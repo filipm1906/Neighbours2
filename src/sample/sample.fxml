@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<SplitPane dividerPositions="0.0728643216080402" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<SplitPane fx:controller="sample.Controller"  dividerPositions="0.0728643216080402" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <items>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
          <children>
@@ -12,7 +12,7 @@
               <menus>
                 <Menu mnemonicParsing="false" text="Plik">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="Wczytaj dane z pliku" />
+                    <MenuItem mnemonicParsing="false" text="Wczytaj dane z pliku" onAction="#wczytajDane"/>
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Edit">
