@@ -1,5 +1,7 @@
 package sample;
 
+import java.awt.Dimension;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,13 +12,12 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+        Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle("Witaj swiecie");
-        primaryStage.setScene(new Scene(root, 300, 275));
+        primaryStage.setScene(new Scene(root, screenSize.getWidth()-4, screenSize.getHeight()-60));
         primaryStage.show();
     }
-
-
     public static void main(String[] args) {
         launch(args);
     }
