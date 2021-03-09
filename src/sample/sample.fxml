@@ -6,9 +6,6 @@
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
 
-
-<SplitPane fx:controller="sample.Controller"  dividerPositions="0.0728643216080402" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
-
 <SplitPane fx:controller="sample.Controller" dividerPositions="0.0728643216080402" maxHeight="400.0" maxWidth="600.0" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
 
   <items>
