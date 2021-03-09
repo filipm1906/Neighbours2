@@ -1,5 +1,6 @@
 package sample;
 
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
@@ -12,6 +13,11 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+
+import java.net.URL;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
@@ -41,5 +47,15 @@ public class Controller implements Initializable {
                 e.printStackTrace();
             }
         return pacjenci;
+
+    public Button btnOK;
+    public ChoiceBox metryka;
+    public ChoiceBox palametrK;
+
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        metryka.getItems().add("Manhattan");
+        metryka.getItems().add("Euklidesowa");
     }
 }
