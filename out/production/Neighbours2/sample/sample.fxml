@@ -1,5 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<<<<<<< HEAD
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<SplitPane fx:controller="sample.Controller"  dividerPositions="0.0728643216080402" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+  <items>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+         <children>
+            <MenuBar layoutY="2.0">
+              <menus>
+                <Menu mnemonicParsing="false" text="Plik">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="Wczytaj dane z pliku" onAction="#wczytajDane"/>
+=======
 <?import javafx.scene.*?>
 <?import javafx.scene.chart.*?>
 <?import javafx.scene.control.*?>
@@ -15,6 +30,7 @@
                 <Menu mnemonicParsing="false" text="Plik">
                   <items>
                     <MenuItem mnemonicParsing="false" text="Wczytaj dane z pliku" />
+>>>>>>> 1ba8c41c26cdd8770e2410087f181f72cffa7f24
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Edit">
@@ -28,12 +44,15 @@
                   </items>
                 </Menu>
               </menus>
+<<<<<<< HEAD
+=======
                <cursor>
                   <Cursor fx:constant="V_RESIZE" />
                </cursor>
                <effect>
                   <Glow level="0.25" />
                </effect>
+>>>>>>> 1ba8c41c26cdd8770e2410087f181f72cffa7f24
             </MenuBar>
          </children></AnchorPane>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
@@ -46,11 +65,14 @@
                 <NumberAxis side="LEFT" />
               </yAxis>
             </AreaChart>
+<<<<<<< HEAD
+=======
             <Button fx:id="btnOK" layoutX="128.0" layoutY="239.0" mnemonicParsing="false" text="Wyświetl wynik" />
             <Label layoutX="14.0" layoutY="59.0" text="Metryka" />
             <Label layoutX="14.0" layoutY="104.0" text="Palametr k" />
             <ChoiceBox fx:id="metryka" layoutX="87.0" layoutY="55.0" prefWidth="150.0" />
             <ChoiceBox fx:id="palametrK" layoutX="87.0" layoutY="100.0" prefHeight="25.0" prefWidth="150.0" />
+>>>>>>> 1ba8c41c26cdd8770e2410087f181f72cffa7f24
          </children></AnchorPane>
   </items>
 </SplitPane>
