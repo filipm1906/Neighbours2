@@ -17,10 +17,6 @@ public class Main extends Application {
         primaryStage.setTitle("Witaj swiecie");
         primaryStage.setScene(new Scene(root, screenSize.getWidth()-4, screenSize.getHeight()-60));
         primaryStage.show();
-
-
-
-
     }
     public static void main(String[] args) {
         launch(args);

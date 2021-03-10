@@ -12,14 +12,13 @@ import javafx.stage.FileChooser;
 import java.awt.*;
 import java.io.*;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
+
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 
 import java.net.URL;
-import java.util.ResourceBundle;
+import java.util.List;
 
 public class Controller implements Initializable {
     private ObservableList<String> MetrykaList = FXCollections.observableArrayList("Manhattan", "Euklidesa");
@@ -28,7 +27,9 @@ public class Controller implements Initializable {
     @FXML
     private ChoiceBox metryka;
     @FXML
-    private ChoiceBox palametrK;
+    private ChoiceBox parametrK;
+
+    public double[][] dane;
 
     public List<List<String>> wczytajDane(ActionEvent actionEvent) {
         FileChooser fileChooser = new FileChooser();
@@ -40,7 +41,7 @@ public class Controller implements Initializable {
         try (BufferedReader br = new BufferedReader(new FileReader(selectedFile))) {
             String line;
             while ((line = br.readLine()) != null) {
-                String[] values = line.split(";");
+                String[] values = line.split(",");
                 pacjenci.add(Arrays.asList(values));
             }
             pacjenci.get(0).set(0, pacjenci.get(0).get(0).substring(1));
@@ -49,6 +50,7 @@ public class Controller implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        zamienNaDouble(pacjenci);
         return pacjenci;
     }
 
@@ -57,8 +59,8 @@ public class Controller implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         metryka.setValue("Manhattan");
         metryka.getItems().addAll("Manhattan","Euklidesa");
-        palametrK.setValue(1);
-        palametrK.getItems().addAll(1,3,5,7);
+        parametrK.setValue(1);
+        parametrK.getItems().addAll(1,3,5,7);
     }
 
     public void selectBtnOk(ActionEvent actionEvent) {
@@ -66,5 +68,32 @@ public class Controller implements Initializable {
         System.out.println(metryka.getSelectionModel().getSelectedItem());
         System.out.println(palametrK.getSelectionModel().getSelectedItem());
         */
+    }
+
+    public void zamienNaDouble(List<List<String>> tablica){
+        dane = new double[tablica.size()-1][tablica.get(0).size()];
+        Iterator<List<String>> it = tablica.iterator();
+        //pominięcie wiersza z opisami kolumn
+        it.next();
+        for(int i=0;it.hasNext();i++){
+            Iterator it2 = it.next().iterator();
+            for(int j=0;it2.hasNext();j++){
+                String s = (String) it2.next();
+                if(s.equals("lagodny")){
+                    //lagodny -> 0
+                    //zlosliwuy -> 1
+                    dane[i][j] = 0;
+                }
+                else if(s.equals("zlosliwy")){
+                    dane[i][j] = 1;
+                }
+                else{
+                    dane[i][j] = Double.parseDouble(s);
+                }
+
+            }
+        }
+        //System.out.println("Rozmiar tablicy to: " + dane.length);
+        //System.out.println("Jeden wiersz składa się z " + dane[0].length + " wartości");
     }
 }

@@ -51,7 +51,7 @@
             <Label layoutX="14.0" layoutY="59.0" text="Metryka" />
             <Label layoutX="14.0" layoutY="104.0" text="Palametr k" />
             <ChoiceBox fx:id="metryka" layoutX="87.0" layoutY="55.0" prefWidth="150.0" />
-            <ChoiceBox fx:id="palametrK" layoutX="87.0" layoutY="100.0" prefHeight="25.0" prefWidth="150.0" />
+            <ChoiceBox fx:id="parametrK" layoutX="87.0" layoutY="100.0" prefHeight="25.0" prefWidth="150.0" />
          </children></AnchorPane>
   </items>
 </SplitPane>
