@@ -65,29 +65,28 @@ public class Controller implements Initializable {
     }
 
 
-    public void zamienNaDouble(List<List<String>> tablica){
-        dane = new double[tablica.size()-1][tablica.get(0).size()];
+    public void zamienNaDouble(List<List<String>> tablica) {
+        dane = new double[tablica.size() - 1][tablica.get(0).size()];
         Iterator<List<String>> it = tablica.iterator();
         //pominięcie wiersza z opisami kolumn
         it.next();
-        for(int i=0;it.hasNext();i++){
+        for (int i = 0; it.hasNext(); i++) {
             Iterator it2 = it.next().iterator();
-            for(int j=0;it2.hasNext();j++){
+            for (int j = 0; it2.hasNext(); j++) {
                 String s = (String) it2.next();
-                if(s.equals("lagodny")){
+                if (s.equals("lagodny")) {
                     //lagodny -> 0
                     //zlosliwuy -> 1
                     dane[i][j] = 0;
-                }
-                else if(s.equals("zlosliwy")){
+                } else if (s.equals("zlosliwy")) {
                     dane[i][j] = 1;
-                }
-                else{
+                } else {
                     dane[i][j] = Double.parseDouble(s);
                 }
 
             }
         }
+    }
 
         public void klasyfikuj(){
             double odleglosc = 0;
@@ -112,6 +111,5 @@ public class Controller implements Initializable {
         }
         //System.out.println("Rozmiar tablicy to: " + dane.length);
         //System.out.println("Jeden wiersz składa się z " + dane[0].length + " wartości");
-    }
-
 }
+
