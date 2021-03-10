@@ -49,7 +49,7 @@
             </AreaChart>
             <Button fx:id="btnOK" layoutX="128.0" layoutY="239.0" mnemonicParsing="false" text="Wyświetl wynik" onAction="#selectBtnOk" />
             <Label layoutX="14.0" layoutY="59.0" text="Metryka" />
-            <Label layoutX="14.0" layoutY="104.0" text="Palametr k" />
+            <Label layoutX="14.0" layoutY="104.0" text="Parametr k" />
             <ChoiceBox fx:id="metryka" layoutX="87.0" layoutY="55.0" prefWidth="150.0" />
             <ChoiceBox fx:id="parametrK" layoutX="87.0" layoutY="100.0" prefHeight="25.0" prefWidth="150.0" />
          </children></AnchorPane>

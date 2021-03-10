@@ -3,22 +3,16 @@ package sample;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.SplitPane;
+import javafx.scene.control.ChoiceBox;
 import javafx.stage.FileChooser;
 
 import java.awt.*;
 import java.io.*;
 import java.net.URL;
-import java.util.*;
-
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-
-import java.net.URL;
 import java.util.List;
+import java.util.*;
 
 public class Controller implements Initializable {
     private ObservableList<String> MetrykaList = FXCollections.observableArrayList("Manhattan", "Euklidesa");
@@ -28,7 +22,7 @@ public class Controller implements Initializable {
     private ChoiceBox metryka;
     @FXML
     private ChoiceBox parametrK;
-
+    public Sasiedzi sas;
     public double[][] dane;
 
     public List<List<String>> wczytajDane(ActionEvent actionEvent) {
@@ -70,6 +64,7 @@ public class Controller implements Initializable {
         */
     }
 
+
     public void zamienNaDouble(List<List<String>> tablica){
         dane = new double[tablica.size()-1][tablica.get(0).size()];
         Iterator<List<String>> it = tablica.iterator();
@@ -93,7 +88,30 @@ public class Controller implements Initializable {
 
             }
         }
+
+        public void klasyfikuj(){
+            double odleglosc = 0;
+            int k=1;
+            sas = new Sasiedzi(k);
+            int wynik = 0;
+            sas.wyczysc();
+            int podzial= 100;
+
+            for (int i = podzial; i < dane.length; i++) {
+                for (int j = 0; j < podzial; j++) {
+                    odleglosc = Metryki.odlegloscEuklides(dane[i], dane[j]);
+                    sas.sprawdz(odleglosc, dane[j][9]);
+                }
+                wynik = sas.decyzja();
+                System.out.println("Wynik dla osoby numer: " + (i + 1) + "to " + wynik);
+                if (wynik == dane[i][9]) {
+                    //poprawneOdpowiedzi++;
+                }
+                sas.wyczysc();
+            }
+        }
         //System.out.println("Rozmiar tablicy to: " + dane.length);
         //System.out.println("Jeden wiersz składa się z " + dane[0].length + " wartości");
     }
+
 }
