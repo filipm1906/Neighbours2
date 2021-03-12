@@ -45,6 +45,8 @@ public class Controller implements Initializable {
             e.printStackTrace();
         }
         zamienNaDouble(pacjenci);
+        //funkcja testująca, sprawdza wczytywanie na podstawie pliku 'breast-cancer-wisconsin'
+        Testowanie1.testWczytywaniaDanych(dane.length);
         return pacjenci;
     }
 
