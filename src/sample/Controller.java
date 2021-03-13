@@ -19,11 +19,14 @@ public class Controller implements Initializable {
     @FXML
     private Button btnOK;
     @FXML
-    private ChoiceBox metryka;
+    private ChoiceBox CB_metryka;
     @FXML
-    private ChoiceBox parametrK;
+    private ChoiceBox CB_parametrK;
     public Sasiedzi sas;
     public double[][] dane;
+
+    public int parametrK;
+    public String metryka;
 
     public List<List<String>> wczytajDane(ActionEvent actionEvent) {
         FileChooser fileChooser = new FileChooser();
@@ -53,17 +56,20 @@ public class Controller implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        metryka.setValue("Manhattan");
-        metryka.getItems().addAll("Manhattan","Euklidesa");
-        parametrK.setValue(1);
-        parametrK.getItems().addAll(1,3,5,7);
+        CB_metryka.setValue("Manhattan");
+        CB_metryka.getItems().addAll("Manhattan","Euklidesa");
+        CB_parametrK.setValue(1);
+        CB_parametrK.getItems().addAll(1,3,5,7);
     }
 
     public void selectBtnOk(ActionEvent actionEvent) {
-        /* --Zwraca wybrane przez użytkownika zmienne (metryka i palametr k)
-        System.out.println(metryka.getSelectionModel().getSelectedItem());
-        System.out.println(palametrK.getSelectionModel().getSelectedItem());
-        */
+        /* Zwraca wybrane przez użytkownika zmienne (metryka i palametr k) */
+        metryka = (String) CB_metryka.getSelectionModel().getSelectedItem();
+        parametrK = (int) (CB_parametrK.getSelectionModel().getSelectedItem());
+
+        System.out.println(metryka);
+        System.out.println(parametrK);
+
     }
 
 
@@ -113,5 +119,7 @@ public class Controller implements Initializable {
         }
         //System.out.println("Rozmiar tablicy to: " + dane.length);
         //System.out.println("Jeden wiersz składa się z " + dane[0].length + " wartości");
+
+
 }
 
