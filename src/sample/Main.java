@@ -14,7 +14,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-        primaryStage.setTitle("Witaj swiecie");
+        primaryStage.setTitle("Wykresy kNN");
         primaryStage.setScene(new Scene(root, screenSize.getWidth()-4, screenSize.getHeight()-60));
         primaryStage.show();
     }
