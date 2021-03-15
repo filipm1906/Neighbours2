@@ -94,7 +94,7 @@ public class Controller implements Initializable {
             sas = new Sasiedzi(k);
             int wynik = 0;
             sas.wyczysc();
-            int podzial= 100;
+            int podzial=100;
 
             for (int i = podzial; i < dane.length; i++) {
                 for (int j = 0; j < podzial; j++) {
