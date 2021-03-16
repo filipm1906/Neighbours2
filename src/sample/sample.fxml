@@ -6,7 +6,7 @@
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
 
-<SplitPane fx:controller="sample.Controller" dividerPositions="0.0728643216080402" maxHeight="400.0" maxWidth="600.0" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<SplitPane dividerPositions="0.0728643216080402" maxHeight="444.0" maxWidth="685.0" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="444.0" prefWidth="685.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
 
   <items>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
@@ -15,7 +15,7 @@
               <menus>
                 <Menu mnemonicParsing="false" text="Plik">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="Wczytaj dane z pliku" onAction="#wczytajDane"/>
+                    <MenuItem mnemonicParsing="false" onAction="#wczytajDane" text="Wczytaj dane z pliku" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Edit">
@@ -37,9 +37,9 @@
                </effect>
             </MenuBar>
          </children></AnchorPane>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="406.0" prefWidth="675.0">
          <children>
-            <AreaChart layoutX="211.0" layoutY="59.0" prefHeight="233.0" prefWidth="367.0">
+            <AreaChart layoutX="250.0" layoutY="29.0" prefHeight="313.0" prefWidth="429.0">
               <xAxis>
                 <CategoryAxis side="BOTTOM" />
               </xAxis>
@@ -47,11 +47,11 @@
                 <NumberAxis side="LEFT" />
               </yAxis>
             </AreaChart>
-            <Button  fx:id="btnOk" layoutX="128.0" layoutY="239.0" mnemonicParsing="false" text="Wyświetl wynik" onAction="#selectBtnOk" />
+            <Button fx:id="btnOk" layoutX="128.0" layoutY="239.0" mnemonicParsing="false" onAction="#selectBtnOk" text="Wyświetl wynik" />
             <Label layoutX="14.0" layoutY="59.0" text="Metryka" />
             <Label layoutX="14.0" layoutY="104.0" text="Parametr k" />
-            <ChoiceBox fx:id="metryka" layoutX="87.0" layoutY="55.0" prefWidth="150.0" />
-            <ChoiceBox fx:id="parametrK" layoutX="87.0" layoutY="100.0" prefHeight="25.0" prefWidth="150.0" />
+            <ChoiceBox fx:id="CB_metryka" layoutX="87.0" layoutY="55.0" prefWidth="150.0" />
+            <ChoiceBox fx:id="CB_parametrK" layoutX="87.0" layoutY="100.0" prefHeight="25.0" prefWidth="150.0" />
          </children></AnchorPane>
   </items>
 </SplitPane>
