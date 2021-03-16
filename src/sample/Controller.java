@@ -69,6 +69,7 @@ public class Controller implements Initializable {
 
         System.out.println(metryka);
         System.out.println(parametrK);
+        klasyfikuj();
 
     }
 
@@ -119,7 +120,5 @@ public class Controller implements Initializable {
         }
         //System.out.println("Rozmiar tablicy to: " + dane.length);
         //System.out.println("Jeden wiersz składa się z " + dane[0].length + " wartości");
-
-
 }
 
