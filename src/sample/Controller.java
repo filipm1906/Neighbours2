@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 
 import java.awt.*;
@@ -19,15 +20,25 @@ public class Controller implements Initializable {
     @FXML
     private Button btnOK;
     @FXML
-    private ChoiceBox CB_metryka;
+    private ChoiceBox CB_parametrP;
     @FXML
     private ChoiceBox CB_parametrK;
+    @FXML
+    private TextField TF_CiagUczacy;
+    @FXML
+    private TextField TF_CiagTestowy;
+
     public Sasiedzi sas;
     public double[][] dane;
 
     private int parametrK;
-    private String metryka;
+    private String parametrP;
     private int podzial;
+
+    private int ciagUczacy;
+    private int ciagTestowy;
+
+
 
     public List<List<String>> wczytajDane(ActionEvent actionEvent) {
         FileChooser fileChooser = new FileChooser();
@@ -57,18 +68,22 @@ public class Controller implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        CB_metryka.setValue("Manhattan");
-        CB_metryka.getItems().addAll("Manhattan","Euklidesa");
+        CB_parametrP.setValue("Manhattan");
+        CB_parametrP.getItems().addAll("Manhattan","Euklidesa");
         CB_parametrK.setValue(1);
         CB_parametrK.getItems().addAll(1,3,5,7);
+
     }
 
     public void selectBtnOk(ActionEvent actionEvent) {
-        /* Zwraca wybrane przez użytkownika zmienne (metryka i palametr k) */
-        metryka = (String) CB_metryka.getSelectionModel().getSelectedItem();
+        /* Zwraca wybrane przez użytkownika zmienne (parametrP i palametr k) */
+        parametrP = (String) CB_parametrP.getSelectionModel().getSelectedItem();
         parametrK = (int) (CB_parametrK.getSelectionModel().getSelectedItem());
 
-        System.out.println(metryka);
+        ciagUczacy =  Integer.parseInt(TF_CiagUczacy.getText());
+        ciagTestowy =  Integer.parseInt(TF_CiagTestowy.getText());
+
+        System.out.println(parametrP);
         System.out.println(parametrK);
         klasyfikuj();
 
