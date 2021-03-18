@@ -25,8 +25,9 @@ public class Controller implements Initializable {
     public Sasiedzi sas;
     public double[][] dane;
 
-    public int parametrK;
-    public String metryka;
+    private int parametrK;
+    private String metryka;
+    private int podzial;
 
     public List<List<String>> wczytajDane(ActionEvent actionEvent) {
         FileChooser fileChooser = new FileChooser();
@@ -99,11 +100,9 @@ public class Controller implements Initializable {
 
         public void klasyfikuj(){
             double odleglosc = 0;
-            int k=1;
-            sas = new Sasiedzi(k);
+            sas = new Sasiedzi(parametrK);
             int wynik = 0;
             sas.wyczysc();
-            int podzial= 100;
 
             for (int i = podzial; i < dane.length; i++) {
                 for (int j = 0; j < podzial; j++) {
