@@ -6,12 +6,12 @@
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
 
-<SplitPane dividerPositions="0.0728643216080402" maxHeight="444.0" maxWidth="685.0" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="444.0" prefWidth="685.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<SplitPane dividerPositions="0.0728643216080402" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="840.0" prefWidth="1594.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
 
   <items>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="340.0" prefWidth="1588.0">
          <children>
-            <MenuBar layoutX="1.0" layoutY="1.0" prefHeight="25.0" prefWidth="683.0">
+            <MenuBar layoutX="1.0" layoutY="1.0" prefHeight="25.0" prefWidth="1592.0">
               <menus>
                 <Menu mnemonicParsing="false" text="Plik">
                   <items>
@@ -37,7 +37,7 @@
                </effect>
             </MenuBar>
          </children></AnchorPane>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="417.0" prefWidth="683.0">
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="586.0" prefWidth="1592.0">
          <children>
             <AreaChart layoutX="250.0" layoutY="29.0" prefHeight="313.0" prefWidth="429.0">
               <xAxis>
