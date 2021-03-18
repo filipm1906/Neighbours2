@@ -83,8 +83,8 @@ public class Controller implements Initializable {
         ciagUczacy =  Integer.parseInt(TF_CiagUczacy.getText());
         ciagTestowy =  Integer.parseInt(TF_CiagTestowy.getText());
 
-        System.out.println(parametrP);
-        System.out.println(parametrK);
+        System.out.println(ciagUczacy);
+        System.out.println(ciagTestowy);
         klasyfikuj();
 
     }
