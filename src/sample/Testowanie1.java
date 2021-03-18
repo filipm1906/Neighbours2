@@ -43,4 +43,13 @@ class Testowanie1 {
         //then
         Assertions.assertEquals(5.75, resultCzebyszew);
     }
+
+    @Test
+    public void testKlasyfikacji() {
+        //given
+
+        //when
+
+        //then
+    }
 }
