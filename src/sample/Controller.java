@@ -122,6 +122,7 @@ public class Controller implements Initializable {
     }
 
         public void klasyfikuj(){
+
             double odleglosc = 0;
             sas = new Sasiedzi(parametrK);
             int wynik = 0;
@@ -129,7 +130,13 @@ public class Controller implements Initializable {
 
             for (int i = podzial; i < dane.length; i++) {
                 for (int j = 0; j < podzial; j++) {
-                    odleglosc = Metryki.odlegloscEuklides(dane[i], dane[j]);
+                    if(parametrP.equals("Manhattan")){
+                        odleglosc = Metryki.odlegloscManhattan(dane[i], dane[j]);
+                    } else if(parametrP.equals("Euklides")){
+                        odleglosc = Metryki.odlegloscEuklides(dane[i], dane[j]);
+                    } else if(parametrP.equals("Czebyszew")){
+                        odleglosc = Metryki.odlegloscCzebyszew(dane[i], dane[j]);
+                    }
                     sas.sprawdz(odleglosc, dane[j][9]);
                 }
                 wynik = sas.decyzja();
