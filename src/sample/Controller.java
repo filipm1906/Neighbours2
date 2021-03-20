@@ -74,9 +74,9 @@ public class Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         CB_parametrP.setValue("Manhattan");
-        CB_parametrP.getItems().addAll("Manhattan","Euklidesa");
+        CB_parametrP.getItems().addAll("Manhattan","Euklides","Czebyszew");
         CB_parametrK.setValue(1);
-        CB_parametrK.getItems().addAll(1,3,5,7);
+        CB_parametrK.getItems().addAll(1,3,5,7,9);
         TA_CiagUczacy.setEditable(false);
         TA_CiagTestowy.setEditable(false);
     }

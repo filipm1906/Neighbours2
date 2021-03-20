@@ -18,14 +18,9 @@
                     <MenuItem mnemonicParsing="false" onAction="#wczytajDane" text="Wczytaj dane z pliku" />
                   </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Edit">
+                <Menu mnemonicParsing="false" text="Rekord">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="Delete" />
-                  </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Help">
-                  <items>
-                    <MenuItem mnemonicParsing="false" text="About" />
+                    <MenuItem mnemonicParsing="false"  text="Dodaj rekord" />
                   </items>
                 </Menu>
               </menus>
@@ -36,9 +31,6 @@
                   <Glow level="0.25" />
                </effect>
             </MenuBar>
-         </children></AnchorPane>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="586.0" prefWidth="1592.0">
-         <children>
             <AreaChart layoutX="250.0" layoutY="29.0" prefHeight="313.0" prefWidth="429.0">
               <xAxis>
                 <CategoryAxis side="BOTTOM" />
