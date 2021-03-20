@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextArea;
 import javafx.stage.FileChooser;
 
 import java.awt.*;
@@ -27,6 +28,10 @@ public class Controller implements Initializable {
     private TextField TF_CiagUczacy;
     @FXML
     private TextField TF_CiagTestowy;
+    @FXML
+    private TextArea TA_CiagUczacy;
+    @FXML
+    private TextArea TA_CiagTestowy;
 
     public Sasiedzi sas;
     public double[][] dane;
@@ -72,7 +77,8 @@ public class Controller implements Initializable {
         CB_parametrP.getItems().addAll("Manhattan","Euklidesa");
         CB_parametrK.setValue(1);
         CB_parametrK.getItems().addAll(1,3,5,7);
-
+        TA_CiagUczacy.setEditable(false);
+        TA_CiagTestowy.setEditable(false);
     }
 
     public void selectBtnOk(ActionEvent actionEvent) {
@@ -85,8 +91,10 @@ public class Controller implements Initializable {
 
         System.out.println(ciagUczacy);
         System.out.println(ciagTestowy);
-        klasyfikuj();
 
+        TA_CiagUczacy.setText("Tu wyświetli się ciąg uczący");
+        TA_CiagTestowy.setText("Tu wyświetli się ciąg testowy");
+        klasyfikuj();
     }
 
 

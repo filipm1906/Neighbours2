@@ -56,6 +56,10 @@
             <Label layoutX="9.0" layoutY="186.0" text="Zakres ciągu testowego" />
             <TextField fx:id="TF_CiagUczacy" layoutX="151.0" layoutY="155.0" prefHeight="17.0" prefWidth="97.0" />
             <TextField fx:id="TF_CiagTestowy" layoutX="151.0" layoutY="182.0" prefHeight="25.0" prefWidth="97.0" />
+            <TextArea fx:id="TA_CiagUczacy" layoutX="817.0" layoutY="61.0" prefHeight="250.0" prefWidth="300.0" />
+            <TextArea fx:id="TA_CiagTestowy" layoutX="819.0" layoutY="387.0" prefHeight="250.0" prefWidth="300.0" />
+            <Label layoutX="819.0" layoutY="29.0" text="Ciąg uczący" />
+            <Label layoutX="817.0" layoutY="342.0" text="Ciąg testowy" />
          </children></AnchorPane>
   </items>
 </SplitPane>
