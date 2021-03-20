@@ -6,7 +6,7 @@
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
 
-<SplitPane dividerPositions="0.0728643216080402" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="840.0" prefWidth="1594.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<SplitPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="840.0" prefWidth="1594.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
 
   <items>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="25.0" prefWidth="1592.0">
@@ -20,7 +20,7 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="Rekord">
                   <items>
-                    <MenuItem mnemonicParsing="false"  text="Dodaj rekord" />
+                    <MenuItem mnemonicParsing="false" text="Dodaj rekord" />
                   </items>
                 </Menu>
               </menus>
@@ -31,7 +31,7 @@
                   <Glow level="0.25" />
                </effect>
             </MenuBar>
-            <AreaChart layoutX="250.0" layoutY="29.0" prefHeight="313.0" prefWidth="429.0">
+            <AreaChart layoutX="250.0" layoutY="29.0" prefHeight="313.0" prefWidth="429.0" title="Płaszczyzny decyzji">
               <xAxis>
                 <CategoryAxis side="BOTTOM" />
               </xAxis>
