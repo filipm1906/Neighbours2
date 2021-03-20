@@ -92,8 +92,9 @@ public class Controller implements Initializable {
         System.out.println(ciagUczacy);
         System.out.println(ciagTestowy);
 
-        TA_CiagUczacy.setText("Tu wyświetli się ciąg uczący");
-        TA_CiagTestowy.setText("Tu wyświetli się ciąg testowy");
+        TA_CiagUczacy.setText(wyswietlWiersze(1,ciagUczacy+1));
+        TA_CiagTestowy.setText(wyswietlWiersze(ciagUczacy,ciagTestowy));
+
         klasyfikuj();
     }
 
@@ -121,7 +122,7 @@ public class Controller implements Initializable {
         }
     }
 
-        public void klasyfikuj(){
+        public void klasyfikuj() {
 
             double odleglosc = 0;
             sas = new Sasiedzi(parametrK);
@@ -147,7 +148,26 @@ public class Controller implements Initializable {
                 sas.wyczysc();
             }
         }
+        private String wyswietlWiersze(int wierszP, int wierszK){
+            String tekst = "";
+            for(int i=(wierszP-1);i<(wierszK-1);i++){
+                for(int j=0;j<dane[i].length;j++){
+                    if(j==dane[i].length-1){
+                        if(dane[i][j]==0){
+                            tekst +=" łagodny";
+                        }
+                        else{
+                            tekst +=" złośliwy";
+                        }
+                    }
+                    else {
+                        tekst += String.format("%3.0f", dane[i][j]);
+                    }
+                }
+                tekst+="\n";
+            }
+            return tekst;
+        }
         //System.out.println("Rozmiar tablicy to: " + dane.length);
         //System.out.println("Jeden wiersz składa się z " + dane[0].length + " wartości");
 }
-
