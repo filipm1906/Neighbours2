@@ -9,7 +9,7 @@
 <SplitPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="840.0" prefWidth="1594.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
 
   <items>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="25.0" prefWidth="1592.0">
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="821.0" prefWidth="1563.0">
          <children>
             <MenuBar layoutX="1.0" layoutY="1.0" maxHeight="100.0" prefHeight="25.0" prefWidth="1592.0">
               <menus>
