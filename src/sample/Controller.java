@@ -150,7 +150,7 @@ public class Controller implements Initializable {
         }
         private String wyswietlWiersze(int wierszP, int wierszK){
             String tekst = "";
-            for(int i=(wierszP-1);i<(wierszK-1);i++){
+            for(int i=(wierszP-1);i<wierszK;i++){
                 for(int j=0;j<dane[i].length;j++){
                     if(j==dane[i].length-1){
                         if(dane[i][j]==0){
