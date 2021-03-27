@@ -42,6 +42,9 @@ public class Controller implements Initializable {
 
     private int ciagUczacy;
     private int ciagTestowy;
+    private int iloscPol;
+
+    private List<List<String>> pacjenci = new ArrayList<>();
 
 
 
@@ -51,7 +54,8 @@ public class Controller implements Initializable {
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("Text Files", "*.csv"));
         File selectedFile = fileChooser.showOpenDialog(null);
-        List<List<String>> pacjenci = new ArrayList<>();
+
+
         try (BufferedReader br = new BufferedReader(new FileReader(selectedFile))) {
             String line;
             while ((line = br.readLine()) != null) {
@@ -82,7 +86,7 @@ public class Controller implements Initializable {
     }
 
     public void selectBtnOk(ActionEvent actionEvent) {
-        /* Zwraca wybrane przez użytkownika zmienne (parametrP i palametr k) */
+        /* Zwraca wybrane przez użytkownika zmienne (parametrP i parametr k) */
         parametrP = (String) CB_parametrP.getSelectionModel().getSelectedItem();
         parametrK = (int) (CB_parametrK.getSelectionModel().getSelectedItem());
 
@@ -96,6 +100,14 @@ public class Controller implements Initializable {
         TA_CiagTestowy.setText(wyswietlWiersze(ciagUczacy,ciagTestowy));
 
         klasyfikuj();
+    }
+
+    public void dodajRekord() {
+        System.out.println(pacjenci.size()); //test
+        pacjenci.add(PopUp.display(dane[0].length));
+        //System.out.print(dane[0].length);
+        //System.out.println(pacjenci.size()); //test
+        //System.out.println(pacjenci.get(pacjenci.size()-1));  //test
     }
 
 
