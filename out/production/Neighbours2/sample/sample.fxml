@@ -20,7 +20,7 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="Rekord">
                   <items>
-                    <MenuItem mnemonicParsing="false" onAction="#dodajRekord" text="Dodaj rekord" />
+                    <MenuItem mnemonicParsing="false" text="Dodaj rekord" />
                   </items>
                 </Menu>
               </menus>
@@ -31,7 +31,7 @@
                   <Glow level="0.25" />
                </effect>
             </MenuBar>
-            <AreaChart layoutX="250.0" layoutY="29.0" prefHeight="313.0" prefWidth="429.0" title="Płaszczyzny decyzji">
+            <AreaChart layoutX="339.0" layoutY="30.0" prefHeight="313.0" prefWidth="429.0" title="Płaszczyzny decyzji">
               <xAxis>
                 <CategoryAxis side="BOTTOM" />
               </xAxis>
@@ -39,19 +39,20 @@
                 <NumberAxis side="LEFT" />
               </yAxis>
             </AreaChart>
-            <Button fx:id="btnOk" layoutX="151.0" layoutY="251.0" mnemonicParsing="false" onAction="#selectBtnOk" text="Wyświetl wynik" />
+            <Button fx:id="btnOk" layoutX="88.0" layoutY="254.0" mnemonicParsing="false" onAction="#selectBtnOk" text="Wyświetl wynik" />
             <Label layoutX="14.0" layoutY="59.0" text="Parametr p" />
             <Label layoutX="14.0" layoutY="104.0" text="Parametr k" />
             <ChoiceBox fx:id="CB_parametrP" layoutX="87.0" layoutY="55.0" prefWidth="150.0" />
             <ChoiceBox fx:id="CB_parametrK" layoutX="87.0" layoutY="100.0" prefHeight="25.0" prefWidth="150.0" />
-            <Label layoutX="9.0" layoutY="159.0" text="Zakres ciągu uczącego" />
-            <Label layoutX="9.0" layoutY="186.0" text="Zakres ciągu testowego" />
-            <TextField fx:id="TF_CiagUczacy" layoutX="151.0" layoutY="155.0" prefHeight="17.0" prefWidth="97.0" />
-            <TextField fx:id="TF_CiagTestowy" layoutX="151.0" layoutY="182.0" prefHeight="25.0" prefWidth="97.0" />
+            <Label layoutX="12.0" layoutY="158.0" text="Zakres ciągu uczącego" />
+            <Label layoutX="10.0" layoutY="201.0" text="Zakres ciągu testowego" />
             <TextArea fx:id="TA_CiagUczacy" layoutX="817.0" layoutY="61.0" prefHeight="250.0" prefWidth="300.0" />
             <TextArea fx:id="TA_CiagTestowy" layoutX="819.0" layoutY="387.0" prefHeight="250.0" prefWidth="300.0" />
             <Label layoutX="819.0" layoutY="29.0" text="Ciąg uczący" />
             <Label layoutX="817.0" layoutY="342.0" text="Ciąg testowy" />
+            <Label fx:id="LciagUczacy" layoutX="148.0" layoutY="158.0" text="" />
+            <Label fx:id="LciagTestowy" layoutX="148.0" layoutY="201.0" text="" />
+            <Slider fx:id="sliderCU" layoutX="200.0" layoutY="160.0" majorTickUnit="10.0" onMouseMoved="#odczytWartoscCUczacy" showTickLabels="true" showTickMarks="true" />
          </children></AnchorPane>
   </items>
 </SplitPane>

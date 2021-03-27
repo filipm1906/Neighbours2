@@ -6,8 +6,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Slider;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextArea;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 
 import java.awt.*;
@@ -32,7 +35,12 @@ public class Controller implements Initializable {
     private TextArea TA_CiagUczacy;
     @FXML
     private TextArea TA_CiagTestowy;
-
+    @FXML
+    private Slider sliderCU;
+    @FXML
+    private Label LciagUczacy;
+    @FXML
+    private Label LciagTestowy;
     public Sasiedzi sas;
     public double[][] dane;
 
@@ -42,9 +50,6 @@ public class Controller implements Initializable {
 
     private int ciagUczacy;
     private int ciagTestowy;
-    private int iloscPol;
-
-    private List<List<String>> pacjenci = new ArrayList<>();
 
 
 
@@ -54,8 +59,7 @@ public class Controller implements Initializable {
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("Text Files", "*.csv"));
         File selectedFile = fileChooser.showOpenDialog(null);
-
-
+        List<List<String>> pacjenci = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(selectedFile))) {
             String line;
             while ((line = br.readLine()) != null) {
@@ -69,11 +73,20 @@ public class Controller implements Initializable {
             e.printStackTrace();
         }
         zamienNaDouble(pacjenci);
+        //wyznaczanie wartości minimalnej i maksymalnej slidera - wyznaczanie ciągu uczącego
+        sliderCU.setMin(0);
+        sliderCU.setMax(dane.length/3);
         //funkcja testująca, sprawdza wczytywanie na podstawie pliku 'breast-cancer-wisconsin'
         Testowanie1.testWczytywaniaDanych(dane.length);
         return pacjenci;
     }
-
+    @FXML
+    public void odczytWartoscCUczacy(MouseEvent mouseEvent) {
+        ciagUczacy = (int)sliderCU.getValue();
+        LciagUczacy.setText(Integer.toString(ciagUczacy));
+        ciagTestowy = dane.length - ciagUczacy;
+        LciagTestowy.setText(Integer.toString(ciagTestowy));
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -86,7 +99,7 @@ public class Controller implements Initializable {
     }
 
     public void selectBtnOk(ActionEvent actionEvent) {
-        /* Zwraca wybrane przez użytkownika zmienne (parametrP i parametr k) */
+        /* Zwraca wybrane przez użytkownika zmienne (parametrP i palametr k) */
         parametrP = (String) CB_parametrP.getSelectionModel().getSelectedItem();
         parametrK = (int) (CB_parametrK.getSelectionModel().getSelectedItem());
 
@@ -100,14 +113,6 @@ public class Controller implements Initializable {
         TA_CiagTestowy.setText(wyswietlWiersze(ciagUczacy,ciagTestowy));
 
         klasyfikuj();
-    }
-
-    public void dodajRekord() {
-        System.out.println(pacjenci.size()); //test
-        pacjenci.add(PopUp.display(dane[0].length));
-        //System.out.print(dane[0].length);
-        //System.out.println(pacjenci.size()); //test
-        //System.out.println(pacjenci.get(pacjenci.size()-1));  //test
     }
 
 
@@ -180,6 +185,6 @@ public class Controller implements Initializable {
             }
             return tekst;
         }
-        //System.out.println("Rozmiar tablicy to: " + dane.length);
+    //System.out.println("Rozmiar tablicy to: " + dane.length);
         //System.out.println("Jeden wiersz składa się z " + dane[0].length + " wartości");
 }
