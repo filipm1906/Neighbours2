@@ -46,12 +46,11 @@ public class Controller implements Initializable {
 
     private int parametrK;
     private String parametrP;
-    private int podzial;
 
     private int ciagUczacy;
     private int ciagTestowy;
 
-
+    private List<List<String>> pacjenci;
 
     public List<List<String>> wczytajDane(ActionEvent actionEvent) {
         FileChooser fileChooser = new FileChooser();
@@ -59,7 +58,7 @@ public class Controller implements Initializable {
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("Text Files", "*.csv"));
         File selectedFile = fileChooser.showOpenDialog(null);
-        List<List<String>> pacjenci = new ArrayList<>();
+        pacjenci = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(selectedFile))) {
             String line;
             while ((line = br.readLine()) != null) {
@@ -115,6 +114,13 @@ public class Controller implements Initializable {
         klasyfikuj();
     }
 
+    public void dodajRekord() {
+        System.out.println(pacjenci.size()); //test
+        pacjenci.add(PopUp.display(dane[0].length));
+        System.out.print(dane[0].length);
+        System.out.println(pacjenci.size()); //test
+        System.out.println(pacjenci.get(pacjenci.size()-1));  //test
+    }
 
     public void zamienNaDouble(List<List<String>> tablica) {
         dane = new double[tablica.size() - 1][tablica.get(0).size()];
@@ -146,8 +152,8 @@ public class Controller implements Initializable {
             int wynik = 0;
             sas.wyczysc();
 
-            for (int i = podzial; i < dane.length; i++) {
-                for (int j = 0; j < podzial; j++) {
+            for (int i = ciagUczacy; i < dane.length; i++) {
+                for (int j = 0; j < ciagUczacy; j++) {
                     if(parametrP.equals("Manhattan")){
                         odleglosc = Metryki.odlegloscManhattan(dane[i], dane[j]);
                     } else if(parametrP.equals("Euklides")){

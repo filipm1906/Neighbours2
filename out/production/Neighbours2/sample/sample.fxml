@@ -18,7 +18,7 @@
                     <MenuItem mnemonicParsing="false" onAction="#wczytajDane" text="Wczytaj dane z pliku" />
                   </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Rekord">
+                <Menu mnemonicParsing="false" onAction="#dodajRekord" text="Rekord">
                   <items>
                     <MenuItem mnemonicParsing="false" text="Dodaj rekord" />
                   </items>
