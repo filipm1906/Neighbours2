@@ -43,13 +43,25 @@ class Testowanie1 {
         //then
         Assertions.assertEquals(5.75, resultCzebyszew);
     }
-
     @Test
     public void testKlasyfikacji() {
         //given
-
+        double[] dane1 = {5,1,1,1,2,1,3,1,1,0};
+        double[] dane2 = {5,4,4,5,7,10,3,2,1,0};
+        double[] dane3 = {3,1,1,1,2,2,3,1,1,0};
+        double[] dane4 = {6,8,8,1,3,4,3,7,1,0};
+        Assertions.assertEquals(25,Metryki.odlegloscManhattan(dane1,dane4));
+        Assertions.assertEquals(28,Metryki.odlegloscManhattan(dane2,dane4));
+        Assertions.assertEquals(26,Metryki.odlegloscManhattan(dane3,dane4));
+        Sasiedzi sas = new Sasiedzi(1);
+        sas.sprawdz(25,0);
+        sas.sprawdz(28,0);
+        sas.sprawdz(26,0);
+        Assertions.assertEquals(sas.decyzja(),0);
+        sas.decyzja();
         //when
 
         //then
     }
+
 }
