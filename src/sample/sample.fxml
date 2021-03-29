@@ -52,7 +52,7 @@
             <Label layoutX="817.0" layoutY="342.0" text="Ciąg testowy" />
             <Label fx:id="LciagUczacy" layoutX="148.0" layoutY="158.0" text="" />
             <Label fx:id="LciagTestowy" layoutX="148.0" layoutY="201.0" text="" />
-            <Slider fx:id="sliderCU" layoutX="200.0" layoutY="160.0" majorTickUnit="10.0" onMouseMoved="#odczytWartoscCUczacy" showTickLabels="true" showTickMarks="true" />
+            <Slider fx:id="sliderCU" layoutX="200.0" layoutY="160.0" majorTickUnit="10.0" onDragDetected="#odczytWartoscCUczacy" showTickLabels="true" showTickMarks="true" />
          </children></AnchorPane>
   </items>
 </SplitPane>

@@ -102,14 +102,14 @@ public class Controller implements Initializable {
         parametrP = (String) CB_parametrP.getSelectionModel().getSelectedItem();
         parametrK = (int) (CB_parametrK.getSelectionModel().getSelectedItem());
 
-        ciagUczacy =  Integer.parseInt(TF_CiagUczacy.getText());
-        ciagTestowy =  Integer.parseInt(TF_CiagTestowy.getText());
+        ciagUczacy = (int)sliderCU.getValue();
+        ciagTestowy = dane.length - ciagUczacy;
 
         System.out.println(ciagUczacy);
         System.out.println(ciagTestowy);
 
-        TA_CiagUczacy.setText(wyswietlWiersze(1,ciagUczacy+1));
-        TA_CiagTestowy.setText(wyswietlWiersze(ciagUczacy,ciagTestowy));
+        TA_CiagUczacy.setText(wyswietlWiersze(1,ciagUczacy));
+        TA_CiagTestowy.setText(wyswietlWiersze(ciagUczacy+1,ciagTestowy));
 
         klasyfikuj();
     }
@@ -117,7 +117,7 @@ public class Controller implements Initializable {
     public void dodajRekord() {
         System.out.println(pacjenci.size()); //test
         pacjenci.add(PopUp.display(dane[0].length));
-        System.out.print(dane[0].length);
+        System.out.println(dane[0].length);
         System.out.println(pacjenci.size()); //test
         System.out.println(pacjenci.get(pacjenci.size()-1));  //test
     }
