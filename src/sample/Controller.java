@@ -102,9 +102,6 @@ public class Controller implements Initializable {
         parametrP = (String) CB_parametrP.getSelectionModel().getSelectedItem();
         parametrK = (int) (CB_parametrK.getSelectionModel().getSelectedItem());
 
-        ciagUczacy = (int)sliderCU.getValue();
-        ciagTestowy = dane.length - ciagUczacy;
-
         System.out.println(ciagUczacy);
         System.out.println(ciagTestowy);
 
@@ -192,5 +189,5 @@ public class Controller implements Initializable {
             return tekst;
         }
     //System.out.println("Rozmiar tablicy to: " + dane.length);
-        //System.out.println("Jeden wiersz składa się z " + dane[0].length + " wartości");
+    //System.out.println("Jeden wiersz składa się z " + dane[0].length + " wartości");
 }
