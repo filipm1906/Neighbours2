@@ -89,7 +89,7 @@ public class Controller implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        CB_parametrP.setValue("Manhattan");
+        CB_parametrP.setValue("Manhattan , p=1");
         CB_parametrP.getItems().addAll("Manhattan , p=1","Euklides , p=2","Czebyszew , p=3");
         CB_parametrK.setValue(1);
         CB_parametrK.getItems().addAll(1,3,5,7,9);
@@ -167,6 +167,10 @@ public class Controller implements Initializable {
                 }
                 sas.wyczysc();
             }
+        }
+        private double[] walidacja(int indexPoczatkowy, int indexKoncowy){
+            double[] tablica = new double[2];
+            return tablica;
         }
         private String wyswietlWiersze(int wierszP, int wierszK){
             String tekst = "";

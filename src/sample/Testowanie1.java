@@ -59,9 +59,6 @@ class Testowanie1 {
         sas.sprawdz(26,0);
         Assertions.assertEquals(sas.decyzja(),0);
         sas.decyzja();
-        //when
-
-        //then
     }
 
 }
