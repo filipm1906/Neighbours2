@@ -106,7 +106,7 @@ public class Controller implements Initializable {
         //System.out.println(ciagTestowy);
 
         TA_CiagUczacy.setText(wyswietlWiersze(1,ciagUczacy));
-        TA_CiagTestowy.setText(wyswietlWiersze(ciagUczacy+1,ciagTestowy));
+        TA_CiagTestowy.setText(wyswietlWiersze(ciagUczacy+1,dane.length));
 
         klasyfikuj();
     }
@@ -162,11 +162,11 @@ public class Controller implements Initializable {
                     } else if(parametrP.equals("Czebyszew")){
                         odleglosc = Metryki.odlegloscCzebyszew(dane[i], dane[j]);
                     }
-                    sas.sprawdz(odleglosc, dane[j][dane[j].length]);
+                    sas.sprawdz(odleglosc, dane[j][dane[j].length-1]);
                 }
                 wynik = sas.decyzja();
                 System.out.println("Wynik dla osoby numer: " + (i + 1) + "to " + wynik);
-                if (wynik == dane[i][dane[i].length]) {
+                if (wynik == dane[i][dane[i].length-1]) {
                     //poprawneOdpowiedzi++;
                 }
                 sas.wyczysc();
