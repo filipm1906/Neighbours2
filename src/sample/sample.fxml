@@ -39,7 +39,7 @@
                 <NumberAxis side="LEFT" />
               </yAxis>
             </AreaChart>
-            <Button fx:id="btnOk" layoutX="21.0" layoutY="245.0" mnemonicParsing="false" onAction="#selectBtnOk" prefHeight="38.0" prefWidth="172.0" style="-fx-border-style: dotted; -fx-border-color: #0000000; -fx-background-color: #3AA7FA;" text="Wyświetl wynik" />
+            <Button fx:id="btnOk" layoutX="21.0" layoutY="245.0" mnemonicParsing="false" onAction="#selectBtnOk" prefHeight="38.0" prefWidth="172.0" style="-fx-border-style: dotted; -fx-border-color: #000000; -fx-background-color: #3AA7FA;" text="Wyświetl wynik" />
             <Label layoutX="18.0" layoutY="59.0" style="-fx-font-size: 18;" text="Parametr p" />
             <Label layoutX="324.0" layoutY="59.0" style="-fx-font-size: 18;" text="Parametr k" />
             <ChoiceBox fx:id="CB_parametrP" layoutX="121.0" layoutY="60.0" prefWidth="150.0" />

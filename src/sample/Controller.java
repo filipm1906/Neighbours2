@@ -73,8 +73,8 @@ public class Controller implements Initializable {
         }
         zamienNaDouble(pacjenci);
         //wyznaczanie wartości minimalnej i maksymalnej slidera - wyznaczanie ciągu uczącego
-        sliderCU.setMin(0);
-        sliderCU.setMax(dane.length/3);
+        sliderCU.setMin(1);
+        sliderCU.setMax(dane.length);
         //funkcja testująca, sprawdza wczytywanie na podstawie pliku 'breast-cancer-wisconsin'
         Testowanie1.testWczytywaniaDanych(dane.length);
         return pacjenci;
@@ -102,8 +102,8 @@ public class Controller implements Initializable {
         parametrP = (String) CB_parametrP.getSelectionModel().getSelectedItem();
         parametrK = (int) (CB_parametrK.getSelectionModel().getSelectedItem());
 
-        System.out.println(ciagUczacy);
-        System.out.println(ciagTestowy);
+        //System.out.println(ciagUczacy);
+        //System.out.println(ciagTestowy);
 
         TA_CiagUczacy.setText(wyswietlWiersze(1,ciagUczacy));
         TA_CiagTestowy.setText(wyswietlWiersze(ciagUczacy+1,ciagTestowy));
@@ -134,6 +134,12 @@ public class Controller implements Initializable {
                     dane[i][j] = 0;
                 } else if (s.equals("zlosliwy")) {
                     dane[i][j] = 1;
+                } else if (s.equals("KlasaA")) {
+                    dane[i][j] = 2;
+                } else if (s.equals("KlasaB")) {
+                    dane[i][j] = 3;
+                } else if (s.equals("KlasaC")) {
+                    dane[i][j] = 4;
                 } else {
                     dane[i][j] = Double.parseDouble(s);
                 }
@@ -141,9 +147,7 @@ public class Controller implements Initializable {
             }
         }
     }
-
         public void klasyfikuj() {
-
             double odleglosc = 0;
             sas = new Sasiedzi(parametrK);
             int wynik = 0;
@@ -158,11 +162,11 @@ public class Controller implements Initializable {
                     } else if(parametrP.equals("Czebyszew")){
                         odleglosc = Metryki.odlegloscCzebyszew(dane[i], dane[j]);
                     }
-                    sas.sprawdz(odleglosc, dane[j][9]);
+                    sas.sprawdz(odleglosc, dane[j].length);
                 }
                 wynik = sas.decyzja();
                 System.out.println("Wynik dla osoby numer: " + (i + 1) + "to " + wynik);
-                if (wynik == dane[i][9]) {
+                if (wynik == dane[i].length) {
                     //poprawneOdpowiedzi++;
                 }
                 sas.wyczysc();
@@ -175,8 +179,13 @@ public class Controller implements Initializable {
                     if(j==dane[i].length-1){
                         if(dane[i][j]==0){
                             tekst +=" łagodny";
-                        }
-                        else{
+                        }else if (dane[i][j]==2) {
+                            tekst +=" KlasaA";
+                        } else if (dane[i][j]==3) {
+                            tekst +=" KlasaB";
+                        } else if (dane[i][j]==4) {
+                            tekst +=" KlasaC";
+                        } else{
                             tekst +=" złośliwy";
                         }
                     }

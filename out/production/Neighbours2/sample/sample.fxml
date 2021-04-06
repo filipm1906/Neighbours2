@@ -39,7 +39,7 @@
                 <NumberAxis side="LEFT" />
               </yAxis>
             </AreaChart>
-            <Button fx:id="btnOk" layoutX="21.0" layoutY="245.0" mnemonicParsing="false" onAction="#selectBtnOk" prefHeight="38.0" prefWidth="172.0" style="-fx-border-style: dotted; -fx-border-color: #0000000; -fx-background-color: #3AA7FA;" text="Wyświetl wynik" />
+            <Button fx:id="btnOk" layoutX="21.0" layoutY="245.0" mnemonicParsing="false" onAction="#selectBtnOk" prefHeight="38.0" prefWidth="172.0" style="-fx-border-style: dotted; -fx-border-color: #000000; -fx-background-color: #3AA7FA;" text="Wyświetl wynik" />
             <Label layoutX="18.0" layoutY="59.0" style="-fx-font-size: 18;" text="Parametr p" />
             <Label layoutX="324.0" layoutY="59.0" style="-fx-font-size: 18;" text="Parametr k" />
             <ChoiceBox fx:id="CB_parametrP" layoutX="121.0" layoutY="60.0" prefWidth="150.0" />
@@ -52,7 +52,7 @@
             <Label layoutX="796.0" layoutY="392.0" style="-fx-font-size: 18;" text="Ciąg testowy" />
             <Label fx:id="LciagUczacy" layoutX="222.0" layoutY="130.0" prefHeight="17.0" prefWidth="48.0" text="" />
             <Label fx:id="LciagTestowy" layoutX="222.0" layoutY="193.0" prefHeight="17.0" prefWidth="48.0" text="" />
-             <Slider fx:id="sliderCU" layoutX="200.0" layoutY="160.0" majorTickUnit="10.0" onMouseDragged="#odczytWartoscCUczacy" showTickLabels="true" showTickMarks="true" />
+             <Slider fx:id="sliderCU" layoutX="286.0" layoutY="128.0" majorTickUnit="10.0" onMouseDragged="#odczytWartoscCUczacy" prefHeight="38.0" prefWidth="279.0" showTickLabels="true" showTickMarks="true" />
            </children></AnchorPane>
   </items>
 </SplitPane>
