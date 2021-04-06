@@ -171,6 +171,7 @@ public class Controller implements Initializable {
         private double[] walidacja(int indexPoczatkowy, int indexKoncowy){
             double[] tablica = new double[2];
             return tablica;
+            //NowyBranch
         }
         private String wyswietlWiersze(int wierszP, int wierszK){
             String tekst = "";
