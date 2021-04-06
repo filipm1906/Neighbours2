@@ -162,11 +162,11 @@ public class Controller implements Initializable {
                     } else if(parametrP.equals("Czebyszew")){
                         odleglosc = Metryki.odlegloscCzebyszew(dane[i], dane[j]);
                     }
-                    sas.sprawdz(odleglosc, dane[j].length);
+                    sas.sprawdz(odleglosc, dane[j][dane[j].length]);
                 }
                 wynik = sas.decyzja();
                 System.out.println("Wynik dla osoby numer: " + (i + 1) + "to " + wynik);
-                if (wynik == dane[i].length) {
+                if (wynik == dane[i][dane[i].length]) {
                     //poprawneOdpowiedzi++;
                 }
                 sas.wyczysc();
