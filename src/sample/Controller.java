@@ -51,6 +51,7 @@ public class Controller implements Initializable {
     private int ciagTestowy;
 
     private List<List<String>> pacjenci;
+    private List<String> slownikKlas;
 
     public List<List<String>> wczytajDane(ActionEvent actionEvent) {
         FileChooser fileChooser = new FileChooser();
@@ -59,6 +60,7 @@ public class Controller implements Initializable {
                 new FileChooser.ExtensionFilter("Text Files", "*.csv"));
         File selectedFile = fileChooser.showOpenDialog(null);
         pacjenci = new ArrayList<>();
+        slownikKlas = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(selectedFile))) {
             String line;
             while ((line = br.readLine()) != null) {
@@ -76,7 +78,7 @@ public class Controller implements Initializable {
         sliderCU.setMin(1);
         sliderCU.setMax(dane.length);
         //funkcja testująca, sprawdza wczytywanie na podstawie pliku 'breast-cancer-wisconsin'
-        Testowanie1.testWczytywaniaDanych(dane.length);
+        //Testowanie1.testWczytywaniaDanych(dane.length);
         return pacjenci;
     }
     @FXML
@@ -128,38 +130,42 @@ public class Controller implements Initializable {
             Iterator it2 = it.next().iterator();
             for (int j = 0; it2.hasNext(); j++) {
                 String s = (String) it2.next();
-                if (s.equals("lagodny")) {
-                    //lagodny -> 0
-                    //zlosliwuy -> 1
-                    dane[i][j] = 0;
-                } else if (s.equals("zlosliwy")) {
-                    dane[i][j] = 1;
-                } else if (s.equals("KlasaA")) {
-                    dane[i][j] = 2;
-                } else if (s.equals("KlasaB")) {
-                    dane[i][j] = 3;
-                } else if (s.equals("KlasaC")) {
-                    dane[i][j] = 4;
-                } else {
+                if(!it2.hasNext()){
+                    dane[i][j] = sprawdzKlase(s);
+                }
+                else {
                     dane[i][j] = Double.parseDouble(s);
                 }
-
             }
         }
     }
+
+    public int sprawdzKlase(String s){
+        Iterator it = slownikKlas.iterator();
+        String klasa="";
+        while(it.hasNext()){
+            klasa = (String) it.next();
+            if(klasa.equals(s)){
+                return slownikKlas.indexOf(klasa);
+            }
+        }
+        // jeśli nie znaleziono klasy na liście dodawana jest nowa klasa
+        slownikKlas.add(s);
+        return slownikKlas.indexOf(s);
+    }
+
         public void klasyfikuj() {
             double odleglosc = 0;
-            sas = new Sasiedzi(parametrK);
+            sas = new Sasiedzi(parametrK,slownikKlas.size());
             int wynik = 0;
             sas.wyczysc();
-
             for (int i = ciagUczacy; i < dane.length; i++) {
                 for (int j = 0; j < ciagUczacy; j++) {
-                    if(parametrP.equals("Manhattan")){
+                    if(parametrP.equals("Manhattan , p=1")){
                         odleglosc = Metryki.odlegloscManhattan(dane[i], dane[j]);
-                    } else if(parametrP.equals("Euklides")){
+                    } else if(parametrP.equals("Euklides , p=2")){
                         odleglosc = Metryki.odlegloscEuklides(dane[i], dane[j]);
-                    } else if(parametrP.equals("Czebyszew")){
+                    } else if(parametrP.equals("Czebyszew , p=3")){
                         odleglosc = Metryki.odlegloscCzebyszew(dane[i], dane[j]);
                     }
                     sas.sprawdz(odleglosc, dane[j][dane[j].length-1]);
@@ -175,24 +181,14 @@ public class Controller implements Initializable {
         private double[] walidacja(int indexPoczatkowy, int indexKoncowy){
             double[] tablica = new double[2];
             return tablica;
-            //NowyBranch
         }
         private String wyswietlWiersze(int wierszP, int wierszK){
             String tekst = "";
             for(int i=(wierszP-1);i<wierszK;i++){
                 for(int j=0;j<dane[i].length;j++){
                     if(j==dane[i].length-1){
-                        if(dane[i][j]==0){
-                            tekst +=" łagodny";
-                        }else if (dane[i][j]==2) {
-                            tekst +=" KlasaA";
-                        } else if (dane[i][j]==3) {
-                            tekst +=" KlasaB";
-                        } else if (dane[i][j]==4) {
-                            tekst +=" KlasaC";
-                        } else{
-                            tekst +=" złośliwy";
-                        }
+                        tekst+=" ";
+                        tekst+=slownikKlas.get((int)dane[i][j]);
                     }
                     else {
                         tekst += String.format("%3.0f", dane[i][j]);

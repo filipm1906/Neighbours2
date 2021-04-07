@@ -1,10 +1,12 @@
 package sample;
 
 public class Sasiedzi {
-    double[][] tablicaSasiadow;
+    private double[][] tablicaSasiadow;
+    private int klasy[];
 
-    public Sasiedzi(int k) {
+    public Sasiedzi(int k,int liczbaKlas) {
         tablicaSasiadow = new double[k][2];
+        klasy = new int[liczbaKlas];
         wyczysc();
     }
 
@@ -19,42 +21,28 @@ public class Sasiedzi {
     }
 
     public int decyzja() {
-        int lagodne = 0;
-        int zlosliwe = 0;
-        int klasaA = 0 ;
-        int klasaB = 0;
-        int klasaC = 0;
         for (int i = 0; i < tablicaSasiadow.length; i++) {
-            if (tablicaSasiadow[i][1] == 0) {
-                lagodne++;
-            }else if (tablicaSasiadow[i][1]==2) {
-                klasaA++;
-            } else if (tablicaSasiadow[i][1]==3) {
-                klasaB++;
-            } else if (tablicaSasiadow[i][1]==4) {
-                klasaC++;
-            } else {
-                zlosliwe++;
+            //System.out.println("Sąsiady"+tablicaSasiadow[i][0]+" , "+tablicaSasiadow[i][1]);
+                klasy[(int)tablicaSasiadow[i][1]]++;
+        }
+        int maxKlasa = -1;
+        int indexMaxKlasy = -1;
+        for (int i = 0; i < klasy.length; i++) {
+            //System.out.println("Klasa "+i+"ma "+klasy[i]+" członków");
+            if (klasy[i] > maxKlasa) {
+                maxKlasa = klasy[i];
+                indexMaxKlasy = i;
             }
         }
-        if (zlosliwe > lagodne) {
-            return 1;
-        } else if(klasaA>klasaB && klasaA>klasaC){
-            return 2;
-        } else if(klasaB>klasaC && klasaB>klasaA){
-            return 3;
-        } else if(klasaC>klasaA && klasaC>klasaB){
-            return 4;
-        } else {
-            return 0;
-        }
+        return indexMaxKlasy;
     }
 
     public void wyczysc() {
         for (int i = 0; i < tablicaSasiadow.length; i++) {
             tablicaSasiadow[i][0] = 9e30;
         }
+        for (int i = 0; i < klasy.length; i++) {
+            klasy[i]=0;
+        }
     }
-
-
 }

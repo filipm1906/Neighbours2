@@ -53,7 +53,7 @@ class Testowanie1 {
         Assertions.assertEquals(25,Metryki.odlegloscManhattan(dane1,dane4));
         Assertions.assertEquals(28,Metryki.odlegloscManhattan(dane2,dane4));
         Assertions.assertEquals(26,Metryki.odlegloscManhattan(dane3,dane4));
-        Sasiedzi sas = new Sasiedzi(1);
+        Sasiedzi sas = new Sasiedzi(1,2);
         sas.sprawdz(25,0);
         sas.sprawdz(28,0);
         sas.sprawdz(26,0);
