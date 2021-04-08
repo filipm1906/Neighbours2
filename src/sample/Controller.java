@@ -179,6 +179,11 @@ public class Controller implements Initializable {
             }
         }
         private double[] walidacja(int indexPoczatkowy, int indexKoncowy){
+        /*
+        Funkcja zwraca tablicę parametrów
+        tablica[0] -> dokładność klasyfikacji ciągu testowego (jako ułamek od 0 do 1)
+        tablica[1] -> ciągu uczącego
+         */
             double[] tablica = new double[2];
             double odleglosc = 0;
             sas = new Sasiedzi(parametrK,slownikKlas.size());
