@@ -110,7 +110,7 @@ public class Controller implements Initializable {
         TA_CiagUczacy.setText(wyswietlWiersze(1,ciagUczacy));
         TA_CiagTestowy.setText(wyswietlWiersze(ciagUczacy+1,dane.length));
 
-        klasyfikuj();
+        walidacja(0,ciagUczacy);
     }
 
     public void dodajRekord() {
@@ -180,8 +180,93 @@ public class Controller implements Initializable {
         }
         private double[] walidacja(int indexPoczatkowy, int indexKoncowy){
             double[] tablica = new double[2];
+            double odleglosc = 0;
+            sas = new Sasiedzi(parametrK,slownikKlas.size());
+            int wynik=0, iloscKlasyfikacji=0, iloscPoprawnych = 0;
+            sas.wyczysc();
+
+            // sprawdzenie dokładności klasyfikacji ciągu testowego
+            for (int i = 0; i < indexPoczatkowy; i++) {
+                for (int j = indexPoczatkowy; j < indexKoncowy; j++) {
+                    if(parametrP.equals("Manhattan , p=1")){
+                        odleglosc = Metryki.odlegloscManhattan(dane[i], dane[j]);
+                    } else if(parametrP.equals("Euklides , p=2")){
+                        odleglosc = Metryki.odlegloscEuklides(dane[i], dane[j]);
+                    } else if(parametrP.equals("Czebyszew , p=3")){
+                        odleglosc = Metryki.odlegloscCzebyszew(dane[i], dane[j]);
+                    }
+                    sas.sprawdz(odleglosc, dane[j][dane[j].length-1]);
+                }
+                wynik = sas.decyzja();
+                iloscKlasyfikacji++;
+                if (wynik == dane[i][dane[i].length-1]) {
+                    iloscPoprawnych++;
+                }
+                sas.wyczysc();
+            }
+
+            for (int i = indexKoncowy; i < dane.length; i++) {
+                for (int j = indexPoczatkowy; j < indexKoncowy; j++) {
+                    if(parametrP.equals("Manhattan , p=1")){
+                        odleglosc = Metryki.odlegloscManhattan(dane[i], dane[j]);
+                    } else if(parametrP.equals("Euklides , p=2")){
+                        odleglosc = Metryki.odlegloscEuklides(dane[i], dane[j]);
+                    } else if(parametrP.equals("Czebyszew , p=3")){
+                        odleglosc = Metryki.odlegloscCzebyszew(dane[i], dane[j]);
+                    }
+                    sas.sprawdz(odleglosc, dane[j][dane[j].length-1]);
+                }
+                wynik = sas.decyzja();
+                iloscKlasyfikacji++;
+                if (wynik == dane[i][dane[i].length-1]) {
+                    iloscPoprawnych++;
+                }
+                sas.wyczysc();
+            }
+            //zapisanie do tablicy dokładności klasyfikacji ciągu testowego
+            if(iloscKlasyfikacji!=0) {
+                tablica[0] = iloscPoprawnych / (double) iloscKlasyfikacji;
+            }
+            else{
+                tablica[0] = 0;
+            }
+
+            // sprawdzenie dokładności klasyfikacji ciągu uczącego
+            iloscKlasyfikacji = iloscPoprawnych = 0;
+
+            for (int i = indexPoczatkowy; i < indexKoncowy; i++) {
+                for (int j = indexPoczatkowy; j < indexKoncowy; j++) {
+                    //rekord nie może być sam dla siebie sąsiadem
+                    if(i!=j) {
+                        if (parametrP.equals("Manhattan , p=1")) {
+                            odleglosc = Metryki.odlegloscManhattan(dane[i], dane[j]);
+                        } else if (parametrP.equals("Euklides , p=2")) {
+                            odleglosc = Metryki.odlegloscEuklides(dane[i], dane[j]);
+                        } else if (parametrP.equals("Czebyszew , p=3")) {
+                            odleglosc = Metryki.odlegloscCzebyszew(dane[i], dane[j]);
+                        }
+                        sas.sprawdz(odleglosc, dane[j][dane[j].length - 1]);
+                    }
+                }
+                wynik = sas.decyzja();
+                iloscKlasyfikacji++;
+                if (wynik == dane[i][dane[i].length-1]) {
+                    iloscPoprawnych++;
+                }
+                sas.wyczysc();
+            }
+            //zapisanie dokładności klasyfikacji dla ciągu uczącego
+            if(iloscKlasyfikacji!=0) {
+                tablica[1] = (double) iloscPoprawnych / iloscKlasyfikacji;
+            }
+            else{
+                tablica [1] = 0;
+            }
+            System.out.println("Dokładność klasyfikacji ciągu testowego to: "+tablica[0]);
+            System.out.println("Dokładność klasyfikacji ciągu uczącego to: "+tablica[1]);
             return tablica;
         }
+
         private String wyswietlWiersze(int wierszP, int wierszK){
             String tekst = "";
             for(int i=(wierszP-1);i<wierszK;i++){
