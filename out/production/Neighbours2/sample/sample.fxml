@@ -45,13 +45,13 @@
             <Label fx:id="LciagUczacy" layoutX="222.0" layoutY="130.0" prefHeight="17.0" prefWidth="48.0" text="" />
             <Label fx:id="LciagTestowy" layoutX="222.0" layoutY="193.0" prefHeight="17.0" prefWidth="48.0" text="" />
              <Slider fx:id="sliderCU" layoutX="286.0" layoutY="128.0" majorTickUnit="10.0" onMouseDragged="#odczytWartoscCUczacy" prefHeight="38.0" prefWidth="279.0" showTickLabels="true" showTickMarks="true" />
-            <ScatterChart layoutX="117.0" layoutY="306.0" title="Wykres">
-              <xAxis>
-                <CategoryAxis side="BOTTOM" />
-              </xAxis>
-              <yAxis>
-                <NumberAxis side="LEFT" />
-              </yAxis>
+            <ScatterChart fx:id="scatterChart" layoutX="117.0" layoutY="306.0" title="Wykres">
+                <xAxis>
+                    <NumberAxis side="LEFT" />
+                </xAxis>
+                <yAxis>
+                    <NumberAxis side="LEFT" />
+                </yAxis>
             </ScatterChart>
            </children></AnchorPane>
   </items>

@@ -5,6 +5,8 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.chart.ScatterChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Slider;
 import javafx.scene.control.Label;
@@ -41,6 +43,9 @@ public class Controller implements Initializable {
     private Label LciagUczacy;
     @FXML
     private Label LciagTestowy;
+    @FXML
+    private ScatterChart<?,?> scatterChart;
+
     public Sasiedzi sas;
     public double[][] dane;
 
@@ -109,10 +114,23 @@ public class Controller implements Initializable {
 
         TA_CiagUczacy.setText(wyswietlWiersze(1,ciagUczacy));
         TA_CiagTestowy.setText(wyswietlWiersze(ciagUczacy+1,dane.length));
-
+        wyswietlWykres(1,ciagUczacy);
+        wyswietlWykres(ciagUczacy+1,dane.length);
         klasyfikuj();
     }
 
+    private void wyswietlWykres(int poczatek, int koniec){
+        XYChart.Series series = new XYChart.Series();
+        for (int i=(poczatek-1);i<koniec;i++){
+            for (int j=0;j<2;j++){
+                double x = dane[i][j];
+                double y = dane[i][j+1];
+                series.getData().add(new XYChart.Data(x, y));
+            }
+        }
+        scatterChart.getData().add(series);
+
+    }
     public void dodajRekord() {
         System.out.println(pacjenci.size()); //test
         pacjenci.add(PopUp.display(dane[0].length));
@@ -182,6 +200,7 @@ public class Controller implements Initializable {
             double[] tablica = new double[2];
             return tablica;
         }
+
         private String wyswietlWiersze(int wierszP, int wierszK){
             String tekst = "";
             for(int i=(wierszP-1);i<wierszK;i++){
