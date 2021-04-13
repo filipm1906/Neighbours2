@@ -14,6 +14,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
+import javafx.scene.control.MenuItem;
 
 import java.awt.*;
 import java.io.*;
@@ -46,6 +47,9 @@ public class Controller implements Initializable {
     @FXML
     private ScatterChart<?,?> scatterChart;
 
+    @FXML
+    private MenuItem addRec;
+
     public Sasiedzi sas;
     public double[][] dane;
 
@@ -57,6 +61,8 @@ public class Controller implements Initializable {
 
     private List<List<String>> pacjenci;
     private List<String> slownikKlas;
+
+    public static String resultManual;
 
     public List<List<String>> wczytajDane(ActionEvent actionEvent) {
         FileChooser fileChooser = new FileChooser();
@@ -84,6 +90,7 @@ public class Controller implements Initializable {
         sliderCU.setMax(dane.length);
         //funkcja testująca, sprawdza wczytywanie na podstawie pliku 'breast-cancer-wisconsin'
         //Testowanie1.testWczytywaniaDanych(dane.length);
+        addRec.setDisable(false);
         return pacjenci;
     }
     @FXML
@@ -114,6 +121,7 @@ public class Controller implements Initializable {
 
         TA_CiagUczacy.setText(wyswietlWiersze(1,ciagUczacy));
         TA_CiagTestowy.setText(wyswietlWiersze(ciagUczacy+1,dane.length));
+        scatterChart.getData().clear();
         wyswietlWykres(1,ciagUczacy);
         wyswietlWykres(ciagUczacy+1,dane.length);
         klasyfikuj();
@@ -132,11 +140,11 @@ public class Controller implements Initializable {
 
     }
     public void dodajRekord() {
-        System.out.println(pacjenci.size()); //test
-        pacjenci.add(PopUp.display(dane[0].length));
-        System.out.println(dane[0].length);
-        System.out.println(pacjenci.size()); //test
-        System.out.println(pacjenci.get(pacjenci.size()-1));  //test
+        //System.out.println(pacjenci.size()); //test
+        klasyfikuj(PopUp.display(dane[0].length));
+//        System.out.println(dane[0].length);
+//        System.out.println(pacjenci.size()); //test
+//        System.out.println(pacjenci.get(pacjenci.size()-1));  //test
     }
 
     public void zamienNaDouble(List<List<String>> tablica) {
@@ -196,6 +204,7 @@ public class Controller implements Initializable {
                 sas.wyczysc();
             }
         }
+
         private double[] walidacja(int indexPoczatkowy, int indexKoncowy){
             double[] tablica = new double[2];
             return tablica;
@@ -217,6 +226,39 @@ public class Controller implements Initializable {
             }
             return tekst;
         }
+
+    public void klasyfikuj(List<String> wektor) {
+        double odleglosc = 0;
+        sas = new Sasiedzi(parametrK,slownikKlas.size());
+        sas.wyczysc();
+        double[] vector = new double[wektor.size()];
+        for(int x=0; x<wektor.size(); x++) {
+            vector[x] = Double.parseDouble(wektor.get(x));
+        }
+
+            for (int j = 0; j < ciagUczacy; j++) {
+                if(parametrP.equals("Manhattan , p=1")){
+                    odleglosc = Metryki.odlegloscManhattan(vector, dane[j]);
+                } else if(parametrP.equals("Euklides , p=2")){
+                    odleglosc = Metryki.odlegloscEuklides(vector, dane[j]);
+                } else if(parametrP.equals("Czebyszew , p=3")){
+                    odleglosc = Metryki.odlegloscCzebyszew(vector, dane[j]);
+                }
+                sas.sprawdz(odleglosc, dane[j][dane[j].length-1]);
+            }
+            resultManual = slownikKlas.get(sas.decyzja());
+            sas.wyczysc();
+            //System.out.println(resultManual);
+
+            XYChart.Series series = new XYChart.Series();
+                    double x = vector[0];
+                    double y = vector[3];
+                    series.setName("Nowy punkt: " + resultManual);
+                    series.getData().add(new XYChart.Data(x, y));
+            scatterChart.getData().add(series);
+
+        }
+    }
     //System.out.println("Rozmiar tablicy to: " + dane.length);
     //System.out.println("Jeden wiersz składa się z " + dane[0].length + " wartości");
-}
+

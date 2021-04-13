@@ -4,12 +4,15 @@ import javafx.geometry.Pos;
 import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
+import javafx.scene.text.Text;
 import javafx.stage.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class PopUp {
+
+    public static String etykieta = "";
 
     public static List<String> display(int iloscPol) {
         Stage popupwindow = new Stage();
@@ -18,13 +21,13 @@ public class PopUp {
 
         popupwindow.initModality(Modality.APPLICATION_MODAL);
         popupwindow.setTitle("Manualne dopisanie rekordu");
-        Label label1 = new Label("Pop up window now displayed");
+        Label label1 = new Label("Klasyfikacja półautomatyczna");
         Button button1 = new Button("Anuluj");
         Button button2 = new Button("Dodaj");
         //tworzenie pól tekstowych na podstawie rozmiaru wektora
-        ChoiceBox severity = new ChoiceBox();
-        severity.getItems().add("łagodny");
-        severity.getItems().add("złośliwy");
+//        ChoiceBox severity = new ChoiceBox();
+//        severity.getItems().add("łagodny");
+//        severity.getItems().add("złośliwy");
         //Dopytać, możliwe, że niepotrzebne
         button1.setOnAction(e -> popupwindow.close());
         VBox layout = new VBox(10);
@@ -33,14 +36,15 @@ public class PopUp {
             textFields[i] = new TextField(Integer.toString(i));
             layout.getChildren().add(textFields[i]);
         }
+
         button2.setOnAction(e -> {
             for (int i = 0; i < iloscPol - 1; i++) {
                 wyniki.add(textFields[i].getText());
             }
-            wyniki.add((String) (severity.getSelectionModel().getSelectedItem()));
             popupwindow.close();
+
         });
-        layout.getChildren().addAll(label1, button1, button2, severity);
+        layout.getChildren().addAll(label1, button1, button2);
         layout.setAlignment(Pos.CENTER);
         Scene scene1 = new Scene(layout, 600, 450);
         popupwindow.setScene(scene1);
