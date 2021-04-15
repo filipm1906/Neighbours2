@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.ScatterChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.ChoiceBox;
@@ -109,6 +110,7 @@ public class Controller implements Initializable {
         CB_parametrK.getItems().addAll(1,3,5,7,9);
         TA_CiagUczacy.setEditable(false);
         TA_CiagTestowy.setEditable(false);
+
     }
 
     public void selectBtnOk(ActionEvent actionEvent) {
@@ -123,21 +125,22 @@ public class Controller implements Initializable {
         TA_CiagTestowy.setText(wyswietlWiersze(ciagUczacy+1,dane.length));
         scatterChart.getData().clear();
         wyswietlWykres(1,ciagUczacy);
-        wyswietlWykres(ciagUczacy+1,dane.length);
         klasyfikuj();
     }
-
     private void wyswietlWykres(int poczatek, int koniec){
-        XYChart.Series series = new XYChart.Series();
-        for (int i=(poczatek-1);i<koniec;i++){
-            for (int j=0;j<2;j++){
-                double x = dane[i][j];
-                double y = dane[i][j+1];
-                series.getData().add(new XYChart.Data(x, y));
-            }
+        XYChart.Series [] tablica = new XYChart.Series[slownikKlas.size()];
+        for (int k=0; k<tablica.length; k++){
+            tablica[k] = new XYChart.Series();
         }
-        scatterChart.getData().add(series);
-
+        for (int i=(poczatek-1);i<koniec;i++) {
+                double x = dane[i][0];// ktory akt z pliku
+                double y = dane[i][1];
+                tablica[(int)dane[i][dane[i].length-1]].getData().add(new XYChart.Data(x, y));
+        }
+        for (int k=0; k<tablica.length; k++){
+            tablica[k].setName(slownikKlas.get(k));
+            scatterChart.getData().add(tablica[k]);
+        }
     }
     public void dodajRekord() {
         //System.out.println(pacjenci.size()); //test
