@@ -124,7 +124,10 @@ public class Controller implements Initializable {
         TA_CiagUczacy.setText(wyswietlWiersze(1,ciagUczacy));
         TA_CiagTestowy.setText(wyswietlWiersze(ciagUczacy+1,dane.length));
         scatterChart.getData().clear();
+
+        wyswietlPlaszczyzneDecyzji();
         wyswietlWykres(1,ciagUczacy);
+
         klasyfikuj();
     }
     private void wyswietlWykres(int poczatek, int koniec){
@@ -142,6 +145,57 @@ public class Controller implements Initializable {
             scatterChart.getData().add(tablica[k]);
         }
     }
+
+    //*//
+    private void wyswietlPlaszczyzneDecyzji() {
+        XYChart.Series[] tablica = new XYChart.Series[slownikKlas.size()];
+        for (int k = 0; k < tablica.length; k++) {
+            tablica[k] = new XYChart.Series();
+        }
+        double odleglosc = 0;
+        sas = new Sasiedzi(parametrK, slownikKlas.size());
+        int wynik;
+        sas.wyczysc();
+
+        double y;
+
+        double dokladnosc = 0.20;
+        double[] daneWykres = new double[2];
+        double[] danePlik = new double[2];
+
+        double x = 0;
+        while (x <= 40) {
+            y = 0;
+            while (y <= 10) {
+                daneWykres[0] = x;
+                daneWykres[1] = y;
+                for (int j = 0; j < ciagUczacy; j++) {
+                    danePlik[0] = dane[j][2];
+                    danePlik[1] = dane[j][3];
+                    if (parametrP.equals("Manhattan , p=1")) {
+                        odleglosc = Metryki.odlegloscManhattan(daneWykres, danePlik);
+                    } else if (parametrP.equals("Euklides , p=2")) {
+                        odleglosc = Metryki.odlegloscEuklides(daneWykres, danePlik);
+                    } else if (parametrP.equals("Czebyszew , p=3")) {
+                        odleglosc = Metryki.odlegloscCzebyszew(daneWykres, danePlik);
+                    }
+                    sas.sprawdz(odleglosc, dane[j][dane[j].length - 1]);
+                }
+                wynik = sas.decyzja();
+                tablica[wynik].getData().add(new XYChart.Data(x, y));
+                sas.wyczysc();
+                y += dokladnosc;
+            }
+            x += dokladnosc;
+        }
+        for (int k = 0; k < tablica.length; k++) {
+            tablica[k].setName("Płaszczyzna decyzji: " + slownikKlas.get(k));
+            scatterChart.getData().add(tablica[k]);
+        }
+    }
+
+
+
     public void dodajRekord() {
         //System.out.println(pacjenci.size()); //test
         klasyfikuj(PopUp.display(dane[0].length));
