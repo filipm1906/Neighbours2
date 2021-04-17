@@ -8,16 +8,16 @@ import javafx.fxml.Initializable;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.ScatterChart;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Slider;
+import javafx.scene.control.*;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
-import javafx.scene.control.MenuItem;
 
 import java.awt.*;
+import java.awt.Button;
 import java.io.*;
 import java.net.URL;
 import java.util.List;
@@ -47,6 +47,13 @@ public class Controller implements Initializable {
     private Label LciagTestowy;
     @FXML
     private ScatterChart<?,?> scatterChart;
+
+    @FXML
+    private Spinner<Integer> wyswietlanieY;
+    @FXML
+    private Spinner<Integer> wyswietlanieX;
+    private int cecha1, cecha2;
+
 
     @FXML
     private MenuItem addRec;
@@ -89,6 +96,12 @@ public class Controller implements Initializable {
         //wyznaczanie wartości minimalnej i maksymalnej slidera - wyznaczanie ciągu uczącego
         sliderCU.setMin(1);
         sliderCU.setMax(dane.length);
+        //Spinnery do wykresu x i y.
+        SpinnerValueFactory<Integer> aby = new SpinnerValueFactory.IntegerSpinnerValueFactory(0,dane[0].length-1,1);
+        SpinnerValueFactory<Integer> abx = new SpinnerValueFactory.IntegerSpinnerValueFactory(0,dane[0].length-1,0);
+        //przypisanie
+        wyswietlanieY.setValueFactory(aby);
+        wyswietlanieX.setValueFactory(abx);
         //funkcja testująca, sprawdza wczytywanie na podstawie pliku 'breast-cancer-wisconsin'
         //Testowanie1.testWczytywaniaDanych(dane.length);
         addRec.setDisable(false);
@@ -124,7 +137,8 @@ public class Controller implements Initializable {
         TA_CiagUczacy.setText(wyswietlWiersze(1,ciagUczacy));
         TA_CiagTestowy.setText(wyswietlWiersze(ciagUczacy+1,dane.length));
         scatterChart.getData().clear();
-
+        cecha1 = wyswietlanieX.getValue();
+        cecha2 = wyswietlanieY.getValue();
         wyswietlPlaszczyzneDecyzji();
         wyswietlWykres(1,ciagUczacy);
 
@@ -136,8 +150,8 @@ public class Controller implements Initializable {
             tablica[k] = new XYChart.Series();
         }
         for (int i=(poczatek-1);i<koniec;i++) {
-                double x = dane[i][0];// ktory akt z pliku
-                double y = dane[i][1];
+                double x = dane[i][cecha1];// ktory akt z pliku
+                double y = dane[i][cecha2];
                 tablica[(int)dane[i][dane[i].length-1]].getData().add(new XYChart.Data(x, y));
         }
         for (int k=0; k<tablica.length; k++){
@@ -170,8 +184,8 @@ public class Controller implements Initializable {
                 daneWykres[0] = x;
                 daneWykres[1] = y;
                 for (int j = 0; j < ciagUczacy; j++) {
-                    danePlik[0] = dane[j][2];
-                    danePlik[1] = dane[j][3];
+                    danePlik[0] = dane[j][cecha1];
+                    danePlik[1] = dane[j][cecha2];
                     if (parametrP.equals("Manhattan , p=1")) {
                         odleglosc = Metryki.odlegloscManhattan(daneWykres, danePlik);
                     } else if (parametrP.equals("Euklides , p=2")) {
