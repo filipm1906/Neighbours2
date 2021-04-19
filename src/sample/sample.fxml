@@ -6,12 +6,12 @@
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
 
-<SplitPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<SplitPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
 
   <items>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1024.0" prefWidth="1884.0" style="-fx-background-color: #FFFFFF;">
+    <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="825.0" prefWidth="1600.0" style="-fx-background-color: #FFFFFF;">
          <children>
-            <MenuBar layoutX="1.0" layoutY="1.0" maxHeight="100.0" prefHeight="25.0" prefWidth="1920.0">
+            <MenuBar layoutX="1.0" layoutY="1.0" prefHeight="25.0" prefWidth="1600.0">
               <menus>
                 <Menu mnemonicParsing="false" text="Plik">
                   <items>
@@ -31,21 +31,21 @@
                   <Glow level="0.25" />
                </effect>
             </MenuBar>
-            <Button fx:id="btnOk" layoutX="21.0" layoutY="245.0" mnemonicParsing="false" onAction="#selectBtnOk" prefHeight="38.0" prefWidth="172.0" style="-fx-border-style: dotted; -fx-border-color: #000000; -fx-background-color: #3AA7FA;" text="Wyświetl wynik" />
+            <Button fx:id="btnOk" layoutX="20.0" layoutY="247.0" mnemonicParsing="false" onAction="#selectBtnOk" prefHeight="38.0" prefWidth="172.0" style="-fx-border-style: dotted; -fx-border-color: #000000; -fx-background-color: #3AA7FA;" text="Wyświetl wynik" />
             <Label layoutX="18.0" layoutY="59.0" style="-fx-font-size: 18;" text="Parametr p" />
             <Label layoutX="324.0" layoutY="59.0" style="-fx-font-size: 18;" text="Parametr k" />
             <ChoiceBox fx:id="CB_parametrP" layoutX="121.0" layoutY="60.0" prefWidth="150.0" />
             <ChoiceBox fx:id="CB_parametrK" layoutX="425.0" layoutY="60.0" prefHeight="25.0" prefWidth="150.0" />
             <Label layoutX="17.0" layoutY="125.0" style="-fx-font-size: 18;" text="Zakres ciągu uczącego" />
             <Label layoutX="18.0" layoutY="188.0" style="-fx-font-size: 18;" text="Zakres ciągu testowego" />
-            <TextArea fx:id="TA_CiagUczacy" layoutX="24.0" layoutY="356.0" prefHeight="250.0" prefWidth="300.0" style="-fx-border-style: dotted;" />
-            <TextArea fx:id="TA_CiagTestowy" layoutX="24.0" layoutY="665.0" prefHeight="250.0" prefWidth="300.0" style="-fx-border-style: dotted;" />
-            <Label layoutX="106.0" layoutY="329.0" style="-fx-font-size: 18;" text="Ciąg uczący" />
-            <Label layoutX="102.0" layoutY="638.0" style="-fx-font-size: 18;" text="Ciąg testowy" />
-            <Label fx:id="LciagUczacy" layoutX="222.0" layoutY="130.0" prefHeight="17.0" prefWidth="48.0" text="" />
-            <Label fx:id="LciagTestowy" layoutX="222.0" layoutY="193.0" prefHeight="17.0" prefWidth="48.0" text="" />
+            <TextArea fx:id="TA_CiagUczacy" layoutX="20.0" layoutY="356.0" prefHeight="145.0" prefWidth="300.0" style="-fx-border-style: dotted;" />
+            <TextArea fx:id="TA_CiagTestowy" layoutX="20.0" layoutY="578.0" prefHeight="145.0" prefWidth="300.0" style="-fx-border-style: dotted;" />
+            <Label layoutX="116.0" layoutY="329.0" style="-fx-font-size: 18;" text="Ciąg uczący" />
+            <Label layoutX="112.0" layoutY="551.0" style="-fx-font-size: 18;" text="Ciąg testowy" />
+            <Label fx:id="LciagUczacy" layoutX="222.0" layoutY="130.0" prefHeight="17.0" prefWidth="48.0" style="-fx-border-style: dotted;" text="" />
+            <Label fx:id="LciagTestowy" layoutX="222.0" layoutY="193.0" prefHeight="17.0" prefWidth="48.0" style="-fx-border-style: dotted;" text="" />
             <Slider fx:id="sliderCU" layoutX="286.0" layoutY="128.0" majorTickUnit="10.0" onMouseDragged="#odczytWartoscCUczacy" prefHeight="38.0" prefWidth="279.0" showTickLabels="true" showTickMarks="true" />
-            <ScatterChart fx:id="scatterChart" layoutX="410.0" layoutY="193.0" prefHeight="560.0" prefWidth="563.0" title="Wykres">
+            <ScatterChart fx:id="scatterChart" layoutX="516.0" layoutY="175.0" prefHeight="614.0" prefWidth="950.0">
                 <xAxis>
                     <NumberAxis side="LEFT" />
                 </xAxis>
@@ -53,8 +53,8 @@
                     <NumberAxis side="LEFT" />
                 </yAxis>
             </ScatterChart>
-             <Spinner fx:id="wyswietlanieY" layoutX="812.0" layoutY="764.0" />
-             <Spinner fx:id="wyswietlanieX" layoutX="271.0" layoutY="245.0" />
+             <Spinner fx:id="wyswietlanieY" layoutX="1332.0" layoutY="777.0" prefHeight="25.0" prefWidth="120.0" />
+             <Spinner fx:id="wyswietlanieX" layoutX="410.0" layoutY="203.0" prefHeight="25.0" prefWidth="120.0" />
            </children></AnchorPane>
   </items>
 </SplitPane>
