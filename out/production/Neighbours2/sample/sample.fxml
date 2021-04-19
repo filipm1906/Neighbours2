@@ -6,12 +6,12 @@
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
 
-<SplitPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<SplitPane orientation="VERTICAL" prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
 
   <items>
-    <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="825.0" prefWidth="1600.0" style="-fx-background-color: #FFFFFF;">
+    <AnchorPane prefHeight="825.0" prefWidth="1600.0" style="-fx-background-color: #FFFFFF;">
          <children>
-            <MenuBar layoutX="1.0" layoutY="1.0" prefHeight="25.0" prefWidth="1605.0">
+            <MenuBar layoutX="1.0" layoutY="1.0" prefHeight="25.0" prefWidth="1600.0">
               <menus>
                 <Menu mnemonicParsing="false" text="Plik">
                   <items>
@@ -40,12 +40,12 @@
             <Label layoutX="18.0" layoutY="188.0" style="-fx-font-size: 18;" text="Zakres ciągu testowego" />
             <TextArea fx:id="TA_CiagUczacy" layoutX="20.0" layoutY="356.0" prefHeight="145.0" prefWidth="300.0" style="-fx-border-style: dotted;" />
             <TextArea fx:id="TA_CiagTestowy" layoutX="20.0" layoutY="578.0" prefHeight="145.0" prefWidth="300.0" style="-fx-border-style: dotted;" />
-            <Label layoutX="96.0" layoutY="329.0" style="-fx-font-size: 18;" text="Ciąg uczący" />
+            <Label layoutX="116.0" layoutY="329.0" style="-fx-font-size: 18;" text="Ciąg uczący" />
             <Label layoutX="112.0" layoutY="551.0" style="-fx-font-size: 18;" text="Ciąg testowy" />
             <Label fx:id="LciagUczacy" layoutX="222.0" layoutY="130.0" prefHeight="17.0" prefWidth="48.0" style="-fx-border-style: dotted;" text="" />
             <Label fx:id="LciagTestowy" layoutX="222.0" layoutY="193.0" prefHeight="17.0" prefWidth="48.0" style="-fx-border-style: dotted;" text="" />
             <Slider fx:id="sliderCU" layoutX="286.0" layoutY="128.0" majorTickUnit="10.0" onMouseDragged="#odczytWartoscCUczacy" prefHeight="38.0" prefWidth="279.0" showTickLabels="true" showTickMarks="true" />
-            <ScatterChart fx:id="scatterChart" layoutX="516.0" layoutY="175.0" prefHeight="614.0" prefWidth="950.0" title="Wykres">
+            <ScatterChart fx:id="scatterChart" layoutX="516.0" layoutY="175.0" prefHeight="614.0" prefWidth="950.0">
                 <xAxis>
                     <NumberAxis side="LEFT" />
                 </xAxis>
@@ -54,7 +54,7 @@
                 </yAxis>
             </ScatterChart>
              <Spinner fx:id="wyswietlanieY" layoutX="1332.0" layoutY="777.0" prefHeight="25.0" prefWidth="120.0" />
-             <Spinner fx:id="wyswietlanieX" layoutX="403.0" layoutY="222.0" prefHeight="25.0" prefWidth="120.0" />
+             <Spinner fx:id="wyswietlanieX" layoutX="410.0" layoutY="203.0" prefHeight="25.0" prefWidth="120.0" />
            </children></AnchorPane>
   </items>
 </SplitPane>
