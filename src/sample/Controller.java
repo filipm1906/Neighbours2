@@ -143,6 +143,7 @@ public class Controller implements Initializable {
         wyswietlWykres(1,ciagUczacy);
 
         klasyfikuj();
+        dziesieciokrotnaWalidacja(); //test
     }
     private void wyswietlWykres(int poczatek, int koniec){
         XYChart.Series [] tablica = new XYChart.Series[slownikKlas.size()];
@@ -369,6 +370,55 @@ public class Controller implements Initializable {
         System.out.println("Dokładność klasyfikacji ciągu uczącego to: "+tablica[1]);
         return tablica;
     }
+
+    private double[] dziesieciokrotnaWalidacja() {
+        if(dane.length<10) {
+            return null;
+        }
+        double tab[] = new double[2];
+        double tabWynik[] = new double[2];
+        double sredniaTestowy = 0.0;
+        double sredniaUczacy = 0.0;
+        int iteracja = 0;
+        double fragment = Math.round(dane.length/10.0);//W przypadku nieparzystej liczby rekordów walidacja może nie objąć wszystkich danych
+        fragment = fragment == dane.length/10 ? fragment+1 : fragment; //Test zaokrąglenia
+        System.out.println("fragment: "+fragment);
+        int iloscMniejszychZbiorow = ((int)fragment*10)- dane.length;
+        System.out.println("iloscMniejszychZbiorow: "+iloscMniejszychZbiorow); //test
+        int poczatekZakresu = 0;
+        int koniecZakresu = (int)fragment;
+        for(int i=0; i<10-iloscMniejszychZbiorow; i++) {
+            tab = walidacja(poczatekZakresu, koniecZakresu);
+            sredniaTestowy += tab[0];
+            System.out.println("sredniaTestowy duże zbiory: "+sredniaTestowy); //test
+            sredniaUczacy += tab[1];
+            System.out.println("sredniaUczący duże zbiory: "+sredniaUczacy); //test
+            iteracja++;
+            poczatekZakresu+=fragment;
+            koniecZakresu+=fragment;
+            System.out.println("przesunięty zaklres: "+poczatekZakresu+", "+koniecZakresu); //test
+        }
+        fragment--; //Overlap culprit
+        koniecZakresu--;//fix
+        for(int i=10-iloscMniejszychZbiorow; i<10; i++) {
+            tab = walidacja(poczatekZakresu, koniecZakresu);
+            sredniaTestowy += tab[0];
+            System.out.println("sredniaTestowy małe zbiory: "+sredniaTestowy); //test
+            sredniaUczacy += tab[1];
+            System.out.println("sredniaUczący małe zbiory: "+sredniaUczacy); //test
+            iteracja++;
+            poczatekZakresu+=fragment;
+            koniecZakresu+=fragment;
+            System.out.println("przesunięty zaklres: "+poczatekZakresu+", "+koniecZakresu); //test
+        }
+        tabWynik[0] = sredniaTestowy/iteracja;
+        tabWynik[1] = sredniaUczacy/iteracja;
+        System.out.println("tabWynik[0]: "+tabWynik[0]); //test
+        System.out.println("tabWynik[1]: "+tabWynik[1]); //test
+        System.out.println("Iteracje: "+iteracja); //test
+        return tabWynik;
+    }
+
 
         private String wyswietlWiersze(int wierszP, int wierszK){
             String tekst = "";
