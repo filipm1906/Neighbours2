@@ -20,7 +20,7 @@
                 </Menu>
                 <Menu mnemonicParsing="false" onAction="#dodajRekord" text="Rekord">
                   <items>
-                    <MenuItem fx:id="addRec" mnemonicParsing="false" text="Dodaj rekord" />
+                    <MenuItem fx:id="addRec" mnemonicParsing="false" text="Dodaj rekord" disable="true" />
                   </items>
                 </Menu>
               </menus>

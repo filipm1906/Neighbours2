@@ -5,7 +5,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.ScatterChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
@@ -16,7 +15,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 
-import java.awt.*;
 import java.awt.Button;
 import java.io.*;
 import java.net.URL;
@@ -97,8 +95,8 @@ public class Controller implements Initializable {
         sliderCU.setMin(1);
         sliderCU.setMax(dane.length);
         //Spinnery do wykresu x i y.
-        SpinnerValueFactory<Integer> aby = new SpinnerValueFactory.IntegerSpinnerValueFactory(0,dane[0].length-1,1);
-        SpinnerValueFactory<Integer> abx = new SpinnerValueFactory.IntegerSpinnerValueFactory(0,dane[0].length-1,0);
+        SpinnerValueFactory<Integer> aby = new SpinnerValueFactory.IntegerSpinnerValueFactory(0,dane[0].length-2,1);
+        SpinnerValueFactory<Integer> abx = new SpinnerValueFactory.IntegerSpinnerValueFactory(0,dane[0].length-2,0);
         //przypisanie
         wyswietlanieY.setValueFactory(aby);
         wyswietlanieX.setValueFactory(abx);
@@ -174,12 +172,12 @@ public class Controller implements Initializable {
 
         double y;
 
-        double dokladnosc = 0.20;
-        double[] daneWykres = new double[2];
-        double[] danePlik = new double[2];
+        double dokladnosc = 0.10;
+        double[] daneWykres = new double[3];
+        double[] danePlik = new double[3];
 
         double x = 0;
-        while (x <= 40) {
+        while (x <= 10) {
             y = 0;
             while (y <= 10) {
                 daneWykres[0] = x;
@@ -371,7 +369,7 @@ public class Controller implements Initializable {
         return tablica;
     }
 
-    private double[] dziesieciokrotnaWalidacja() {
+    private String dziesieciokrotnaWalidacja() {
         if(dane.length<10) {
             return null;
         }
@@ -379,44 +377,57 @@ public class Controller implements Initializable {
         double tabWynik[] = new double[2];
         double sredniaTestowy = 0.0;
         double sredniaUczacy = 0.0;
+        String raport = "Raport dla walidacji krzyżowej: \n"; //WiP
+        int iloscZbiorow=1; //WiP
         int iteracja = 0;
-        double fragment = Math.round(dane.length/10.0);//W przypadku nieparzystej liczby rekordów walidacja może nie objąć wszystkich danych
+        double fragment = Math.round(dane.length/10.0);
         fragment = fragment == dane.length/10 ? fragment+1 : fragment; //Test zaokrąglenia
         System.out.println("fragment: "+fragment);
         int iloscMniejszychZbiorow = ((int)fragment*10)- dane.length;
-        System.out.println("iloscMniejszychZbiorow: "+iloscMniejszychZbiorow); //test
+        //System.out.println("iloscMniejszychZbiorow: "+iloscMniejszychZbiorow); //test
         int poczatekZakresu = 0;
         int koniecZakresu = (int)fragment;
         for(int i=0; i<10-iloscMniejszychZbiorow; i++) {
             tab = walidacja(poczatekZakresu, koniecZakresu);
             sredniaTestowy += tab[0];
-            System.out.println("sredniaTestowy duże zbiory: "+sredniaTestowy); //test
+            raport+="========== Podzbiór "+iloscZbiorow+" ==========\n";
+            raport+="Dokładność klasyfikacji ciągu testowego to: "+tab[0]+"\n";
+            //System.out.println("sredniaTestowy duże zbiory: "+sredniaTestowy); //test
             sredniaUczacy += tab[1];
-            System.out.println("sredniaUczący duże zbiory: "+sredniaUczacy); //test
+            raport+="Dokładność klasyfikacji ciągu uczącego to: "+tab[1]+"\n";
+            //System.out.println("sredniaUczący duże zbiory: "+sredniaUczacy); //test
             iteracja++;
             poczatekZakresu+=fragment;
             koniecZakresu+=fragment;
-            System.out.println("przesunięty zaklres: "+poczatekZakresu+", "+koniecZakresu); //test
+            //System.out.println("przesunięty zakres: "+poczatekZakresu+", "+koniecZakresu); //test
+            iloscZbiorow++;
         }
         fragment--; //Overlap culprit
         koniecZakresu--;//fix
         for(int i=10-iloscMniejszychZbiorow; i<10; i++) {
             tab = walidacja(poczatekZakresu, koniecZakresu);
             sredniaTestowy += tab[0];
-            System.out.println("sredniaTestowy małe zbiory: "+sredniaTestowy); //test
+            raport+="========== Podzbiór "+iloscZbiorow+" ==========\n";
+            raport+="Dokładność klasyfikacji ciągu testowego to: "+tab[0]+"\n";
+            //System.out.println("sredniaTestowy małe zbiory: "+sredniaTestowy); //test
             sredniaUczacy += tab[1];
-            System.out.println("sredniaUczący małe zbiory: "+sredniaUczacy); //test
+            raport+="Dokładność klasyfikacji ciągu uczącego to: "+tab[1]+"\n";
+            //System.out.println("sredniaUczący małe zbiory: "+sredniaUczacy); //test
             iteracja++;
             poczatekZakresu+=fragment;
             koniecZakresu+=fragment;
-            System.out.println("przesunięty zaklres: "+poczatekZakresu+", "+koniecZakresu); //test
+            //System.out.println("przesunięty zakres: "+poczatekZakresu+", "+koniecZakresu); //test
+            iloscZbiorow++;
         }
         tabWynik[0] = sredniaTestowy/iteracja;
         tabWynik[1] = sredniaUczacy/iteracja;
-        System.out.println("tabWynik[0]: "+tabWynik[0]); //test
-        System.out.println("tabWynik[1]: "+tabWynik[1]); //test
-        System.out.println("Iteracje: "+iteracja); //test
-        return tabWynik;
+        raport+="==============================\n";
+        raport+="Ogólna dokładność walidacji: "+tabWynik[0]+", "+tabWynik[1];
+        //System.out.println("tabWynik[0]: "+tabWynik[0]); //test
+        //System.out.println("tabWynik[1]: "+tabWynik[1]); //test
+        //System.out.println("Iteracje: "+iteracja); //test
+        System.out.println(raport);
+        return raport;
     }
 
 
