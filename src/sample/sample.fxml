@@ -9,9 +9,9 @@
 <SplitPane orientation="VERTICAL" prefHeight="738.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
 
   <items>
-    <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="738.0" prefWidth="1366.0" style="-fx-background-color: #FFFFFF;">
+    <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="817.0" prefWidth="1373.0" style="-fx-background-color: #FFFFFF;">
          <children>
-            <MenuBar layoutX="1.0" layoutY="29.0" prefHeight="768.0" prefWidth="1366.0">
+            <MenuBar layoutY="-2.0" prefHeight="741.0" prefWidth="1373.0">
               <menus>
                 <Menu mnemonicParsing="false" text="Plik">
                   <items>
