@@ -6,12 +6,12 @@
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
 
-<SplitPane orientation="VERTICAL" prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<SplitPane orientation="VERTICAL" prefHeight="738.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
 
   <items>
-    <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="825.0" prefWidth="1600.0" style="-fx-background-color: #FFFFFF;">
+    <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="738.0" prefWidth="1366.0" style="-fx-background-color: #FFFFFF;">
          <children>
-            <MenuBar layoutX="1.0" layoutY="1.0" prefHeight="25.0" prefWidth="1600.0">
+            <MenuBar layoutX="1.0" layoutY="29.0" prefHeight="768.0" prefWidth="1366.0">
               <menus>
                 <Menu mnemonicParsing="false" text="Plik">
                   <items>
@@ -20,7 +20,7 @@
                 </Menu>
                 <Menu mnemonicParsing="false" onAction="#dodajRekord" text="Rekord">
                   <items>
-                    <MenuItem fx:id="addRec" mnemonicParsing="false" text="Dodaj rekord" disable="true" />
+                    <MenuItem fx:id="addRec" mnemonicParsing="false" text="Dodaj rekord" />
                   </items>
                 </Menu>
               </menus>
@@ -45,7 +45,7 @@
             <Label fx:id="LciagUczacy" layoutX="222.0" layoutY="130.0" prefHeight="17.0" prefWidth="48.0" style="-fx-border-style: dotted;" text="" />
             <Label fx:id="LciagTestowy" layoutX="222.0" layoutY="193.0" prefHeight="17.0" prefWidth="48.0" style="-fx-border-style: dotted;" text="" />
             <Slider fx:id="sliderCU" layoutX="286.0" layoutY="128.0" majorTickUnit="10.0" onMouseDragged="#odczytWartoscCUczacy" prefHeight="38.0" prefWidth="279.0" showTickLabels="true" showTickMarks="true" />
-            <ScatterChart fx:id="scatterChart" layoutX="516.0" layoutY="175.0" prefHeight="614.0" prefWidth="950.0">
+            <ScatterChart fx:id="scatterChart" layoutX="516.0" layoutY="175.0" prefHeight="510.0" prefWidth="829.0">
                 <xAxis>
                     <NumberAxis side="LEFT" />
                 </xAxis>
@@ -53,7 +53,7 @@
                     <NumberAxis side="LEFT" />
                 </yAxis>
             </ScatterChart>
-             <Spinner fx:id="wyswietlanieY" layoutX="1332.0" layoutY="777.0" prefHeight="25.0" prefWidth="120.0" />
+             <Spinner fx:id="wyswietlanieY" layoutX="1175.0" layoutY="685.0" prefHeight="25.0" prefWidth="120.0" />
              <Spinner fx:id="wyswietlanieX" layoutX="410.0" layoutY="203.0" prefHeight="25.0" prefWidth="120.0" />
            </children></AnchorPane>
   </items>
