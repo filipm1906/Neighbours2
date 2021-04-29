@@ -139,7 +139,6 @@ public class Controller implements Initializable {
         cecha2 = wyswietlanieY.getValue();
         wyswietlPlaszczyzneDecyzji();
         wyswietlWykres(1,ciagUczacy);
-
         klasyfikuj();
         dziesieciokrotnaWalidacja(); //test
     }
@@ -154,7 +153,7 @@ public class Controller implements Initializable {
                 tablica[(int)dane[i][dane[i].length-1]].getData().add(new XYChart.Data(x, y));
         }
         for (int k=0; k<tablica.length; k++){
-            tablica[k].setName(slownikKlas.get(k));
+            tablica[k].setName("Ciąg uczący: "+slownikKlas.get(k));
             scatterChart.getData().add(tablica[k]);
         }
     }
@@ -255,7 +254,13 @@ public class Controller implements Initializable {
             sas = new Sasiedzi(parametrK,slownikKlas.size());
             int wynik = 0;
             sas.wyczysc();
+            XYChart.Series [] tablica = new XYChart.Series[slownikKlas.size()];
+            for (int k=0; k<tablica.length; k++){
+                tablica[k] = new XYChart.Series();
+            }
             for (int i = ciagUczacy; i < dane.length; i++) {
+                double x = dane[i][cecha1];
+                double y = dane[i][cecha2];
                 for (int j = 0; j < ciagUczacy; j++) {
                     if(parametrP.equals("Manhattan , p=1")){
                         odleglosc = Metryki.odlegloscManhattan(dane[i], dane[j]);
@@ -267,11 +272,13 @@ public class Controller implements Initializable {
                     sas.sprawdz(odleglosc, dane[j][dane[j].length-1]);
                 }
                 wynik = sas.decyzja();
+                tablica[wynik].getData().add(new XYChart.Data(x, y));
                 System.out.println("Wynik dla osoby numer: " + (i + 1) + "to " + wynik);
-                if (wynik == dane[i][dane[i].length-1]) {
-                    //poprawneOdpowiedzi++;
-                }
                 sas.wyczysc();
+            }
+            for (int k=0; k<tablica.length; k++){
+                tablica[k].setName("Ciąg testowy: "+slownikKlas.get(k));
+                scatterChart.getData().add(tablica[k]);
             }
         }
 
@@ -461,7 +468,6 @@ public class Controller implements Initializable {
         for(int x=0; x<wektor.size(); x++) {
             vector[x] = Double.parseDouble(wektor.get(x));
         }
-
             for (int j = 0; j < ciagUczacy; j++) {
                 if(parametrP.equals("Manhattan , p=1")){
                     odleglosc = Metryki.odlegloscManhattan(vector, dane[j]);
@@ -475,14 +481,12 @@ public class Controller implements Initializable {
             resultManual = slownikKlas.get(sas.decyzja());
             sas.wyczysc();
             //System.out.println(resultManual);
-
             XYChart.Series series = new XYChart.Series();
                     double x = vector[0];
                     double y = vector[3];
                     series.setName("Nowy punkt: " + resultManual);
                     series.getData().add(new XYChart.Data(x, y));
             scatterChart.getData().add(series);
-
         }
     }
     //System.out.println("Rozmiar tablicy to: " + dane.length);
