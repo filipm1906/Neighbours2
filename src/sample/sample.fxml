@@ -40,8 +40,8 @@
             <Label layoutX="18.0" layoutY="188.0" style="-fx-font-size: 18;" text="Zakres ciągu testowego" />
             <TextArea fx:id="TA_CiagUczacy" layoutX="20.0" layoutY="356.0" prefHeight="125.0" prefWidth="300.0" style="-fx-border-style: dotted;" />
             <TextArea fx:id="TA_CiagTestowy" layoutX="20.0" layoutY="528.0" prefHeight="125.0" prefWidth="300.0" style="-fx-border-style: dotted;" />
-            <Label layoutX="116.0" layoutY="329.0" style="-fx-font-size: 18;" text="Ciąg uczący" />
-            <Label layoutX="112.0" layoutY="494.0" prefHeight="27.0" prefWidth="102.0" style="-fx-font-size: 18;" text="Ciąg testowy" />
+            <Label layoutX="116.0" layoutY="323.0" style="-fx-font-size: 18;" text="Ciąg uczący" />
+            <Label layoutX="119.0" layoutY="495.0" prefHeight="27.0" prefWidth="102.0" style="-fx-font-size: 18;" text="Ciąg testowy" />
             <Label fx:id="LciagUczacy" layoutX="222.0" layoutY="130.0" prefHeight="17.0" prefWidth="48.0" style="-fx-border-style: dotted;" text="" />
             <Label fx:id="LciagTestowy" layoutX="222.0" layoutY="193.0" prefHeight="17.0" prefWidth="48.0" style="-fx-border-style: dotted;" text="" />
             <Slider fx:id="sliderCU" layoutX="286.0" layoutY="128.0" majorTickUnit="10.0" onMouseDragged="#odczytWartoscCUczacy" prefHeight="38.0" prefWidth="279.0" showTickLabels="true" showTickMarks="true" />

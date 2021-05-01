@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.ScatterChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
@@ -67,6 +68,8 @@ public class Controller implements Initializable {
 
     private List<List<String>> pacjenci;
     private List<String> slownikKlas;
+
+    private double[][] extrema;
 
     public static String resultManual;
 
@@ -139,6 +142,7 @@ public class Controller implements Initializable {
         cecha2 = wyswietlanieY.getValue();
         wyswietlPlaszczyzneDecyzji();
         wyswietlWykres(1,ciagUczacy);
+
         klasyfikuj();
         dziesieciokrotnaWalidacja(); //test
     }
@@ -148,12 +152,12 @@ public class Controller implements Initializable {
             tablica[k] = new XYChart.Series();
         }
         for (int i=(poczatek-1);i<koniec;i++) {
-                double x = dane[i][cecha1];// ktory akt z pliku
-                double y = dane[i][cecha2];
-                tablica[(int)dane[i][dane[i].length-1]].getData().add(new XYChart.Data(x, y));
+            double x = dane[i][cecha1];// ktory akt z pliku
+            double y = dane[i][cecha2];
+            tablica[(int)dane[i][dane[i].length-1]].getData().add(new XYChart.Data(x, y));
         }
         for (int k=0; k<tablica.length; k++){
-            tablica[k].setName("Ciąg uczący: "+slownikKlas.get(k));
+            tablica[k].setName(slownikKlas.get(k));
             scatterChart.getData().add(tablica[k]);
         }
     }
@@ -169,16 +173,17 @@ public class Controller implements Initializable {
         int wynik;
         sas.wyczysc();
 
-        double y;
+        double y = extrema[cecha2][1]-1;
+        double x = extrema[cecha1][1]-1;
 
         double dokladnosc = 0.10;
         double[] daneWykres = new double[3];
         double[] danePlik = new double[3];
 
-        double x = 0;
-        while (x <= 10) {
-            y = 0;
-            while (y <= 10) {
+
+        while (x <= extrema[cecha1][0]+1) {
+            y = extrema[cecha2][1]-1;
+            while (y <= extrema[cecha2][0]+1) {
                 daneWykres[0] = x;
                 daneWykres[1] = y;
                 for (int j = 0; j < ciagUczacy; j++) {
@@ -204,6 +209,15 @@ public class Controller implements Initializable {
             tablica[k].setName("Płaszczyzna decyzji: " + slownikKlas.get(k));
             scatterChart.getData().add(tablica[k]);
         }
+        NumberAxis xAxis = (NumberAxis) scatterChart.getXAxis();
+        xAxis.setAutoRanging(false);
+        xAxis.setLowerBound(extrema[cecha1][1]-1);
+        xAxis.setUpperBound(extrema[cecha1][0]+1);
+
+        NumberAxis yAxis = (NumberAxis) scatterChart.getYAxis();
+        yAxis.setAutoRanging(false);
+        yAxis.setLowerBound(extrema[cecha2][1]-1);
+        yAxis.setUpperBound(extrema[cecha2][0]+1);
     }
 
 
@@ -218,6 +232,7 @@ public class Controller implements Initializable {
 
     public void zamienNaDouble(List<List<String>> tablica) {
         dane = new double[tablica.size() - 1][tablica.get(0).size()];
+        extrema = new double [tablica.get(0).size() - 1][2];
         Iterator<List<String>> it = tablica.iterator();
         //pominięcie wiersza z opisami kolumn
         it.next();
@@ -230,10 +245,29 @@ public class Controller implements Initializable {
                 }
                 else {
                     dane[i][j] = Double.parseDouble(s);
+                    if(i==0) // określone jako maksimum
+                    {
+                        extrema[j][0] = extrema[j][1] = dane[i][j];
+                    }
+                    else {
+                        if(dane[i][j] > extrema[j][0]){
+                            extrema[j][0] = dane[i][j];
+                        }
+                        else if(dane[i][j] < extrema[j][1]) {
+                            extrema[j][1] = dane[i][j];
+                        }
+                    }
                 }
             }
         }
+        for(int i=0; i<extrema.length; i++){
+            for (int j=0; j<extrema[i].length; j++){
+                System.out.print(extrema[i][j]);
+            }
+            System.out.println();
+        }
     }
+
 
     public int sprawdzKlase(String s){
         Iterator it = slownikKlas.iterator();
@@ -249,38 +283,30 @@ public class Controller implements Initializable {
         return slownikKlas.indexOf(s);
     }
 
-        public void klasyfikuj() {
-            double odleglosc = 0;
-            sas = new Sasiedzi(parametrK,slownikKlas.size());
-            int wynik = 0;
-            sas.wyczysc();
-            XYChart.Series [] tablica = new XYChart.Series[slownikKlas.size()];
-            for (int k=0; k<tablica.length; k++){
-                tablica[k] = new XYChart.Series();
-            }
-            for (int i = ciagUczacy; i < dane.length; i++) {
-                double x = dane[i][cecha1];
-                double y = dane[i][cecha2];
-                for (int j = 0; j < ciagUczacy; j++) {
-                    if(parametrP.equals("Manhattan , p=1")){
-                        odleglosc = Metryki.odlegloscManhattan(dane[i], dane[j]);
-                    } else if(parametrP.equals("Euklides , p=2")){
-                        odleglosc = Metryki.odlegloscEuklides(dane[i], dane[j]);
-                    } else if(parametrP.equals("Czebyszew , p=3")){
-                        odleglosc = Metryki.odlegloscCzebyszew(dane[i], dane[j]);
-                    }
-                    sas.sprawdz(odleglosc, dane[j][dane[j].length-1]);
+    public void klasyfikuj() {
+        double odleglosc = 0;
+        sas = new Sasiedzi(parametrK,slownikKlas.size());
+        int wynik = 0;
+        sas.wyczysc();
+        for (int i = ciagUczacy; i < dane.length; i++) {
+            for (int j = 0; j < ciagUczacy; j++) {
+                if(parametrP.equals("Manhattan , p=1")){
+                    odleglosc = Metryki.odlegloscManhattan(dane[i], dane[j]);
+                } else if(parametrP.equals("Euklides , p=2")){
+                    odleglosc = Metryki.odlegloscEuklides(dane[i], dane[j]);
+                } else if(parametrP.equals("Czebyszew , p=3")){
+                    odleglosc = Metryki.odlegloscCzebyszew(dane[i], dane[j]);
                 }
-                wynik = sas.decyzja();
-                tablica[wynik].getData().add(new XYChart.Data(x, y));
-                System.out.println("Wynik dla osoby numer: " + (i + 1) + "to " + wynik);
-                sas.wyczysc();
+                sas.sprawdz(odleglosc, dane[j][dane[j].length-1]);
             }
-            for (int k=0; k<tablica.length; k++){
-                tablica[k].setName("Ciąg testowy: "+slownikKlas.get(k));
-                scatterChart.getData().add(tablica[k]);
+            wynik = sas.decyzja();
+            System.out.println("Wynik dla osoby numer: " + (i + 1) + "to " + wynik);
+            if (wynik == dane[i][dane[i].length-1]) {
+                //poprawneOdpowiedzi++;
             }
+            sas.wyczysc();
         }
+    }
 
     private double[] walidacja(int indexPoczatkowy, int indexKoncowy){
         /*
@@ -385,7 +411,6 @@ public class Controller implements Initializable {
         double sredniaTestowy = 0.0;
         double sredniaUczacy = 0.0;
         String raport = "Raport dla walidacji krzyżowej: \n"; //WiP
-        raport += "testowy:    uczący:\n"; //WiP
         int iloscZbiorow=1; //WiP
         int iteracja = 0;
         double fragment = Math.round(dane.length/10.0);
@@ -398,10 +423,11 @@ public class Controller implements Initializable {
         for(int i=0; i<10-iloscMniejszychZbiorow; i++) {
             tab = walidacja(poczatekZakresu, koniecZakresu);
             sredniaTestowy += tab[0];
-            raport+="=== Podzbiór "+iloscZbiorow+" ===\n";
+            raport+="========== Podzbiór "+iloscZbiorow+" ==========\n";
+            raport+="Dokładność klasyfikacji ciągu testowego to: "+tab[0]+"\n";
             //System.out.println("sredniaTestowy duże zbiory: "+sredniaTestowy); //test
             sredniaUczacy += tab[1];
-            raport+=String.format("%1.4f",tab[0])+"      "+String.format("%1.4f",tab[1])+"\n";
+            raport+="Dokładność klasyfikacji ciągu uczącego to: "+tab[1]+"\n";
             //System.out.println("sredniaUczący duże zbiory: "+sredniaUczacy); //test
             iteracja++;
             poczatekZakresu+=fragment;
@@ -414,10 +440,11 @@ public class Controller implements Initializable {
         for(int i=10-iloscMniejszychZbiorow; i<10; i++) {
             tab = walidacja(poczatekZakresu, koniecZakresu);
             sredniaTestowy += tab[0];
-            raport+="=== Podzbiór "+iloscZbiorow+" ===\n";
+            raport+="========== Podzbiór "+iloscZbiorow+" ==========\n";
+            raport+="Dokładność klasyfikacji ciągu testowego to: "+tab[0]+"\n";
             //System.out.println("sredniaTestowy małe zbiory: "+sredniaTestowy); //test
             sredniaUczacy += tab[1];
-            raport+=String.format("%1.4f",tab[0])+"      "+String.format("%1.4f",tab[1])+"\n";
+            raport+="Dokładność klasyfikacji ciągu uczącego to: "+tab[1]+"\n";
             //System.out.println("sredniaUczący małe zbiory: "+sredniaUczacy); //test
             iteracja++;
             poczatekZakresu+=fragment;
@@ -427,14 +454,8 @@ public class Controller implements Initializable {
         }
         tabWynik[0] = sredniaTestowy/iteracja;
         tabWynik[1] = sredniaUczacy/iteracja;
-        raport+="===================\n";
-        raport+="Ogólna dokładność: \n";
-        raport+=String.format("%1.4f",tabWynik[0])+"      "+String.format("%1.4f",tabWynik[1]);
-        tab = walidacja(0,ciagUczacy);
-        raport+="\n \n";
-        raport+="Jednokrotna walidacja \n";
-        raport+="Ciąg testowy:      Ciąg uczący:\n";
-        raport+=String.format("%1.4f",tab[0])+"             "+String.format("%1.4f",tab[1]);
+        raport+="==============================\n";
+        raport+="Ogólna dokładność walidacji: "+tabWynik[0]+", "+tabWynik[1];
         //System.out.println("tabWynik[0]: "+tabWynik[0]); //test
         //System.out.println("tabWynik[1]: "+tabWynik[1]); //test
         //System.out.println("Iteracje: "+iteracja); //test
@@ -443,22 +464,22 @@ public class Controller implements Initializable {
     }
 
 
-        private String wyswietlWiersze(int wierszP, int wierszK){
-            String tekst = "";
-            for(int i=(wierszP-1);i<wierszK;i++){
-                for(int j=0;j<dane[i].length;j++){
-                    if(j==dane[i].length-1){
-                        tekst+=" ";
-                        tekst+=slownikKlas.get((int)dane[i][j]);
-                    }
-                    else {
-                        tekst += String.format("%3.0f", dane[i][j]);
-                    }
+    private String wyswietlWiersze(int wierszP, int wierszK){
+        String tekst = "";
+        for(int i=(wierszP-1);i<wierszK;i++){
+            for(int j=0;j<dane[i].length;j++){
+                if(j==dane[i].length-1){
+                    tekst+=" ";
+                    tekst+=slownikKlas.get((int)dane[i][j]);
                 }
-                tekst+="\n";
+                else {
+                    tekst += String.format("%3.0f", dane[i][j]);
+                }
             }
-            return tekst;
+            tekst+="\n";
         }
+        return tekst;
+    }
 
     public void klasyfikuj(List<String> wektor) {
         double odleglosc = 0;
@@ -468,27 +489,30 @@ public class Controller implements Initializable {
         for(int x=0; x<wektor.size(); x++) {
             vector[x] = Double.parseDouble(wektor.get(x));
         }
-            for (int j = 0; j < ciagUczacy; j++) {
-                if(parametrP.equals("Manhattan , p=1")){
-                    odleglosc = Metryki.odlegloscManhattan(vector, dane[j]);
-                } else if(parametrP.equals("Euklides , p=2")){
-                    odleglosc = Metryki.odlegloscEuklides(vector, dane[j]);
-                } else if(parametrP.equals("Czebyszew , p=3")){
-                    odleglosc = Metryki.odlegloscCzebyszew(vector, dane[j]);
-                }
-                sas.sprawdz(odleglosc, dane[j][dane[j].length-1]);
+
+        for (int j = 0; j < ciagUczacy; j++) {
+            if(parametrP.equals("Manhattan , p=1")){
+                odleglosc = Metryki.odlegloscManhattan(vector, dane[j]);
+            } else if(parametrP.equals("Euklides , p=2")){
+                odleglosc = Metryki.odlegloscEuklides(vector, dane[j]);
+            } else if(parametrP.equals("Czebyszew , p=3")){
+                odleglosc = Metryki.odlegloscCzebyszew(vector, dane[j]);
             }
-            resultManual = slownikKlas.get(sas.decyzja());
-            sas.wyczysc();
-            //System.out.println(resultManual);
-            XYChart.Series series = new XYChart.Series();
-                    double x = vector[0];
-                    double y = vector[3];
-                    series.setName("Nowy punkt: " + resultManual);
-                    series.getData().add(new XYChart.Data(x, y));
-            scatterChart.getData().add(series);
+            sas.sprawdz(odleglosc, dane[j][dane[j].length-1]);
         }
+        resultManual = slownikKlas.get(sas.decyzja());
+        sas.wyczysc();
+        //System.out.println(resultManual);
+
+        XYChart.Series series = new XYChart.Series();
+        double x = vector[0];
+        double y = vector[3];
+        series.setName("Nowy punkt: " + resultManual);
+        series.getData().add(new XYChart.Data(x, y));
+        scatterChart.getData().add(series);
+
     }
-    //System.out.println("Rozmiar tablicy to: " + dane.length);
-    //System.out.println("Jeden wiersz składa się z " + dane[0].length + " wartości");
+}
+//System.out.println("Rozmiar tablicy to: " + dane.length);
+//System.out.println("Jeden wiersz składa się z " + dane[0].length + " wartości");
 
