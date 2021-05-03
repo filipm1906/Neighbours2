@@ -6,55 +6,56 @@
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
 
-<SplitPane orientation="VERTICAL" prefHeight="738.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
-
-  <items>
-    <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="817.0" prefWidth="1373.0" style="-fx-background-color: #FFFFFF;">
-         <children>
-            <MenuBar layoutY="3.0" prefHeight="27.0" prefWidth="1366.0">
-              <menus>
-                <Menu mnemonicParsing="false" text="Plik">
-                  <items>
-                    <MenuItem mnemonicParsing="false" onAction="#wczytajDane" text="Wczytaj dane z pliku" />
-                  </items>
-                </Menu>
-                <Menu mnemonicParsing="false" onAction="#dodajRekord" text="Rekord">
-                  <items>
-                    <MenuItem fx:id="addRec" mnemonicParsing="false" text="Dodaj rekord" />
-                  </items>
-                </Menu>
-              </menus>
-               <cursor>
-                  <Cursor fx:constant="V_RESIZE" />
-               </cursor>
-               <effect>
-                  <Glow level="0.25" />
-               </effect>
-            </MenuBar>
-            <Button fx:id="btnOk" layoutX="20.0" layoutY="247.0" mnemonicParsing="false" onAction="#selectBtnOk" prefHeight="38.0" prefWidth="172.0" style="-fx-border-style: dotted; -fx-border-color: #000000; -fx-background-color: #3AA7FA;" text="Wyświetl wynik" />
-            <Label layoutX="18.0" layoutY="59.0" style="-fx-font-size: 18;" text="Parametr p" />
-            <Label layoutX="324.0" layoutY="59.0" style="-fx-font-size: 18;" text="Parametr k" />
-            <ChoiceBox fx:id="CB_parametrP" layoutX="121.0" layoutY="60.0" prefWidth="150.0" />
-            <ChoiceBox fx:id="CB_parametrK" layoutX="425.0" layoutY="60.0" prefHeight="25.0" prefWidth="150.0" />
-            <Label layoutX="17.0" layoutY="125.0" style="-fx-font-size: 18;" text="Zakres ciągu uczącego" />
-            <Label layoutX="18.0" layoutY="188.0" style="-fx-font-size: 18;" text="Zakres ciągu testowego" />
-            <TextArea fx:id="TA_CiagUczacy" layoutX="20.0" layoutY="356.0" prefHeight="125.0" prefWidth="300.0" style="-fx-border-style: dotted;" />
-            <TextArea fx:id="TA_CiagTestowy" layoutX="20.0" layoutY="528.0" prefHeight="125.0" prefWidth="300.0" style="-fx-border-style: dotted;" />
-            <Label layoutX="116.0" layoutY="323.0" style="-fx-font-size: 18;" text="Ciąg uczący" />
-            <Label layoutX="119.0" layoutY="495.0" prefHeight="27.0" prefWidth="102.0" style="-fx-font-size: 18;" text="Ciąg testowy" />
-            <Label fx:id="LciagUczacy" layoutX="222.0" layoutY="130.0" prefHeight="17.0" prefWidth="48.0" style="-fx-border-style: dotted;" text="" />
-            <Label fx:id="LciagTestowy" layoutX="222.0" layoutY="193.0" prefHeight="17.0" prefWidth="48.0" style="-fx-border-style: dotted;" text="" />
-            <Slider fx:id="sliderCU" layoutX="286.0" layoutY="128.0" majorTickUnit="10.0" onMouseDragged="#odczytWartoscCUczacy" prefHeight="38.0" prefWidth="279.0" showTickLabels="true" showTickMarks="true" />
-            <ScatterChart fx:id="scatterChart" layoutX="516.0" layoutY="175.0" prefHeight="480.0" prefWidth="829.0">
-                <xAxis>
-                    <NumberAxis side="LEFT" />
-                </xAxis>
-                <yAxis>
-                    <NumberAxis side="LEFT" />
-                </yAxis>
-            </ScatterChart>
-             <Spinner fx:id="wyswietlanieY" layoutX="1195.0" layoutY="655.0" prefHeight="25.0" prefWidth="120.0" />
-             <Spinner fx:id="wyswietlanieX" layoutX="410.0" layoutY="200.0" prefHeight="25.0" prefWidth="120.0" />
-           </children></AnchorPane>
-  </items>
-</SplitPane>
+<ScrollPane maxHeight="Infinity" maxWidth="Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+    <content>
+        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" style="-fx-background-color: #FFFFFF;" SplitPane.resizableWithParent="false">
+            <children>
+                <MenuBar layoutY="3.0" prefHeight="27.0" prefWidth="1366.0">
+                    <menus>
+                        <Menu mnemonicParsing="false" text="Plik">
+                            <items>
+                                <MenuItem mnemonicParsing="false" onAction="#wczytajDane" text="Wczytaj dane z pliku" />
+                            </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" onAction="#dodajRekord" text="Rekord">
+                            <items>
+                                <MenuItem fx:id="addRec" mnemonicParsing="false" text="Dodaj rekord" />
+                            </items>
+                        </Menu>
+                    </menus>
+                    <cursor>
+                        <Cursor fx:constant="V_RESIZE" />
+                    </cursor>
+                    <effect>
+                        <Glow level="0.25" />
+                    </effect>
+                </MenuBar>
+                <Button fx:id="btnOk" layoutX="30.0" layoutY="225.0" mnemonicParsing="false" onAction="#selectBtnOk" prefHeight="38.0" prefWidth="172.0" style="-fx-border-style: dotted; -fx-border-color: #000000; -fx-background-color: #3AA7FA;" text="Wyświetl wynik" />
+                <Label layoutX="18.0" layoutY="46.0" style="-fx-font-size: 18;" text="Parametr p" />
+                <Label layoutX="20.0" layoutY="85.0" style="-fx-font-size: 18;" text="Parametr k" />
+                <ChoiceBox fx:id="CB_parametrP" layoutX="121.0" layoutY="48.0" prefHeight="25.0" prefWidth="150.0" />
+                <ChoiceBox fx:id="CB_parametrK" layoutX="121.0" layoutY="86.0" prefHeight="25.0" prefWidth="150.0" />
+                <Label layoutX="16.0" layoutY="136.0" prefHeight="27.0" prefWidth="200.0" style="-fx-font-size: 18;" text="Zakres ciągu uczącego" />
+                <Label layoutX="16.0" layoutY="176.0" prefHeight="27.0" prefWidth="200.0" style="-fx-font-size: 18;" text="Zakres ciągu testowego" />
+                <TextArea fx:id="TA_CiagUczacy" layoutX="20.0" layoutY="307.0" prefHeight="180.0" prefWidth="250.0" style="-fx-border-style: dotted;" />
+                <TextArea fx:id="TA_CiagTestowy" layoutX="20.0" layoutY="528.0" prefHeight="180.0" prefWidth="250.0" style="-fx-border-style: dotted;" />
+                <Label layoutX="95.0" layoutY="280.0" prefHeight="27.0" prefWidth="100.0" style="-fx-font-size: 18;" text="Ciąg uczący" />
+                <Label layoutX="94.0" layoutY="501.0" prefHeight="27.0" prefWidth="102.0" style="-fx-font-size: 18;" text="Ciąg testowy" />
+                <Label fx:id="LciagUczacy" layoutX="215.0" layoutY="140.0" prefHeight="19.0" prefWidth="55.0" style="-fx-border-style: dotted;" text="" />
+                <Label fx:id="LciagTestowy" layoutX="215.0" layoutY="180.0" prefHeight="19.0" prefWidth="55.0" style="-fx-border-style: dotted;" text="" />
+                <Slider fx:id="sliderCU" layoutX="292.0" layoutY="140.0" majorTickUnit="10.0" onMouseDragged="#odczytWartoscCUczacy" prefHeight="38.0" prefWidth="279.0" showTickLabels="true" showTickMarks="true" />
+                <ScatterChart fx:id="scatterChart" layoutX="622.0" layoutY="74.0" prefHeight="595.0" prefWidth="730.0" AnchorPane.bottomAnchor="99.0" AnchorPane.leftAnchor="622.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="74.0">
+                    <xAxis>
+                        <NumberAxis side="LEFT" />
+                    </xAxis>
+                    <yAxis>
+                        <NumberAxis side="LEFT" />
+                    </yAxis>
+                </ScatterChart>
+                <Spinner fx:id="wyswietlanieY" layoutX="1218.0" layoutY="669.0" prefHeight="25.0" prefWidth="120.0" />
+                <Spinner fx:id="wyswietlanieX" layoutX="664.0" layoutY="48.0" prefHeight="25.0" prefWidth="120.0" />
+                <Label layoutX="325.0" layoutY="280.0" style="-fx-font-size: 18;" text="Wyniki 10-krotnej walidacji" />
+                <TextArea fx:id="wyswietlWalidacje" layoutX="307.0" layoutY="307.0" prefHeight="400.0" prefWidth="250.0" style="-fx-border-style: dotted;" />
+            </children></AnchorPane>
+    </content>
+</ScrollPane>

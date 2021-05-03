@@ -15,7 +15,8 @@ public class Main extends Application {
         Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle("Wykresy kNN");
-        primaryStage.setScene(new Scene(root, screenSize.getWidth()-4, screenSize.getHeight()-60));
+        //primaryStage.setScene(new Scene(root, screenSize.getWidth()-4, screenSize.getHeight()-60));
+        primaryStage.setScene(new Scene(root, screenSize.getWidth()-551, screenSize.getHeight()-310));
         primaryStage.show();
     }
     public static void main(String[] args) {

@@ -48,9 +48,13 @@ public class Controller implements Initializable {
     private ScatterChart<?,?> scatterChart;
 
     @FXML
+    private TextArea wyswietlWalidacje;
+
+    @FXML
     private Spinner<Integer> wyswietlanieY;
     @FXML
     private Spinner<Integer> wyswietlanieX;
+
     private int cecha1, cecha2;
 
 
@@ -144,7 +148,7 @@ public class Controller implements Initializable {
         wyswietlWykres(1,ciagUczacy);
 
         klasyfikuj();
-        dziesieciokrotnaWalidacja(); //test
+        wyswietlWalidacje.setText(dziesieciokrotnaWalidacja());
     }
     private void wyswietlWykres(int poczatek, int koniec){
         XYChart.Series [] tablica = new XYChart.Series[slownikKlas.size()];
@@ -411,6 +415,7 @@ public class Controller implements Initializable {
         double sredniaTestowy = 0.0;
         double sredniaUczacy = 0.0;
         String raport = "Raport dla walidacji krzyżowej: \n"; //WiP
+        raport += "testowy:    uczący:\n"; //WiP
         int iloscZbiorow=1; //WiP
         int iteracja = 0;
         double fragment = Math.round(dane.length/10.0);
@@ -423,11 +428,10 @@ public class Controller implements Initializable {
         for(int i=0; i<10-iloscMniejszychZbiorow; i++) {
             tab = walidacja(poczatekZakresu, koniecZakresu);
             sredniaTestowy += tab[0];
-            raport+="========== Podzbiór "+iloscZbiorow+" ==========\n";
-            raport+="Dokładność klasyfikacji ciągu testowego to: "+tab[0]+"\n";
+            raport+="=== Podzbiór "+iloscZbiorow+" ===\n";
             //System.out.println("sredniaTestowy duże zbiory: "+sredniaTestowy); //test
             sredniaUczacy += tab[1];
-            raport+="Dokładność klasyfikacji ciągu uczącego to: "+tab[1]+"\n";
+            raport+=String.format("%1.4f",tab[0])+"      "+String.format("%1.4f",tab[1])+"\n";
             //System.out.println("sredniaUczący duże zbiory: "+sredniaUczacy); //test
             iteracja++;
             poczatekZakresu+=fragment;
@@ -440,11 +444,10 @@ public class Controller implements Initializable {
         for(int i=10-iloscMniejszychZbiorow; i<10; i++) {
             tab = walidacja(poczatekZakresu, koniecZakresu);
             sredniaTestowy += tab[0];
-            raport+="========== Podzbiór "+iloscZbiorow+" ==========\n";
-            raport+="Dokładność klasyfikacji ciągu testowego to: "+tab[0]+"\n";
+            raport+="=== Podzbiór "+iloscZbiorow+" ===\n";
             //System.out.println("sredniaTestowy małe zbiory: "+sredniaTestowy); //test
             sredniaUczacy += tab[1];
-            raport+="Dokładność klasyfikacji ciągu uczącego to: "+tab[1]+"\n";
+            raport+=String.format("%1.4f",tab[0])+"      "+String.format("%1.4f",tab[1])+"\n";
             //System.out.println("sredniaUczący małe zbiory: "+sredniaUczacy); //test
             iteracja++;
             poczatekZakresu+=fragment;
@@ -454,8 +457,14 @@ public class Controller implements Initializable {
         }
         tabWynik[0] = sredniaTestowy/iteracja;
         tabWynik[1] = sredniaUczacy/iteracja;
-        raport+="==============================\n";
-        raport+="Ogólna dokładność walidacji: "+tabWynik[0]+", "+tabWynik[1];
+        raport+="===================\n";
+        raport+="Ogólna dokładność: \n";
+        raport+=String.format("%1.4f",tabWynik[0])+"      "+String.format("%1.4f",tabWynik[1]);
+        tab = walidacja(0,ciagUczacy);
+        raport+="\n \n";
+        raport+="Jednokrotna walidacja \n";
+        raport+="Ciąg testowy:      Ciąg uczący:\n";
+        raport+=String.format("%1.4f",tab[0])+"             "+String.format("%1.4f",tab[1]);
         //System.out.println("tabWynik[0]: "+tabWynik[0]); //test
         //System.out.println("tabWynik[1]: "+tabWynik[1]); //test
         //System.out.println("Iteracje: "+iteracja); //test
