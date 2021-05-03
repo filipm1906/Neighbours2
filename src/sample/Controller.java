@@ -161,7 +161,7 @@ public class Controller implements Initializable {
             tablica[(int)dane[i][dane[i].length-1]].getData().add(new XYChart.Data(x, y));
         }
         for (int k=0; k<tablica.length; k++){
-            tablica[k].setName(slownikKlas.get(k));
+            tablica[k].setName("Ciąg uczący: "+slownikKlas.get(k));
             scatterChart.getData().add(tablica[k]);
         }
     }
@@ -223,8 +223,6 @@ public class Controller implements Initializable {
         yAxis.setLowerBound(extrema[cecha2][1]-1);
         yAxis.setUpperBound(extrema[cecha2][0]+1);
     }
-
-
 
     public void dodajRekord() {
         //System.out.println(pacjenci.size()); //test
@@ -292,7 +290,13 @@ public class Controller implements Initializable {
         sas = new Sasiedzi(parametrK,slownikKlas.size());
         int wynik = 0;
         sas.wyczysc();
+        XYChart.Series [] tablica = new XYChart.Series[slownikKlas.size()];
+        for (int k=0; k<tablica.length; k++){
+            tablica[k] = new XYChart.Series();
+        }
         for (int i = ciagUczacy; i < dane.length; i++) {
+            double x = dane[i][cecha1];
+            double y = dane[i][cecha2];
             for (int j = 0; j < ciagUczacy; j++) {
                 if(parametrP.equals("Manhattan , p=1")){
                     odleglosc = Metryki.odlegloscManhattan(dane[i], dane[j]);
@@ -304,11 +308,13 @@ public class Controller implements Initializable {
                 sas.sprawdz(odleglosc, dane[j][dane[j].length-1]);
             }
             wynik = sas.decyzja();
+            tablica[wynik].getData().add(new XYChart.Data(x, y));
             System.out.println("Wynik dla osoby numer: " + (i + 1) + "to " + wynik);
-            if (wynik == dane[i][dane[i].length-1]) {
-                //poprawneOdpowiedzi++;
-            }
             sas.wyczysc();
+        }
+        for (int k=0; k<tablica.length; k++){
+            tablica[k].setName("Ciąg testowy: "+slownikKlas.get(k));
+            scatterChart.getData().add(tablica[k]);
         }
     }
 
