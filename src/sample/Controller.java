@@ -78,6 +78,7 @@ public class Controller implements Initializable {
     public List<List<String>> wczytajDane(ActionEvent actionEvent) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open Resource File");
+        atrybuty.clear();
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("Text Files", "*.csv"));
         File selectedFile = fileChooser.showOpenDialog(null);
