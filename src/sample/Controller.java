@@ -51,12 +51,10 @@ public class Controller implements Initializable {
     private TextArea wyswietlWalidacje;
 
     @FXML
-    private Spinner<Integer> wyswietlanieY;
+    private Spinner<String> wyswietlanieY;
     @FXML
-    private Spinner<Integer> wyswietlanieX;
-
+    private Spinner<String> wyswietlanieX;
     private int cecha1, cecha2;
-
 
     @FXML
     private MenuItem addRec;
@@ -72,7 +70,7 @@ public class Controller implements Initializable {
 
     private List<List<String>> pacjenci;
     private List<String> slownikKlas;
-
+    private List<String> atrybuty =new ArrayList<>();
     private double[][] extrema;
 
     public static String resultManual;
@@ -91,7 +89,12 @@ public class Controller implements Initializable {
                 String[] values = line.split(",");
                 pacjenci.add(Arrays.asList(values));
             }
-            pacjenci.get(0).set(0, pacjenci.get(0).get(0).substring(1));
+            for(int i=0;i<pacjenci.get(0).size()-1;i++){
+                atrybuty.add(pacjenci.get(0).get(i));
+            }
+            //atrybuty = pacjenci.get(0);
+            //atrybuty.remove(atrybuty.size());
+            //pacjenci.get(0).set(0, pacjenci.get(0).get(0).substring(1));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -102,11 +105,15 @@ public class Controller implements Initializable {
         sliderCU.setMin(1);
         sliderCU.setMax(dane.length);
         //Spinnery do wykresu x i y.
-        SpinnerValueFactory<Integer> aby = new SpinnerValueFactory.IntegerSpinnerValueFactory(0,dane[0].length-2,1);
-        SpinnerValueFactory<Integer> abx = new SpinnerValueFactory.IntegerSpinnerValueFactory(0,dane[0].length-2,0);
+        //SpinnerValueFactory<Integer> aby = new SpinnerValueFactory.IntegerSpinnerValueFactory(0,dane[0].length-2,1);
+        //SpinnerValueFactory<Integer> abx = new SpinnerValueFactory.IntegerSpinnerValueFactory(0,dane[0].length-2,0);
+
+        SpinnerValueFactory<String> x = new SpinnerValueFactory.ListSpinnerValueFactory<String>(FXCollections.observableArrayList(atrybuty));
+        SpinnerValueFactory<String> y = new SpinnerValueFactory.ListSpinnerValueFactory<String>(FXCollections.observableArrayList(atrybuty));
         //przypisanie
-        wyswietlanieY.setValueFactory(aby);
-        wyswietlanieX.setValueFactory(abx);
+        wyswietlanieY.setValueFactory(x);
+        wyswietlanieX.setValueFactory(y);
+
         //funkcja testująca, sprawdza wczytywanie na podstawie pliku 'breast-cancer-wisconsin'
         //Testowanie1.testWczytywaniaDanych(dane.length);
         addRec.setDisable(false);
@@ -142,8 +149,11 @@ public class Controller implements Initializable {
         TA_CiagUczacy.setText(wyswietlWiersze(1,ciagUczacy));
         TA_CiagTestowy.setText(wyswietlWiersze(ciagUczacy+1,dane.length));
         scatterChart.getData().clear();
-        cecha1 = wyswietlanieX.getValue();
-        cecha2 = wyswietlanieY.getValue();
+        int idX = atrybuty.indexOf(wyswietlanieX.getValue());
+        int idY = atrybuty.indexOf(wyswietlanieY.getValue());
+        cecha1 = idX;
+        cecha2 = idY;
+        System.out.println(idX+", "+idY);
         wyswietlPlaszczyzneDecyzji();
         wyswietlWykres(1,ciagUczacy);
 
