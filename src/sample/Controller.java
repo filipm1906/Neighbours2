@@ -3,8 +3,11 @@ package sample;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.ScatterChart;
 import javafx.scene.chart.XYChart;
@@ -14,7 +17,11 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 import java.awt.Button;
 import java.io.*;
@@ -72,10 +79,11 @@ public class Controller implements Initializable {
     private List<String> slownikKlas;
     private List<String> atrybuty =new ArrayList<>();
     private double[][] extrema;
-
+    private double[][] sasiady = new double[parametrK][2];
     public static String resultManual;
 
     public List<List<String>> wczytajDane(ActionEvent actionEvent) {
+        atrybuty.clear();
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open Resource File");
         atrybuty.clear();
@@ -155,10 +163,11 @@ public class Controller implements Initializable {
         cecha1 = idX;
         cecha2 = idY;
         System.out.println(idX+", "+idY);
-        wyswietlPlaszczyzneDecyzji();
-        wyswietlWykres(1,ciagUczacy);
+        //wyswietlPlaszczyzneDecyzji();
+        //wyswietlWykres(1,ciagUczacy);
 
         klasyfikuj();
+        wyswietlSasiadow();
         wyswietlWalidacje.setText(dziesieciokrotnaWalidacja());
     }
     private void wyswietlWykres(int poczatek, int koniec){
@@ -317,18 +326,33 @@ public class Controller implements Initializable {
                     odleglosc = Metryki.odlegloscCzebyszew(dane[i], dane[j]);
                 }
                 sas.sprawdz(odleglosc, dane[j][dane[j].length-1]);
+
             }
             wynik = sas.decyzja();
             tablica[wynik].getData().add(new XYChart.Data(x, y));
-            System.out.println("Wynik dla osoby numer: " + (i + 1) + "to " + wynik);
+            //System.out.println("Wynik dla osoby numer: " + (i + 1) + "to " + wynik);
             sas.wyczysc();
         }
         for (int k=0; k<tablica.length; k++){
             tablica[k].setName("Ciąg testowy: "+slownikKlas.get(k));
             scatterChart.getData().add(tablica[k]);
         }
-    }
 
+    }
+    private void wyswietlSasiadow(){
+        for (XYChart.Series<?,?> s : scatterChart.getData()) {
+            for (final XYChart.Data<?,?> item  : s.getData()) {
+                // po chwili trzymania kursora na punkcie
+                Tooltip tooltip = new Tooltip();
+                String tekst = "Tu wypisać k-najbliższych sąsiadów";
+                tooltip.setText(tekst);
+                tooltip.setStyle("-fx-font: normal bold 11 Langdon; "
+                        + "-fx-base: #AE3522; "
+                        + "-fx-text-fill: #FFFFFF;");
+                Tooltip.install(item.getNode(), tooltip);
+            }
+        }
+    }
     private double[] walidacja(int indexPoczatkowy, int indexKoncowy){
         /*
         Funkcja zwraca tablicę parametrów
