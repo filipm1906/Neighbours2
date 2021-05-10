@@ -42,7 +42,6 @@ public class PopUp {
                 wyniki.add(textFields[i].getText());
             }
             popupwindow.close();
-
         });
         layout.getChildren().addAll(label1, button1, button2);
         layout.setAlignment(Pos.CENTER);

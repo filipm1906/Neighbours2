@@ -83,6 +83,7 @@ public class Controller implements Initializable {
     public static String resultManual;
 
     public List<List<String>> wczytajDane(ActionEvent actionEvent) {
+        atrybuty.clear();
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open Resource File");
         atrybuty.clear();
