@@ -237,7 +237,7 @@ public class Controller implements Initializable {
 
     public void dodajRekord() {
         //System.out.println(pacjenci.size()); //test
-        klasyfikuj(PopUp.display(dane[0].length));
+        klasyfikuj(PopUp.display(dane[0].length, atrybuty));
 //        System.out.println(dane[0].length);
 //        System.out.println(pacjenci.size()); //test
 //        System.out.println(pacjenci.get(pacjenci.size()-1));  //test

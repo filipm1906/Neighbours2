@@ -1,5 +1,6 @@
 package sample;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.*;
 import javafx.scene.control.*;
@@ -14,7 +15,7 @@ public class PopUp {
 
     public static String etykieta = "";
 
-    public static List<String> display(int iloscPol) {
+    public static List<String> display(int iloscPol, List<String> atrybuty) {
         Stage popupwindow = new Stage();
 
         List<String> wyniki = new ArrayList<String>();
@@ -31,9 +32,13 @@ public class PopUp {
         //Dopytać, możliwe, że niepotrzebne
         button1.setOnAction(e -> popupwindow.close());
         VBox layout = new VBox(10);
+        layout.setPadding(new Insets(15, 15, 15, 15));
         TextField[] textFields = new TextField[iloscPol - 1];
+        Label[] labels = new Label[iloscPol-1];
         for (int i = 0; i < iloscPol - 1; i++) {
             textFields[i] = new TextField(Integer.toString(i));
+            labels[i] = new Label(atrybuty.get(i));
+            layout.getChildren().add(labels[i]);
             layout.getChildren().add(textFields[i]);
         }
 
@@ -46,7 +51,9 @@ public class PopUp {
         });
         layout.getChildren().addAll(label1, button1, button2);
         layout.setAlignment(Pos.CENTER);
-        Scene scene1 = new Scene(layout, 600, 450);
+        Scene scene1 = new Scene(layout);
+        popupwindow.setMinWidth(600);
+        layout.setVgrow(button2, Priority.ALWAYS);
         popupwindow.setScene(scene1);
         popupwindow.showAndWait();
         return wyniki;
