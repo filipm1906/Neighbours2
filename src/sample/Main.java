@@ -17,7 +17,7 @@ public class Main extends Application {
         primaryStage.setTitle("Wykresy kNN");
         primaryStage.setScene(new Scene(root, screenSize.getWidth()-104, screenSize.getHeight()-160));
         primaryStage.setMaximized(true);
-        //primaryStage.setScene(new Scene(root, screenSize.getWidth()-551, screenSize.getHeight()-310));
+//        primaryStage.setScene(new Scene(root, screenSize.getWidth()-551, screenSize.getHeight()-310));
         primaryStage.show();
     }
     public static void main(String[] args) {

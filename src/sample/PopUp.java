@@ -22,7 +22,7 @@ public class PopUp {
 
         popupwindow.initModality(Modality.APPLICATION_MODAL);
         popupwindow.setTitle("Manualne dopisanie rekordu");
-        Label label1 = new Label("Klasyfikacja półautomatyczna");
+//        Label label1 = new Label("Klasyfikacja półautomatyczna");
         Button button1 = new Button("Anuluj");
         Button button2 = new Button("Dodaj");
         //tworzenie pól tekstowych na podstawie rozmiaru wektora
@@ -48,7 +48,7 @@ public class PopUp {
             }
             popupwindow.close();
         });
-        layout.getChildren().addAll(label1, button1, button2);
+        layout.getChildren().addAll(button1, button2);
         layout.setAlignment(Pos.CENTER);
         Scene scene1 = new Scene(layout);
         popupwindow.setMinWidth(600);

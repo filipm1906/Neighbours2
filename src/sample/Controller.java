@@ -31,8 +31,7 @@ import java.util.*;
 
 public class Controller implements Initializable {
     private ObservableList<String> MetrykaList = FXCollections.observableArrayList("Manhattan", "Euklidesa");
-    @FXML
-    private Button btnOK;
+
     @FXML
     private ChoiceBox CB_parametrP;
     @FXML
@@ -52,7 +51,7 @@ public class Controller implements Initializable {
     @FXML
     private Label LciagTestowy;
     @FXML
-    private ScatterChart<?,?> scatterChart;
+    private ScatterChart<?, ?> scatterChart;
 
     @FXML
     private TextArea wyswietlWalidacje;
@@ -62,6 +61,7 @@ public class Controller implements Initializable {
     @FXML
     private Spinner<String> wyswietlanieX;
     private int cecha1, cecha2;
+
 
     @FXML
     private MenuItem addRec;
@@ -77,7 +77,7 @@ public class Controller implements Initializable {
 
     private List<List<String>> pacjenci;
     private List<String> slownikKlas;
-    private List<String> atrybuty =new ArrayList<>();
+    private List<String> atrybuty = new ArrayList<>();
     private double[][] extrema;
     private double[][] sasiady = new double[parametrK][2];
     public static String resultManual;
@@ -98,7 +98,7 @@ public class Controller implements Initializable {
                 String[] values = line.split(",");
                 pacjenci.add(Arrays.asList(values));
             }
-            for(int i=0;i<pacjenci.get(0).size()-1;i++){
+            for (int i = 0; i < pacjenci.get(0).size() - 1; i++) {
                 atrybuty.add(pacjenci.get(0).get(i));
             }
             //atrybuty = pacjenci.get(0);
@@ -128,9 +128,10 @@ public class Controller implements Initializable {
         addRec.setDisable(false);
         return pacjenci;
     }
+
     @FXML
     public void odczytWartoscCUczacy(MouseEvent mouseEvent) {
-        ciagUczacy = (int)sliderCU.getValue();
+        ciagUczacy = (int) sliderCU.getValue();
         LciagUczacy.setText(Integer.toString(ciagUczacy));
         ciagTestowy = dane.length - ciagUczacy;
         LciagTestowy.setText(Integer.toString(ciagTestowy));
@@ -139,15 +140,15 @@ public class Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         CB_parametrP.setValue("Manhattan , p=1");
-        CB_parametrP.getItems().addAll("Manhattan , p=1","Euklides , p=2","Czebyszew , p=3");
+        CB_parametrP.getItems().addAll("Manhattan , p=1", "Euklides , p=2", "Czebyszew , p=3");
         CB_parametrK.setValue(1);
-        CB_parametrK.getItems().addAll(1,3,5,7,9);
+        CB_parametrK.getItems().addAll(1, 3, 5, 7, 9);
         TA_CiagUczacy.setEditable(false);
         TA_CiagTestowy.setEditable(false);
 
     }
 
-    public void selectBtnOk(ActionEvent actionEvent) {
+    public void selectWyswietlCiagUczacyTestowy(ActionEvent actionEvent) {
         /* Zwraca wybrane przez użytkownika zmienne (parametrP i palametr k) */
         parametrP = (String) CB_parametrP.getSelectionModel().getSelectedItem();
         parametrK = (int) (CB_parametrK.getSelectionModel().getSelectedItem());
@@ -155,21 +156,36 @@ public class Controller implements Initializable {
         //System.out.println(ciagUczacy);
         //System.out.println(ciagTestowy);
 
-        TA_CiagUczacy.setText(wyswietlWiersze(1,ciagUczacy));
-        TA_CiagTestowy.setText(wyswietlWiersze(ciagUczacy+1,dane.length));
+        TA_CiagUczacy.setText(wyswietlWiersze(1, ciagUczacy));
+        TA_CiagTestowy.setText(wyswietlWiersze(ciagUczacy + 1, dane.length));
+    }
+
+    public void selectWyswietlWykresNKK(ActionEvent actionEvent) {
         scatterChart.getData().clear();
+
         int idX = atrybuty.indexOf(wyswietlanieX.getValue());
         int idY = atrybuty.indexOf(wyswietlanieY.getValue());
         cecha1 = idX;
         cecha2 = idY;
-        System.out.println(idX+", "+idY);
-        //wyswietlPlaszczyzneDecyzji();
-        //wyswietlWykres(1,ciagUczacy);
+        System.out.println(idX + ", " + idY);
+
+        wyswietlWykres(1,ciagUczacy);
 
         klasyfikuj();
         wyswietlSasiadow();
+    }
+
+    public void selectWyswietlPlaszczyznyDecyzji(ActionEvent actionEvent) {
+        scatterChart.getData().clear();
+        wyswietlPlaszczyzneDecyzji();
+        wyswietlWykres(1,ciagUczacy);
+}
+
+    public void selectWyswietlwalidacjaDziesieciokrotna(ActionEvent actionEvent) {
         wyswietlWalidacje.setText(dziesieciokrotnaWalidacja());
     }
+
+
     private void wyswietlWykres(int poczatek, int koniec){
         XYChart.Series [] tablica = new XYChart.Series[slownikKlas.size()];
         for (int k=0; k<tablica.length; k++){
@@ -200,7 +216,7 @@ public class Controller implements Initializable {
         double y = extrema[cecha2][1]-1;
         double x = extrema[cecha1][1]-1;
 
-        double dokladnosc = 0.10;
+        double dokladnosc = 0.07;
         double[] daneWykres = new double[3];
         double[] danePlik = new double[3];
 
