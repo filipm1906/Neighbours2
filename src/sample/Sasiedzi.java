@@ -5,9 +5,20 @@ public class Sasiedzi {
     private int klasy[];
 
     public Sasiedzi(int k,int liczbaKlas) {
-        tablicaSasiadow = new double[k][2];
+        tablicaSasiadow = new double[k][3];
         klasy = new int[liczbaKlas];
         wyczysc();
+    }
+
+    public void sprawdz(double odleglosc, double wynik,int pozycja) {
+        for (int i = 0; i < tablicaSasiadow.length; i++) {
+            if (odleglosc < tablicaSasiadow[i][0]) {
+                tablicaSasiadow[i][0] = odleglosc;
+                tablicaSasiadow[i][1] = wynik;
+                tablicaSasiadow[i][2] = pozycja;
+                break;
+            }
+        }
     }
 
     public void sprawdz(double odleglosc, double wynik) {
@@ -43,5 +54,15 @@ public class Sasiedzi {
         for (int i = 0; i < klasy.length; i++) {
             klasy[i]=0;
         }
+    }
+
+    public String zwrocSasiadow(){
+        String sasiady ="";
+        for(int i=0;i<tablicaSasiadow.length;i++){
+            sasiady+="Wektor nr: " + (int) tablicaSasiadow[i][2] +
+                    " odległość " + tablicaSasiadow[i][0] + " "+ Controller.slownikKlas.get((int)tablicaSasiadow[i][1]);
+            sasiady+="\n";
+        }
+        return sasiady;
     }
 }

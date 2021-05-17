@@ -23,7 +23,6 @@ import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import java.awt.Button;
 import java.io.*;
 import java.net.URL;
 import java.util.List;
@@ -62,9 +61,8 @@ public class Controller implements Initializable {
     private Spinner<String> wyswietlanieX;
     private int cecha1, cecha2;
 
-
     @FXML
-    private MenuItem addRec;
+    private Button buttonDodajRekord;
 
     public Sasiedzi sas;
     public double[][] dane;
@@ -76,7 +74,7 @@ public class Controller implements Initializable {
     private int ciagTestowy;
 
     private List<List<String>> pacjenci;
-    private List<String> slownikKlas;
+    public static List<String> slownikKlas;
     private List<String> atrybuty = new ArrayList<>();
     private double[][] extrema;
     private double[][] sasiady = new double[parametrK][2];
@@ -125,7 +123,7 @@ public class Controller implements Initializable {
 
         //funkcja testująca, sprawdza wczytywanie na podstawie pliku 'breast-cancer-wisconsin'
         //Testowanie1.testWczytywaniaDanych(dane.length);
-        addRec.setDisable(false);
+        buttonDodajRekord.setDisable(false);
         return pacjenci;
     }
 
@@ -161,6 +159,8 @@ public class Controller implements Initializable {
     }
 
     public void selectWyswietlWykresNKK(ActionEvent actionEvent) {
+        parametrP = (String) CB_parametrP.getSelectionModel().getSelectedItem();
+        parametrK = (int) (CB_parametrK.getSelectionModel().getSelectedItem());
         scatterChart.getData().clear();
 
         int idX = atrybuty.indexOf(wyswietlanieX.getValue());
@@ -170,12 +170,12 @@ public class Controller implements Initializable {
         System.out.println(idX + ", " + idY);
 
         wyswietlWykres(1,ciagUczacy);
-
         klasyfikuj();
-        wyswietlSasiadow();
     }
 
     public void selectWyswietlPlaszczyznyDecyzji(ActionEvent actionEvent) {
+        parametrP = (String) CB_parametrP.getSelectionModel().getSelectedItem();
+        parametrK = (int) (CB_parametrK.getSelectionModel().getSelectedItem());
         scatterChart.getData().clear();
         wyswietlPlaszczyzneDecyzji();
         wyswietlWykres(1,ciagUczacy);
@@ -322,6 +322,7 @@ public class Controller implements Initializable {
     }
 
     public void klasyfikuj() {
+        String sasiedziTestowy[] = new String[dane.length-ciagUczacy+1];
         double odleglosc = 0;
         sas = new Sasiedzi(parametrK,slownikKlas.size());
         int wynik = 0;
@@ -341,27 +342,25 @@ public class Controller implements Initializable {
                 } else if(parametrP.equals("Czebyszew , p=3")){
                     odleglosc = Metryki.odlegloscCzebyszew(dane[i], dane[j]);
                 }
-                sas.sprawdz(odleglosc, dane[j][dane[j].length-1]);
+                sas.sprawdz(odleglosc, dane[j][dane[j].length-1],j);
 
             }
             wynik = sas.decyzja();
-            tablica[wynik].getData().add(new XYChart.Data(x, y));
-            //System.out.println("Wynik dla osoby numer: " + (i + 1) + "to " + wynik);
+            XYChart.Data<?,?> punkt = new XYChart.Data(x,y);
+            sasiedziTestowy[i-ciagUczacy] = "Wektor nr: " + i+" sąsiedzi: \n"+sas.zwrocSasiadow();
+            tablica[wynik].getData().add(punkt);
             sas.wyczysc();
         }
         for (int k=0; k<tablica.length; k++){
             tablica[k].setName("Ciąg testowy: "+slownikKlas.get(k));
             scatterChart.getData().add(tablica[k]);
         }
-
-    }
-    private void wyswietlSasiadow(){
-        for (XYChart.Series<?,?> s : scatterChart.getData()) {
+        int licznik=0;
+        for (XYChart.Series<?,?> s : tablica) {
             for (final XYChart.Data<?,?> item  : s.getData()) {
                 // po chwili trzymania kursora na punkcie
                 Tooltip tooltip = new Tooltip();
-                String tekst = "Tu wypisać k-najbliższych sąsiadów";
-                tooltip.setText(tekst);
+                tooltip.setText(sasiedziTestowy[licznik++]);
                 tooltip.setStyle("-fx-font: normal bold 11 Langdon; "
                         + "-fx-base: #AE3522; "
                         + "-fx-text-fill: #FFFFFF;");
@@ -369,6 +368,7 @@ public class Controller implements Initializable {
             }
         }
     }
+
     private double[] walidacja(int indexPoczatkowy, int indexKoncowy){
         /*
         Funkcja zwraca tablicę parametrów
