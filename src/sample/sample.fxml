@@ -6,7 +6,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="716.0" prefWidth="1353.0" style="-fx-background-color: #FFFFFF;" SplitPane.resizableWithParent="false" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
     <children>
-        <Button layoutX="60.0" layoutY="232.0" mnemonicParsing="false" onAction="#selectWyswietlCiagUczacyTestowy" prefHeight="38.0" prefWidth="179.0" style="-fx-border-style: dotted; -fx-border-color: #000000; -fx-background-color: #3AA7FA;" text="Wyświetl wartość ciągu uczącego i testowego" />
+        <Button layoutX="12.0" layoutY="228.0" mnemonicParsing="false" onAction="#selectWyswietlCiagUczacyTestowy" prefHeight="39.0" prefWidth="267.0" style="-fx-border-style: dotted; -fx-border-color: #000000; -fx-background-color: #3AA7FA;" text="Wyświetl wartość ciągu uczącego i testowego" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" />
         <Label layoutX="18.0" layoutY="67.0" style="-fx-font-size: 18;" text="Parametr p" />
         <Label layoutX="19.0" layoutY="98.0" style="-fx-font-size: 18;" text="Parametr k" />
         <ChoiceBox fx:id="CB_parametrP" layoutX="121.0" layoutY="68.0" prefHeight="25.0" prefWidth="150.0" />
@@ -32,7 +32,7 @@
         <Spinner fx:id="wyswietlanieY" layoutX="677.0" layoutY="87.0" prefHeight="25.0" prefWidth="120.0" />
         <Label layoutX="325.0" layoutY="280.0" style="-fx-font-size: 18;" text="Wyniki 10-krotnej walidacji" />
         <TextArea fx:id="wyswietlWalidacje" layoutX="311.0" layoutY="307.0" prefHeight="400.0" prefWidth="250.0" style="-fx-border-style: dotted;" AnchorPane.bottomAnchor="9.0" AnchorPane.topAnchor="307.0" />
-        <Button layoutX="342.0" layoutY="232.0" mnemonicParsing="false" onAction="#selectWyswietlwalidacjaDziesieciokrotna" prefHeight="39.0" prefWidth="179.0" style="-fx-border-style: dotted; -fx-border-color: #000000; -fx-background-color: #3AA7FA;" text="Wyświetl wynik 10-krotnej walidacji" />
+        <Button layoutX="321.0" layoutY="228.0" mnemonicParsing="false" onAction="#selectWyswietlwalidacjaDziesieciokrotna" prefHeight="39.0" prefWidth="231.0" style="-fx-border-style: dotted; -fx-border-color: #000000; -fx-background-color: #3AA7FA;" text="Wyświetl wynik 10-krotnej walidacji" wrapText="true" />
         <Button layoutX="648.0" layoutY="30.0" mnemonicParsing="false" onAction="#selectWyswietlWykresNKK" prefHeight="39.0" prefWidth="179.0" style="-fx-border-style: dotted; -fx-border-color: #000000; -fx-background-color: #4CBBD9;" text="Wyświetl wykresy kNN" />
         <Button layoutX="19.0" layoutY="14.0" mnemonicParsing="false" onAction="#wczytajDane" prefHeight="35.0" prefWidth="150.0" style="-fx-border-style: dotted; -fx-border-color: #000000; -fx-background-color: #28CF19;" text="Wczytaj dane z pliku" />
         <Button fx:id="buttonDodajRekord" disable="true" layoutX="195.0" layoutY="14.0" mnemonicParsing="false" onAction="#dodajRekord" prefHeight="35.0" prefWidth="150.0" style="-fx-border-style: dotted; -fx-border-color: #000000; -fx-background-color: #28CF19;" text="Dodaj rekord" />
