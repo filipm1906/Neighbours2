@@ -13,7 +13,7 @@
         <ChoiceBox fx:id="CB_parametrK" layoutX="121.0" layoutY="99.0" prefHeight="25.0" prefWidth="150.0" />
         <Label layoutX="16.0" layoutY="136.0" prefHeight="27.0" prefWidth="200.0" style="-fx-font-size: 18;" text="Zakres ciągu uczącego" />
         <Label layoutX="16.0" layoutY="176.0" prefHeight="27.0" prefWidth="200.0" style="-fx-font-size: 18;" text="Zakres ciągu testowego" />
-        <TextArea fx:id="TA_CiagUczacy" layoutX="24.0" layoutY="307.0" prefHeight="175.0" prefWidth="250.0" style="-fx-border-style: dotted;" AnchorPane.leftAnchor="24.0" />
+        <TextArea fx:id="TA_CiagUczacy" layoutX="24.0" layoutY="307.0" prefHeight="185.0" prefWidth="250.0" style="-fx-border-style: dotted;" AnchorPane.leftAnchor="24.0" />
         <TextArea fx:id="TA_CiagTestowy" layoutX="24.0" layoutY="532.0" prefHeight="175.0" prefWidth="250.0" style="-fx-border-style: dotted;" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="24.0" AnchorPane.topAnchor="532.0" />
         <Label layoutX="95.0" layoutY="280.0" prefHeight="27.0" prefWidth="100.0" style="-fx-font-size: 18;" text="Ciąg uczący" />
         <Label layoutX="94.0" layoutY="501.0" prefHeight="27.0" prefWidth="102.0" style="-fx-font-size: 18;" text="Ciąg testowy" />
@@ -31,10 +31,12 @@
         <Spinner fx:id="wyswietlanieX" layoutX="1186.0" layoutY="634.0" prefHeight="25.0" prefWidth="120.0" AnchorPane.bottomAnchor="57.0" AnchorPane.rightAnchor="47.0" />
         <Spinner fx:id="wyswietlanieY" layoutX="677.0" layoutY="87.0" prefHeight="25.0" prefWidth="120.0" />
         <Label layoutX="325.0" layoutY="280.0" style="-fx-font-size: 18;" text="Wyniki 10-krotnej walidacji" />
-        <TextArea fx:id="wyswietlWalidacje" layoutX="311.0" layoutY="307.0" prefHeight="400.0" prefWidth="250.0" style="-fx-border-style: dotted;" AnchorPane.bottomAnchor="9.0" AnchorPane.topAnchor="307.0" />
+        <TextArea fx:id="wyswietlWalidacje" layoutX="311.0" layoutY="307.0" prefHeight="265.0" prefWidth="250.0" style="-fx-border-style: dotted;" AnchorPane.topAnchor="307.0" />
         <Button layoutX="321.0" layoutY="228.0" mnemonicParsing="false" onAction="#selectWyswietlwalidacjaDziesieciokrotna" prefHeight="39.0" prefWidth="231.0" style="-fx-border-style: dotted; -fx-border-color: #000000; -fx-background-color: #3AA7FA;" text="Wyświetl wynik 10-krotnej walidacji" wrapText="true" />
         <Button layoutX="648.0" layoutY="30.0" mnemonicParsing="false" onAction="#selectWyswietlWykresNKK" prefHeight="39.0" prefWidth="179.0" style="-fx-border-style: dotted; -fx-border-color: #000000; -fx-background-color: #4CBBD9;" text="Wyświetl wykresy kNN" />
         <Button layoutX="19.0" layoutY="14.0" mnemonicParsing="false" onAction="#wczytajDane" prefHeight="35.0" prefWidth="150.0" style="-fx-border-style: dotted; -fx-border-color: #000000; -fx-background-color: #28CF19;" text="Wczytaj dane z pliku" />
         <Button fx:id="buttonDodajRekord" disable="true" layoutX="195.0" layoutY="14.0" mnemonicParsing="false" onAction="#dodajRekord" prefHeight="35.0" prefWidth="150.0" style="-fx-border-style: dotted; -fx-border-color: #000000; -fx-background-color: #28CF19;" text="Dodaj rekord" />
         <Button layoutX="875.0" layoutY="30.0" mnemonicParsing="false" onAction="#selectWyswietlPlaszczyznyDecyzji" prefHeight="39.0" prefWidth="179.0" style="-fx-border-style: dotted; -fx-border-color: #000000; -fx-background-color: #4CBBD9;" text="Wyświetl płaszczyzny decyzji" />
+        <TextArea fx:id="wyswietlNowyRedord" layoutX="312.0" layoutY="611.0" prefHeight="95.0" prefWidth="250.0" style="-fx-border-style: dotted;" AnchorPane.bottomAnchor="10.0" AnchorPane.topAnchor="611.0" />
+        <Label layoutX="337.0" layoutY="584.0" prefHeight="27.0" prefWidth="200.0" style="-fx-font-size: 18;" text="Rekordy dodane ręcznie" AnchorPane.topAnchor="584.0" />
     </children></AnchorPane>

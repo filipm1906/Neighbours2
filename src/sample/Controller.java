@@ -44,6 +44,9 @@ public class Controller implements Initializable {
     @FXML
     private TextArea TA_CiagTestowy;
     @FXML
+    private TextArea wyswietlNowyRedord;
+
+    @FXML
     private Slider sliderCU;
     @FXML
     private Label LciagUczacy;
@@ -74,7 +77,7 @@ public class Controller implements Initializable {
     private int ciagTestowy;
 
     public static List<List<String>> dodaneRekordy = new ArrayList<>();
-    private String dodaneRekordyWyswietlenie = "Rekordy dodane ręcznie:\n";
+    private String dodaneRekordyWyswietlenie = " ";
 
     private List<List<String>> pacjenci;
     public static List<String> slownikKlas;
@@ -267,12 +270,17 @@ public class Controller implements Initializable {
         //System.out.println(pacjenci.size()); //test
         klasyfikuj(PopUp.display(dane[0].length, atrybuty));
         aktualizujStringZRekordami();
+
+//        wyswietlNowyRedord.setText("");
+        wyswietlNowyRedord.setText(dodaneRekordyWyswietlenie);
+
 //        System.out.println(dane[0].length);
 //        System.out.println(pacjenci.size()); //test
 //        System.out.println(pacjenci.get(pacjenci.size()-1));  //test
     }
 
     public String aktualizujStringZRekordami() {
+//        dodaneRekordyWyswietlenie = "";
         for(int i=0; i<dodaneRekordy.size(); i++) {
             for (int j=0; j<dodaneRekordy.get(0).size(); j++) {
                     dodaneRekordyWyswietlenie+= dodaneRekordy.get(i).get(j);
