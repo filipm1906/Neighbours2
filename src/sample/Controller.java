@@ -270,6 +270,7 @@ public class Controller implements Initializable {
         //System.out.println(pacjenci.size()); //test
         klasyfikuj(PopUp.display(dane[0].length, atrybuty));
         aktualizujStringZRekordami();
+        wyswietlNowyRedord.setText(dodaneRekordyWyswietlenie);
 
 //        wyswietlNowyRedord.setText("");
         wyswietlNowyRedord.setText(dodaneRekordyWyswietlenie);
@@ -280,7 +281,7 @@ public class Controller implements Initializable {
     }
 
     public String aktualizujStringZRekordami() {
-//        dodaneRekordyWyswietlenie = "";
+        dodaneRekordyWyswietlenie = "";
         for(int i=0; i<dodaneRekordy.size(); i++) {
             for (int j=0; j<dodaneRekordy.get(0).size(); j++) {
                     dodaneRekordyWyswietlenie+= dodaneRekordy.get(i).get(j);
