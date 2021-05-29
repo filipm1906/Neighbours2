@@ -55,6 +55,7 @@ public class PopUp {
         layout.setVgrow(button2, Priority.ALWAYS);
         popupwindow.setScene(scene1);
         popupwindow.showAndWait();
+        Controller.dodaneRekordy.add(wyniki);
         return wyniki;
     }
 

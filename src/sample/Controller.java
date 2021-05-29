@@ -73,6 +73,9 @@ public class Controller implements Initializable {
     private int ciagUczacy;
     private int ciagTestowy;
 
+    public static List<List<String>> dodaneRekordy = new ArrayList<>();
+    private String dodaneRekordyWyswietlenie = "Rekordy dodane ręcznie:\n";
+
     private List<List<String>> pacjenci;
     public static List<String> slownikKlas;
     private List<String> atrybuty = new ArrayList<>();
@@ -263,9 +266,22 @@ public class Controller implements Initializable {
     public void dodajRekord() {
         //System.out.println(pacjenci.size()); //test
         klasyfikuj(PopUp.display(dane[0].length, atrybuty));
+        aktualizujStringZRekordami();
 //        System.out.println(dane[0].length);
 //        System.out.println(pacjenci.size()); //test
 //        System.out.println(pacjenci.get(pacjenci.size()-1));  //test
+    }
+
+    public String aktualizujStringZRekordami() {
+        for(int i=0; i<dodaneRekordy.size(); i++) {
+            for (int j=0; j<dodaneRekordy.get(0).size(); j++) {
+                    dodaneRekordyWyswietlenie+= dodaneRekordy.get(i).get(j);
+                    dodaneRekordyWyswietlenie+=" ";
+            }
+            dodaneRekordyWyswietlenie+="\n";
+        }
+        System.out.print(dodaneRekordyWyswietlenie);
+        return dodaneRekordyWyswietlenie;
     }
 
     public void zamienNaDouble(List<List<String>> tablica) {

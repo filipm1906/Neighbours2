@@ -20,8 +20,8 @@ public class Main extends Application {
         primaryStage.setMaximized(true);
 //        primaryStage.setScene(new Scene(root, screenSize.getWidth()-551, screenSize.getHeight()-310));
         primaryStage.show();
-        primaryStage.getIcons().add(new Image("file:kNN-ICON.png"));
-        primaryStage.getIcons().add(new Image(Main.class.getResourceAsStream("kNN-ICON.png")));
+//        primaryStage.getIcons().add(new Image("file:kNN-ICON.png"));
+//        primaryStage.getIcons().add(new Image(Main.class.getResourceAsStream("kNN-ICON.png")));
     }
     public static void main(String[] args) {
         launch(args);
