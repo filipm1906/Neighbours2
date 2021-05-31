@@ -75,6 +75,7 @@ public class Controller implements Initializable {
 
     private int ciagUczacy;
     private int ciagTestowy;
+    private int iloscNowychR;
 
     public static List<List<String>> dodaneRekordy = new ArrayList<>();
     private String dodaneRekordyWyswietlenie = " ";
@@ -573,14 +574,19 @@ public class Controller implements Initializable {
     }
 
     public void klasyfikuj(List<String> wektor) {
+        String sasiedziNowyRekord[] = new String[dane.length-ciagUczacy+1];
         double odleglosc = 0;
+        int iloscSasiadow=0;
         sas = new Sasiedzi(parametrK,slownikKlas.size());
         sas.wyczysc();
         double[] vector = new double[wektor.size()];
         for(int x=0; x<wektor.size(); x++) {
             vector[x] = Double.parseDouble(wektor.get(x));
         }
-
+        XYChart.Series [] tablicaNowyRekord = new XYChart.Series[1];
+        for (int k=0; k<tablicaNowyRekord.length; k++){
+            tablicaNowyRekord[k] = new XYChart.Series();
+        }
         for (int j = 0; j < ciagUczacy; j++) {
             if(parametrP.equals("Manhattan , p=1")){
                 odleglosc = Metryki.odlegloscManhattan(vector, dane[j]);
@@ -589,19 +595,36 @@ public class Controller implements Initializable {
             } else if(parametrP.equals("Czebyszew , p=3")){
                 odleglosc = Metryki.odlegloscCzebyszew(vector, dane[j]);
             }
-            sas.sprawdz(odleglosc, dane[j][dane[j].length-1]);
+            sas.sprawdz(odleglosc, dane[j][dane[j].length-1],j);
+
         }
         resultManual = slownikKlas.get(sas.decyzja());
-        sas.wyczysc();
+        sasiedziNowyRekord[iloscSasiadow] = "Nowy rekord \nWektor nr: " + (iloscNowychR+1)+" sąsiedzi: \n"+sas.zwrocSasiadow();
         //System.out.println(resultManual);
-
-        XYChart.Series series = new XYChart.Series();
+        iloscSasiadow++;
         double x = vector[0];
         double y = vector[3];
-        series.setName("Nowy punkt: " + resultManual);
-        series.getData().add(new XYChart.Data(x, y));
-        scatterChart.getData().add(series);
+        XYChart.Data<?,?> punkt = new XYChart.Data(x,y);
+        tablicaNowyRekord[0].getData().add(punkt);
+        sas.wyczysc();
 
+        for (int k=0; k<tablicaNowyRekord.length; k++){
+            tablicaNowyRekord[k].setName("Nowy punkt nr "+(iloscNowychR+1)+": " + resultManual);
+            scatterChart.getData().add(tablicaNowyRekord[k]);
+        }
+        iloscNowychR++;
+        int licznik=0;
+        for (XYChart.Series<?,?> s : tablicaNowyRekord) {
+            for (final XYChart.Data<?,?> item  : s.getData()) {
+                // po chwili trzymania kursora na punkcie
+                Tooltip tooltip = new Tooltip();
+                tooltip.setText(sasiedziNowyRekord[licznik++]);
+                tooltip.setStyle("-fx-font: normal bold 11 Langdon; "
+                        + "-fx-base: #AE3522; "
+                        + "-fx-text-fill: #FFFFFF;");
+                Tooltip.install(item.getNode(), tooltip);
+            }
+        }
     }
 }
 //System.out.println("Rozmiar tablicy to: " + dane.length);
