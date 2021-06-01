@@ -375,6 +375,7 @@ public class Controller implements Initializable {
             XYChart.Data<?,?> punkt = new XYChart.Data(x,y);
             sasiedziTestowy[i-ciagUczacy] = "Wektor nr: " + i+" sąsiedzi: \n"+sas.zwrocSasiadow();
             tablica[wynik].getData().add(punkt);
+            System.out.println("nic");
             sas.wyczysc();
         }
         for (int k=0; k<tablica.length; k++){
