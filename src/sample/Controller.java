@@ -1,5 +1,6 @@
 package sample;
 
+import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -25,6 +26,7 @@ import javafx.stage.Stage;
 
 import java.io.*;
 import java.net.URL;
+import java.text.NumberFormat;
 import java.util.List;
 import java.util.*;
 
@@ -48,10 +50,15 @@ public class Controller implements Initializable {
 
     @FXML
     private Slider sliderCU;
+
+    @FXML
+    private TextField WpiszWartoscCU;
+
     @FXML
     private Label LciagUczacy;
     @FXML
     private Label LciagTestowy;
+
     @FXML
     private ScatterChart<?, ?> scatterChart;
 
@@ -118,6 +125,11 @@ public class Controller implements Initializable {
         //wyznaczanie wartości minimalnej i maksymalnej slidera - wyznaczanie ciągu uczącego
         sliderCU.setMin(1);
         sliderCU.setMax(dane.length);
+
+//
+        WpiszWartoscCU.textProperty().bindBidirectional(sliderCU.valueProperty(), NumberFormat.getNumberInstance());
+//
+
         //Spinnery do wykresu x i y.
         //SpinnerValueFactory<Integer> aby = new SpinnerValueFactory.IntegerSpinnerValueFactory(0,dane[0].length-2,1);
         //SpinnerValueFactory<Integer> abx = new SpinnerValueFactory.IntegerSpinnerValueFactory(0,dane[0].length-2,0);
@@ -136,8 +148,10 @@ public class Controller implements Initializable {
 
     @FXML
     public void odczytWartoscCUczacy(MouseEvent mouseEvent) {
+
         ciagUczacy = (int) sliderCU.getValue();
-        LciagUczacy.setText(Integer.toString(ciagUczacy));
+//        LciagUczacy.setText(Integer.toString(ciagUczacy));
+        WpiszWartoscCU.setText(Integer.toString(ciagUczacy));
         ciagTestowy = dane.length - ciagUczacy;
         LciagTestowy.setText(Integer.toString(ciagTestowy));
     }
