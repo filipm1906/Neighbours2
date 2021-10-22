@@ -31,7 +31,6 @@ import java.util.List;
 import java.util.*;
 
 public class Controller implements Initializable {
-    private ObservableList<String> MetrykaList = FXCollections.observableArrayList("Manhattan", "Euklidesa");
 
     @FXML
     private ChoiceBox CB_parametrP;
@@ -47,32 +46,28 @@ public class Controller implements Initializable {
     private TextArea TA_CiagTestowy;
     @FXML
     private TextArea wyswietlNowyRedord;
-
     @FXML
     private Slider sliderCU;
-
     @FXML
     private TextField WpiszWartoscCU;
-
     @FXML
     private Label LciagUczacy;
     @FXML
     private Label LciagTestowy;
-
     @FXML
     private ScatterChart<?, ?> scatterChart;
-
     @FXML
     private TextArea wyswietlWalidacje;
-
     @FXML
     private Spinner<String> wyswietlanieY;
     @FXML
     private Spinner<String> wyswietlanieX;
-    private int cecha1, cecha2;
-
     @FXML
     private Button buttonDodajRekord;
+    @FXML
+    private Slider SliderDokladnosc;
+
+    private int cecha1, cecha2;
 
     public Sasiedzi sas;
     public double[][] dane;
@@ -93,6 +88,7 @@ public class Controller implements Initializable {
     private double[][] extrema;
     private double[][] sasiady = new double[parametrK][2];
     public static String resultManual;
+    private double dokladnosc = 1;
 
     public List<List<String>> wczytajDane(ActionEvent actionEvent) {
         atrybuty.clear();
@@ -150,7 +146,7 @@ public class Controller implements Initializable {
     public void odczytWartoscCUczacy(MouseEvent mouseEvent) {
 
         ciagUczacy = (int) sliderCU.getValue();
-//        LciagUczacy.setText(Integer.toString(ciagUczacy));
+//      LciagUczacy.setText(Integer.toString(ciagUczacy));
         WpiszWartoscCU.setText(Integer.toString(ciagUczacy));
         ciagTestowy = dane.length - ciagUczacy;
         LciagTestowy.setText(Integer.toString(ciagTestowy));
@@ -237,7 +233,7 @@ public class Controller implements Initializable {
         double y = extrema[cecha2][1]-1;
         double x = extrema[cecha1][1]-1;
 
-        double dokladnosc = 0.07;
+        dokladnosc = 1.01 - SliderDokladnosc.getValue();
         double[] daneWykres = new double[3];
         double[] danePlik = new double[3];
 

@@ -21,7 +21,7 @@
         <Label fx:id="LciagTestowy" layoutX="215.0" layoutY="180.0" prefHeight="19.0" prefWidth="55.0" style="-fx-border-style: dotted;" text="" />
 
         <Slider fx:id="sliderCU" layoutX="292.0" layoutY="140.0" majorTickUnit="10.0" onMouseDragged="#odczytWartoscCUczacy" prefHeight="38.0" prefWidth="279.0" showTickLabels="true" showTickMarks="true" />
-        <ScatterChart fx:id="scatterChart" layoutX="622.0" layoutY="111.0" prefHeight="575.0" prefWidth="730.0" AnchorPane.bottomAnchor="82.0" AnchorPane.leftAnchor="622.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="111.0">
+        <ScatterChart fx:id="scatterChart" layoutX="606.0" layoutY="111.0" prefHeight="536.0" prefWidth="733.0" AnchorPane.bottomAnchor="69.0" AnchorPane.leftAnchor="606.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="111.0">
             <xAxis>
                 <NumberAxis side="LEFT" />
             </xAxis>
@@ -29,20 +29,25 @@
                 <NumberAxis side="LEFT" />
             </yAxis>
         </ScatterChart>
-        <Spinner fx:id="wyswietlanieX" layoutX="1186.0" layoutY="634.0" prefHeight="25.0" prefWidth="120.0" AnchorPane.bottomAnchor="57.0" AnchorPane.rightAnchor="47.0" />
-        <Spinner fx:id="wyswietlanieY" layoutX="677.0" layoutY="87.0" prefHeight="25.0" prefWidth="120.0" />
+        <Spinner fx:id="wyswietlanieX" layoutX="1186.0" layoutY="659.0" prefHeight="25.0" prefWidth="120.0" AnchorPane.bottomAnchor="32.0" AnchorPane.rightAnchor="47.0" />
+        <Spinner fx:id="wyswietlanieY" layoutX="617.0" layoutY="88.0" prefHeight="25.0" prefWidth="120.0" />
         <Label layoutX="325.0" layoutY="280.0" style="-fx-font-size: 18;" text="Wyniki 10-krotnej walidacji" />
         <TextArea fx:id="wyswietlWalidacje" layoutX="311.0" layoutY="307.0" prefHeight="265.0" prefWidth="250.0" style="-fx-border-style: dotted;" AnchorPane.topAnchor="307.0" />
         <Button layoutX="321.0" layoutY="228.0" mnemonicParsing="false" onAction="#selectWyswietlwalidacjaDziesieciokrotna" prefHeight="39.0" prefWidth="231.0" style="-fx-border-style: dotted; -fx-border-color: #000000; -fx-background-color: #3AA7FA;" text="Wyświetl wynik 10-krotnej walidacji" wrapText="true" />
-        <Button layoutX="648.0" layoutY="30.0" mnemonicParsing="false" onAction="#selectWyswietlWykresNKK" prefHeight="39.0" prefWidth="179.0" style="-fx-border-style: dotted; -fx-border-color: #000000; -fx-background-color: #4CBBD9;" text="Wyświetl wykresy kNN" />
+        <Button layoutX="626.0" layoutY="14.0" mnemonicParsing="false" onAction="#selectWyswietlWykresNKK" prefHeight="39.0" prefWidth="179.0" style="-fx-border-style: dotted; -fx-border-color: #000000; -fx-background-color: #4CBBD9;" text="Wyświetl wykresy kNN" />
         <Button layoutX="19.0" layoutY="14.0" mnemonicParsing="false" onAction="#wczytajDane" prefHeight="35.0" prefWidth="150.0" style="-fx-border-style: dotted; -fx-border-color: #000000; -fx-background-color: #28CF19;" text="Wczytaj dane z pliku" />
         <Button fx:id="buttonDodajRekord" disable="true" layoutX="195.0" layoutY="14.0" mnemonicParsing="false" onAction="#dodajRekord" prefHeight="35.0" prefWidth="150.0" style="-fx-border-style: dotted; -fx-border-color: #000000; -fx-background-color: #28CF19;" text="Dodaj rekord" />
-        <Button layoutX="875.0" layoutY="30.0" mnemonicParsing="false" onAction="#selectWyswietlPlaszczyznyDecyzji" prefHeight="39.0" prefWidth="179.0" style="-fx-border-style: dotted; -fx-border-color: #000000; -fx-background-color: #4CBBD9;" text="Wyświetl płaszczyzny decyzji" />
+        <Button layoutX="873.0" layoutY="14.0" mnemonicParsing="false" onAction="#selectWyswietlPlaszczyznyDecyzji" prefHeight="39.0" prefWidth="179.0" style="-fx-border-style: dotted; -fx-border-color: #000000; -fx-background-color: #4CBBD9;" text="Wyświetl płaszczyzny decyzji" />
         <TextArea fx:id="wyswietlNowyRedord" layoutX="312.0" layoutY="611.0" prefHeight="95.0" prefWidth="250.0" style="-fx-border-style: dotted;" AnchorPane.bottomAnchor="10.0" AnchorPane.topAnchor="611.0" />
         <Label layoutX="337.0" layoutY="584.0" prefHeight="27.0" prefWidth="200.0" style="-fx-font-size: 18;" text="Rekordy dodane ręcznie" AnchorPane.topAnchor="584.0" />
 
         <!---->
         <TextField fx:id="WpiszWartoscCU" layoutX="292.0" layoutY="100.0" prefHeight="25.0" prefWidth="279.0" />
+      <Label layoutX="873.0" layoutY="59.0" text="Dokładność" />
+      <Slider fx:id="SliderDokladnosc" layoutX="873.0" layoutY="81.0" max="1.0" min="0.01" prefHeight="14.0" prefWidth="179.0" value="0.01" />
+      <Label layoutX="873.0" layoutY="103.0" text="Mała" />
+      <Label layoutX="949.0" layoutY="103.0" text="Średnia" />
+      <Label layoutX="1024.0" layoutY="103.0" text="Duża" />
         <!--        -->
 
 

@@ -33,7 +33,7 @@ public class Sasiedzi {
 
     public int decyzja() {
         for (int i = 0; i < tablicaSasiadow.length; i++) {
-            System.out.println("Sąsiady"+tablicaSasiadow[i][0]+" , "+tablicaSasiadow[i][1]);
+            //System.out.println("Sąsiady"+tablicaSasiadow[i][0]+" , "+tablicaSasiadow[i][1]);
                 klasy[(int)tablicaSasiadow[i][1]]++;
         }
         int maxKlasa = -1;
