@@ -121,6 +121,7 @@ public class Controller implements Initializable {
         //wyznaczanie wartości minimalnej i maksymalnej slidera - wyznaczanie ciągu uczącego
         sliderCU.setMin(1);
         sliderCU.setMax(dane.length);
+        sliderCU.setValue(dane.length);
 
 //
         WpiszWartoscCU.textProperty().bindBidirectional(sliderCU.valueProperty(), NumberFormat.getNumberInstance());
@@ -148,8 +149,8 @@ public class Controller implements Initializable {
         ciagUczacy = (int) sliderCU.getValue();
 //      LciagUczacy.setText(Integer.toString(ciagUczacy));
         WpiszWartoscCU.setText(Integer.toString(ciagUczacy));
-        ciagTestowy = dane.length - ciagUczacy;
-        LciagTestowy.setText(Integer.toString(ciagTestowy));
+//        ciagTestowy = dane.length - ciagUczacy;
+//        LciagTestowy.setText(Integer.toString(ciagTestowy));
     }
 
     @Override
