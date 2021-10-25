@@ -229,6 +229,10 @@ public class Controller implements Initializable {
         sas = new Sasiedzi(parametrK, slownikKlas.size());
         int wynik;
         sas.wyczysc();
+        int idX = atrybuty.indexOf(wyswietlanieX.getValue());
+        int idY = atrybuty.indexOf(wyswietlanieY.getValue());
+        cecha1 = idX;
+        cecha2 = idY;
 
         double y = extrema[cecha2][1]-1;
         double x = extrema[cecha1][1]-1;
