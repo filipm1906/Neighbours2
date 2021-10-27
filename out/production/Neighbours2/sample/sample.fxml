@@ -34,17 +34,17 @@
         <Button layoutX="626.0" layoutY="14.0" mnemonicParsing="false" onAction="#selectWyswietlWykresNKK" prefHeight="39.0" prefWidth="179.0" style="-fx-border-style: dotted; -fx-border-color: #000000; -fx-background-color: #4CBBD9;" text="Wyświetl wykresy kNN" />
         <Button layoutX="19.0" layoutY="14.0" mnemonicParsing="false" onAction="#wczytajDane" prefHeight="35.0" prefWidth="150.0" style="-fx-border-style: dotted; -fx-border-color: #000000; -fx-background-color: #28CF19;" text="Wczytaj dane z pliku" />
         <Button fx:id="buttonDodajRekord" disable="true" layoutX="195.0" layoutY="14.0" mnemonicParsing="false" onAction="#dodajRekord" prefHeight="35.0" prefWidth="150.0" style="-fx-border-style: dotted; -fx-border-color: #000000; -fx-background-color: #28CF19;" text="Dodaj rekord" />
-        <Button layoutX="847.0" layoutY="14.0" mnemonicParsing="false" onAction="#selectWyswietlPlaszczyznyDecyzji" prefHeight="39.0" prefWidth="179.0" style="-fx-border-style: dotted; -fx-border-color: #000000; -fx-background-color: #4CBBD9;" text="Wyświetl płaszczyzny decyzji" />
+        <Button layoutX="822.0" layoutY="14.0" mnemonicParsing="false" onAction="#selectWyswietlPlaszczyznyDecyzji" prefHeight="39.0" prefWidth="179.0" style="-fx-border-style: dotted; -fx-border-color: #000000; -fx-background-color: #4CBBD9;" text="Wyświetl płaszczyzny decyzji" />
         <TextArea fx:id="wyswietlNowyRedord" layoutX="312.0" layoutY="611.0" prefHeight="95.0" prefWidth="250.0" style="-fx-border-style: dotted;" AnchorPane.bottomAnchor="10.0" AnchorPane.topAnchor="611.0" />
         <Label layoutX="337.0" layoutY="584.0" prefHeight="27.0" prefWidth="200.0" style="-fx-font-size: 18;" text="Rekordy dodane ręcznie" AnchorPane.topAnchor="584.0" />
 
         <!---->
         <TextField fx:id="WpiszWartoscCU" layoutX="212.0" layoutY="137.0" prefHeight="25.0" prefWidth="150.0" />
-      <Label layoutX="987.0" layoutY="67.0" style="-fx-font-size: 15;" text="Dokładność" />
-      <Slider fx:id="SliderDokladnosc" layoutX="881.0" layoutY="85.0" max="1.0" min="0.01" prefHeight="8.0" prefWidth="291.0" value="0.01" />
-      <Label layoutX="874.0" layoutY="101.0" style="-fx-font-size: 15;" text="Mała" />
-      <Label layoutX="1001.0" layoutY="101.0" style="-fx-font-size: 15;" text="Średnia" />
-      <Label layoutX="1132.0" layoutY="101.0" style="-fx-font-size: 15;" text="Duża" />
+      <Label layoutX="929.0" layoutY="67.0" style="-fx-font-size: 15;" text="Dokładność" />
+      <Slider fx:id="SliderDokladnosc" layoutX="822.0" layoutY="86.0" max="1.0" min="0.01" prefHeight="8.0" prefWidth="291.0" value="0.01" />
+      <Label layoutX="822.0" layoutY="101.0" style="-fx-font-size: 15;" text="Mała" />
+      <Label layoutX="948.0" layoutY="101.0" style="-fx-font-size: 15;" text="Średnia" />
+      <Label layoutX="1079.0" layoutY="101.0" style="-fx-font-size: 15;" text="Duża" />
         <!--        -->
 
 

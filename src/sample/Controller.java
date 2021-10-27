@@ -196,7 +196,7 @@ public class Controller implements Initializable {
         parametrK = (int) (CB_parametrK.getSelectionModel().getSelectedItem());
         scatterChart.getData().clear();
         wyswietlPlaszczyzneDecyzji();
-        wyswietlWykres(1,ciagUczacy);
+        wyswietlWykres(1, dane.length);
 }
 
     public void selectWyswietlwalidacjaDziesieciokrotna(ActionEvent actionEvent) {
@@ -619,7 +619,7 @@ public class Controller implements Initializable {
         //System.out.println(resultManual);
         iloscSasiadow++;
         double x = vector[0];
-        double y = vector[3];
+        double y = vector[vector.length-1];
         XYChart.Data<?,?> punkt = new XYChart.Data(x,y);
         tablicaNowyRekord[0].getData().add(punkt);
         sas.wyczysc();
