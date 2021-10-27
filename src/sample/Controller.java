@@ -125,7 +125,7 @@ public class Controller implements Initializable {
 
 //
         WpiszWartoscCU.textProperty().bindBidirectional(sliderCU.valueProperty(), NumberFormat.getNumberInstance());
-//
+        //
 
         //Spinnery do wykresu x i y.
         //SpinnerValueFactory<Integer> aby = new SpinnerValueFactory.IntegerSpinnerValueFactory(0,dane[0].length-2,1);
@@ -168,8 +168,9 @@ public class Controller implements Initializable {
         /* Zwraca wybrane przez użytkownika zmienne (parametrP i palametr k) */
         parametrP = (String) CB_parametrP.getSelectionModel().getSelectedItem();
         parametrK = (int) (CB_parametrK.getSelectionModel().getSelectedItem());
-
-        //System.out.println(ciagUczacy);
+        ciagUczacy = (int) sliderCU.getValue();
+        System.out.println("ciąg uczący to");
+        System.out.println(ciagUczacy);
         //System.out.println(ciagTestowy);
 
         TA_CiagUczacy.setText(wyswietlWiersze(1, ciagUczacy));
@@ -590,6 +591,10 @@ public class Controller implements Initializable {
     }
 
     public void klasyfikuj(List<String> wektor) {
+        int idX = atrybuty.indexOf(wyswietlanieX.getValue());
+        int idY = atrybuty.indexOf(wyswietlanieY.getValue());
+        cecha1 = idX;
+        cecha2 = idY;
         String sasiedziNowyRekord[] = new String[dane.length-ciagUczacy+1];
         double odleglosc = 0;
         int iloscSasiadow=0;
@@ -618,8 +623,8 @@ public class Controller implements Initializable {
         sasiedziNowyRekord[iloscSasiadow] = "Nowy rekord \nWektor nr: " + (iloscNowychR+1)+" sąsiedzi: \n"+sas.zwrocSasiadow();
         //System.out.println(resultManual);
         iloscSasiadow++;
-        double x = vector[0];
-        double y = vector[vector.length-1];
+        double x = vector[cecha1];
+        double y = vector[cecha2];
         XYChart.Data<?,?> punkt = new XYChart.Data(x,y);
         tablicaNowyRekord[0].getData().add(punkt);
         sas.wyczysc();
