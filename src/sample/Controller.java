@@ -18,6 +18,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
@@ -122,6 +123,7 @@ public class Controller implements Initializable {
         sliderCU.setMin(1);
         sliderCU.setMax(dane.length);
         sliderCU.setValue(dane.length);
+        ciagUczacy = dane.length;
 
 //
         WpiszWartoscCU.textProperty().bindBidirectional(sliderCU.valueProperty(), NumberFormat.getNumberInstance());
@@ -236,13 +238,19 @@ public class Controller implements Initializable {
         cecha1 = idX;
         cecha2 = idY;
 
+        double dokl_poziom;
+        double dokl_pion;
+        dokladnosc = SliderDokladnosc.getValue();
+        dokl_poziom = (extrema[cecha1][0]+1 - extrema[cecha1][1]-1) / dokladnosc;
+        dokl_pion = (extrema[cecha2][0]+1 - extrema[cecha2][1]-1) / dokladnosc;
+        System.out.println("dokładność poziom : " +dokl_poziom);
+        System.out.println("dokładność pion : " +dokl_pion);
+
         double y = extrema[cecha2][1]-1;
         double x = extrema[cecha1][1]-1;
 
-        dokladnosc = 1.01 - SliderDokladnosc.getValue();
         double[] daneWykres = new double[3];
         double[] danePlik = new double[3];
-
 
         while (x <= extrema[cecha1][0]+1) {
             y = extrema[cecha2][1]-1;
@@ -264,14 +272,16 @@ public class Controller implements Initializable {
                 wynik = sas.decyzja();
                 tablica[wynik].getData().add(new XYChart.Data(x, y));
                 sas.wyczysc();
-                y += dokladnosc;
+                y += dokl_pion;
             }
-            x += dokladnosc;
+            x += dokl_poziom;
         }
         for (int k = 0; k < tablica.length; k++) {
             tablica[k].setName("Płaszczyzna decyzji: " + slownikKlas.get(k));
             scatterChart.getData().add(tablica[k]);
         }
+
+        // ustawienie zakresu osi
         NumberAxis xAxis = (NumberAxis) scatterChart.getXAxis();
         xAxis.setAutoRanging(false);
         xAxis.setLowerBound(extrema[cecha1][1]-1);
@@ -281,6 +291,24 @@ public class Controller implements Initializable {
         yAxis.setAutoRanging(false);
         yAxis.setLowerBound(extrema[cecha2][1]-1);
         yAxis.setUpperBound(extrema[cecha2][0]+1);
+
+        //dopasowanie wielkości punktów do dokładności płaszczyzn
+        System.out.println("Wysokość wykresu: " + scatterChart.getHeight());
+        System.out.println("Szerokość wykresu: " + scatterChart.getWidth());
+        int wsp_poziom = (int) (scatterChart.getWidth() / dokladnosc);
+        int wsp_pion = (int) (scatterChart.getHeight() / dokladnosc);
+        System.out.println("Wsp poziom to" +wsp_poziom);
+        System.out.println("Wsp pion" + wsp_pion);
+        //próbna zmiana punktów
+        for (XYChart.Series<?, ?> series : scatterChart.getData()) {
+            //for all series, take date, each data has Node (symbol) for representing point
+            for (XYChart.Data<?, ?> data : series.getData()) {
+                // this node is StackPane
+                StackPane stackPane =  (StackPane) data.getNode();
+                stackPane.setPrefWidth(wsp_poziom);
+                stackPane.setPrefHeight(wsp_pion);
+            }
+        }
     }
 
     public void dodajRekord() {

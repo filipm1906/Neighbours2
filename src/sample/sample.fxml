@@ -41,7 +41,7 @@
         <!---->
         <TextField fx:id="WpiszWartoscCU" layoutX="212.0" layoutY="137.0" prefHeight="25.0" prefWidth="150.0" />
       <Label layoutX="929.0" layoutY="67.0" style="-fx-font-size: 15;" text="Dokładność" />
-      <Slider fx:id="SliderDokladnosc" layoutX="822.0" layoutY="86.0" max="1.0" min="0.01" prefHeight="8.0" prefWidth="291.0" value="0.01" />
+      <Slider fx:id="SliderDokladnosc" layoutX="822.0" layoutY="86.0" max="150" min="5" prefHeight="8.0" prefWidth="291.0" value="0.01" />
       <Label layoutX="822.0" layoutY="101.0" style="-fx-font-size: 15;" text="Mała" />
       <Label layoutX="948.0" layoutY="101.0" style="-fx-font-size: 15;" text="Średnia" />
       <Label layoutX="1079.0" layoutY="101.0" style="-fx-font-size: 15;" text="Duża" />
