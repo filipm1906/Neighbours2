@@ -205,7 +205,6 @@ public class Controller implements Initializable {
         parametrK = (int) (CB_parametrK.getSelectionModel().getSelectedItem());
         scatterChart.getData().clear();
         wyswietlPlaszczyzneDecyzji();
-//        wyswietlWykres(1, dane.length);
 }
 
     public void selectWyswietlwalidacjaDziesieciokrotna(ActionEvent actionEvent) {
@@ -262,7 +261,6 @@ public class Controller implements Initializable {
                 double[] danePlik = new double[3];
 
                 while (x <= extrema[cecha1][0]+1) {
-                    System.out.println("Pętla while działa");
                     y = extrema[cecha2][1]-1;
                     while (y <= extrema[cecha2][0]+1) {
                         daneWykres[0] = x;
