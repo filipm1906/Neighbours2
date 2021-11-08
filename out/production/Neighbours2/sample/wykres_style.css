@@ -1,0 +1,40 @@
+.chart-symbol { /* solid circle */
+    -fx-background-color: #2C6CBF;
+    -fx-background-radius: 0;
+    -fx-shape: null;
+}
+.default-color1.chart-symbol { /* solid square */
+    -fx-background-color: #59D986;
+    -fx-background-radius: 0;
+    -fx-shape: null;
+}
+.default-color2.chart-symbol { /* solid diamond */
+    -fx-background-color: #F2C849;
+    -fx-background-radius: 0;
+    -fx-shape: null;
+}
+.default-color3.chart-symbol { /* cross */
+    -fx-background-color: #F26A1B;
+    -fx-background-radius: 0;
+    -fx-shape: null;
+}
+.default-color4.chart-symbol { /* solid triangle */
+    -fx-background-color: #D92211;
+    -fx-background-radius: 0;
+    -fx-shape: null;
+}
+.default-color5.chart-symbol { /* hollow circle */
+    -fx-background-color: CHART_COLOR_6;
+    -fx-background-radius: 0;
+    -fx-shape: null;
+}
+.default-color6.chart-symbol { /* hollow square */
+    -fx-background-color: CHART_COLOR_7;
+    -fx-background-radius: 0;
+    -fx-shape: null;
+}
+.default-color7.chart-symbol { /* hollow diamond */
+    -fx-background-color: CHART_COLOR_8;
+    -fx-background-radius: 0;
+    -fx-shape: null;
+}

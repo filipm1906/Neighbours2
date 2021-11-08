@@ -1,5 +1,6 @@
 package sample;
 
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -67,6 +68,8 @@ public class Controller implements Initializable {
     private Button buttonDodajRekord;
     @FXML
     private Slider SliderDokladnosc;
+    @FXML
+    private ProgressBar pasekPostepu;
 
     private int cecha1, cecha2;
 
@@ -79,6 +82,8 @@ public class Controller implements Initializable {
     private int ciagUczacy;
     private int ciagTestowy;
     private int iloscNowychR;
+    private double postepValue;
+    private boolean planesDOneFlag = false;
 
     public static List<List<String>> dodaneRekordy = new ArrayList<>();
     private String dodaneRekordyWyswietlenie = " ";
@@ -93,6 +98,7 @@ public class Controller implements Initializable {
 
     public List<List<String>> wczytajDane(ActionEvent actionEvent) {
         atrybuty.clear();
+        pasekPostepu.setProgress(0.0);
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open Resource File");
         atrybuty.clear();
@@ -194,12 +200,12 @@ public class Controller implements Initializable {
         klasyfikuj();
     }
 
-    public void selectWyswietlPlaszczyznyDecyzji(ActionEvent actionEvent) {
+    public void selectWyswietlPlaszczyznyDecyzji(ActionEvent actionEvent) throws InterruptedException {
         parametrP = (String) CB_parametrP.getSelectionModel().getSelectedItem();
         parametrK = (int) (CB_parametrK.getSelectionModel().getSelectedItem());
         scatterChart.getData().clear();
         wyswietlPlaszczyzneDecyzji();
-        wyswietlWykres(1, dane.length);
+//        wyswietlWykres(1, dane.length);
 }
 
     public void selectWyswietlwalidacjaDziesieciokrotna(ActionEvent actionEvent) {
@@ -225,90 +231,113 @@ public class Controller implements Initializable {
 
     //*//
     private void wyswietlPlaszczyzneDecyzji() {
-        XYChart.Series[] tablica = new XYChart.Series[slownikKlas.size()];
-        for (int k = 0; k < tablica.length; k++) {
-            tablica[k] = new XYChart.Series();
-        }
-        double odleglosc = 0;
-        sas = new Sasiedzi(parametrK, slownikKlas.size());
-        int wynik;
-        sas.wyczysc();
-        int idX = atrybuty.indexOf(wyswietlanieX.getValue());
-        int idY = atrybuty.indexOf(wyswietlanieY.getValue());
-        cecha1 = idX;
-        cecha2 = idY;
-
-        double dokl_poziom;
-        double dokl_pion;
-        dokladnosc = SliderDokladnosc.getValue();
-        dokl_poziom = (extrema[cecha1][0]+1 - extrema[cecha1][1]-1) / dokladnosc;
-        dokl_pion = (extrema[cecha2][0]+1 - extrema[cecha2][1]-1) / dokladnosc;
-        System.out.println("dokładność poziom : " +dokl_poziom);
-        System.out.println("dokładność pion : " +dokl_pion);
-
-        double y = extrema[cecha2][1]-1;
-        double x = extrema[cecha1][1]-1;
-
-        double[] daneWykres = new double[3];
-        double[] danePlik = new double[3];
-
-        while (x <= extrema[cecha1][0]+1) {
-            y = extrema[cecha2][1]-1;
-            while (y <= extrema[cecha2][0]+1) {
-                daneWykres[0] = x;
-                daneWykres[1] = y;
-                for (int j = 0; j < ciagUczacy; j++) {
-                    danePlik[0] = dane[j][cecha1];
-                    danePlik[1] = dane[j][cecha2];
-                    if (parametrP.equals("Manhattan , p=1")) {
-                        odleglosc = Metryki.odlegloscManhattan(daneWykres, danePlik);
-                    } else if (parametrP.equals("Euklides , p=2")) {
-                        odleglosc = Metryki.odlegloscEuklides(daneWykres, danePlik);
-                    } else if (parametrP.equals("Czebyszew , p=3")) {
-                        odleglosc = Metryki.odlegloscCzebyszew(daneWykres, danePlik);
-                    }
-                    sas.sprawdz(odleglosc, dane[j][dane[j].length - 1]);
+        Thread taskThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                XYChart.Series[] tablica = new XYChart.Series[slownikKlas.size()];
+                for (int k = 0; k < tablica.length; k++) {
+                    tablica[k] = new XYChart.Series();
                 }
-                wynik = sas.decyzja();
-                tablica[wynik].getData().add(new XYChart.Data(x, y));
+                double odleglosc = 0;
+                sas = new Sasiedzi(parametrK, slownikKlas.size());
+                int wynik;
                 sas.wyczysc();
-                y += dokl_pion;
+                int idX = atrybuty.indexOf(wyswietlanieX.getValue());
+                int idY = atrybuty.indexOf(wyswietlanieY.getValue());
+                cecha1 = idX;
+                cecha2 = idY;
+
+                double dokl_poziom;
+                double dokl_pion;
+                dokladnosc = SliderDokladnosc.getValue();
+                dokl_poziom = (extrema[cecha1][0]+1 - extrema[cecha1][1]-1) / dokladnosc;
+                dokl_pion = (extrema[cecha2][0]+1 - extrema[cecha2][1]-1) / dokladnosc;
+                System.out.println("dokładność poziom : " +dokl_poziom);
+                System.out.println("dokładność pion : " +dokl_pion);
+
+                double y = extrema[cecha2][1]-1;
+                double x = extrema[cecha1][1]-1;
+
+                double[] daneWykres = new double[3];
+                double[] danePlik = new double[3];
+
+                while (x <= extrema[cecha1][0]+1) {
+                    System.out.println("Pętla while działa");
+                    y = extrema[cecha2][1]-1;
+                    while (y <= extrema[cecha2][0]+1) {
+                        daneWykres[0] = x;
+                        daneWykres[1] = y;
+                        for (int j = 0; j < ciagUczacy; j++) {
+                            danePlik[0] = dane[j][cecha1];
+                            danePlik[1] = dane[j][cecha2];
+                            if (parametrP.equals("Manhattan , p=1")) {
+                                odleglosc = Metryki.odlegloscManhattan(daneWykres, danePlik);
+                            } else if (parametrP.equals("Euklides , p=2")) {
+                                odleglosc = Metryki.odlegloscEuklides(daneWykres, danePlik);
+                            } else if (parametrP.equals("Czebyszew , p=3")) {
+                                odleglosc = Metryki.odlegloscCzebyszew(daneWykres, danePlik);
+                            }
+                            sas.sprawdz(odleglosc, dane[j][dane[j].length - 1]);
+                        }
+                        wynik = sas.decyzja();
+                        tablica[wynik].getData().add(new XYChart.Data(x, y));
+                        sas.wyczysc();
+                        y += dokl_pion;
+                    }
+                    x += dokl_poziom;
+                    postepValue = (x-extrema[cecha1][1]-1)/(extrema[cecha1][0]+1-extrema[cecha1][1]-1);
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            pasekPostepu.setProgress(postepValue);
+                        }
+                    });
+                }
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        for (int k = 0; k < tablica.length; k++) {
+                            tablica[k].setName("Płaszczyzna decyzji: " + slownikKlas.get(k));
+                            scatterChart.getData().add(tablica[k]);
+                        }
+
+                        // ustawienie zakresu osi
+                        NumberAxis xAxis = (NumberAxis) scatterChart.getXAxis();
+                        xAxis.setAutoRanging(false);
+                        xAxis.setLowerBound(extrema[cecha1][1]-1);
+                        xAxis.setUpperBound(extrema[cecha1][0]+1);
+
+                        NumberAxis yAxis = (NumberAxis) scatterChart.getYAxis();
+                        yAxis.setAutoRanging(false);
+                        yAxis.setLowerBound(extrema[cecha2][1]-1);
+                        yAxis.setUpperBound(extrema[cecha2][0]+1);
+
+                        //dopasowanie wielkości punktów do dokładności płaszczyzn
+                        System.out.println("Wysokość wykresu: " + scatterChart.getHeight());
+                        System.out.println("Szerokość wykresu: " + scatterChart.getWidth());
+                        int wsp_poziom = (int) (scatterChart.getWidth() / dokladnosc);
+                        int wsp_pion = (int) (scatterChart.getHeight() / dokladnosc);
+                        System.out.println("Wsp poziom to" +wsp_poziom);
+                        System.out.println("Wsp pion" + wsp_pion);
+                        //próbna zmiana punktów
+                        planesDOneFlag = false;
+                        for (XYChart.Series<?, ?> series : scatterChart.getData()) {
+                            //for all series, take date, each data has Node (symbol) for representing point
+                            for (XYChart.Data<?, ?> data : series.getData()) {
+                                // this node is StackPane
+                                StackPane stackPane =  (StackPane) data.getNode();
+                                stackPane.setPrefWidth(wsp_poziom);
+                                stackPane.setPrefHeight(wsp_pion);
+                            }
+                        }
+                        planesDOneFlag = true;
+                        wyswietlWykres(1, dane.length);
+                    }
+                });
+
             }
-            x += dokl_poziom;
-        }
-        for (int k = 0; k < tablica.length; k++) {
-            tablica[k].setName("Płaszczyzna decyzji: " + slownikKlas.get(k));
-            scatterChart.getData().add(tablica[k]);
-        }
-
-        // ustawienie zakresu osi
-        NumberAxis xAxis = (NumberAxis) scatterChart.getXAxis();
-        xAxis.setAutoRanging(false);
-        xAxis.setLowerBound(extrema[cecha1][1]-1);
-        xAxis.setUpperBound(extrema[cecha1][0]+1);
-
-        NumberAxis yAxis = (NumberAxis) scatterChart.getYAxis();
-        yAxis.setAutoRanging(false);
-        yAxis.setLowerBound(extrema[cecha2][1]-1);
-        yAxis.setUpperBound(extrema[cecha2][0]+1);
-
-        //dopasowanie wielkości punktów do dokładności płaszczyzn
-        System.out.println("Wysokość wykresu: " + scatterChart.getHeight());
-        System.out.println("Szerokość wykresu: " + scatterChart.getWidth());
-        int wsp_poziom = (int) (scatterChart.getWidth() / dokladnosc);
-        int wsp_pion = (int) (scatterChart.getHeight() / dokladnosc);
-        System.out.println("Wsp poziom to" +wsp_poziom);
-        System.out.println("Wsp pion" + wsp_pion);
-        //próbna zmiana punktów
-        for (XYChart.Series<?, ?> series : scatterChart.getData()) {
-            //for all series, take date, each data has Node (symbol) for representing point
-            for (XYChart.Data<?, ?> data : series.getData()) {
-                // this node is StackPane
-                StackPane stackPane =  (StackPane) data.getNode();
-                stackPane.setPrefWidth(wsp_poziom);
-                stackPane.setPrefHeight(wsp_pion);
-            }
-        }
+        });
+        taskThread.start();
     }
 
     public void dodajRekord() {
