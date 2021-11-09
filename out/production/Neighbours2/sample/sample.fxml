@@ -31,23 +31,24 @@
         <Label layoutX="325.0" layoutY="280.0" style="-fx-font-size: 18;" text="Wyniki 10-krotnej walidacji" />
         <TextArea fx:id="wyswietlWalidacje" layoutX="311.0" layoutY="307.0" prefHeight="265.0" prefWidth="250.0" style="-fx-border-style: dotted;" AnchorPane.topAnchor="307.0" />
         <Button layoutX="321.0" layoutY="228.0" mnemonicParsing="false" onAction="#selectWyswietlwalidacjaDziesieciokrotna" prefHeight="39.0" prefWidth="231.0" style="-fx-border-style: dotted; -fx-border-color: #000000; -fx-background-color: #3AA7FA;" text="Wyświetl wynik 10-krotnej walidacji" wrapText="true" />
-        <Button layoutX="626.0" layoutY="14.0" mnemonicParsing="false" onAction="#selectWyswietlWykresNKK" prefHeight="39.0" prefWidth="179.0" style="-fx-border-style: dotted; -fx-border-color: #000000; -fx-background-color: #4CBBD9;" text="Wyświetl wykresy kNN" />
+        <Button layoutX="567.0" layoutY="14.0" mnemonicParsing="false" onAction="#selectWyswietlWykresNKK" prefHeight="39.0" prefWidth="179.0" style="-fx-border-style: dotted; -fx-border-color: #000000; -fx-background-color: #4CBBD9;" text="Wyświetl wykresy kNN" />
         <Button layoutX="19.0" layoutY="14.0" mnemonicParsing="false" onAction="#wczytajDane" prefHeight="35.0" prefWidth="150.0" style="-fx-border-style: dotted; -fx-border-color: #000000; -fx-background-color: #28CF19;" text="Wczytaj dane z pliku" />
         <Button fx:id="buttonDodajRekord" disable="true" layoutX="195.0" layoutY="14.0" mnemonicParsing="false" onAction="#dodajRekord" prefHeight="35.0" prefWidth="150.0" style="-fx-border-style: dotted; -fx-border-color: #000000; -fx-background-color: #28CF19;" text="Dodaj rekord" />
-        <Button layoutX="822.0" layoutY="14.0" mnemonicParsing="false" onAction="#selectWyswietlPlaszczyznyDecyzji" prefHeight="39.0" prefWidth="179.0" style="-fx-border-style: dotted; -fx-border-color: #000000; -fx-background-color: #4CBBD9;" text="Wyświetl płaszczyzny decyzji" />
+        <Button layoutX="769.0" layoutY="14.0" mnemonicParsing="false" onAction="#selectWyswietlPlaszczyznyDecyzji" prefHeight="39.0" prefWidth="179.0" style="-fx-border-style: dotted; -fx-border-color: #000000; -fx-background-color: #4CBBD9;" text="Wyświetl płaszczyzny decyzji" />
         <TextArea fx:id="wyswietlNowyRedord" layoutX="312.0" layoutY="611.0" prefHeight="95.0" prefWidth="250.0" style="-fx-border-style: dotted;" AnchorPane.bottomAnchor="10.0" AnchorPane.topAnchor="611.0" />
         <Label layoutX="337.0" layoutY="584.0" prefHeight="27.0" prefWidth="200.0" style="-fx-font-size: 18;" text="Rekordy dodane ręcznie" AnchorPane.topAnchor="584.0" />
 
-        <!---->
         <TextField fx:id="WpiszWartoscCU" layoutX="212.0" layoutY="137.0" prefHeight="25.0" prefWidth="150.0" />
-      <Label layoutX="929.0" layoutY="67.0" style="-fx-font-size: 15;" text="Dokładność" />
-      <Slider fx:id="SliderDokladnosc" layoutX="822.0" layoutY="86.0" max="150" min="5" prefHeight="8.0" prefWidth="291.0" value="0.01" />
-      <Label layoutX="822.0" layoutY="101.0" style="-fx-font-size: 15;" text="Mała" />
-      <Label layoutX="948.0" layoutY="101.0" style="-fx-font-size: 15;" text="Średnia" />
-      <Label layoutX="1079.0" layoutY="101.0" style="-fx-font-size: 15;" text="Duża" />
-      <ProgressBar fx:id="pasekPostepu" layoutX="1086.0" layoutY="44.0" prefWidth="200.0" progress="0.0" AnchorPane.leftAnchor="1086.0" AnchorPane.topAnchor="44.0" />
-      <Label layoutX="1082.0" layoutY="23.0" text="Postęp rysowania płaszczyzn decyzji:" AnchorPane.leftAnchor="1082.0" AnchorPane.topAnchor="23.0" />
-        <!--        -->
+        <Label layoutX="929.0" layoutY="67.0" style="-fx-font-size: 15;" text="Dokładność" />
+        <Slider fx:id="SliderDokladnosc" layoutX="822.0" layoutY="86.0" max="150" min="5" prefHeight="8.0" prefWidth="291.0" value="0.01" />
+        <Label layoutX="822.0" layoutY="101.0" style="-fx-font-size: 15;" text="Mała" />
+        <Label layoutX="948.0" layoutY="101.0" style="-fx-font-size: 15;" text="Średnia" />
+        <Label layoutX="1079.0" layoutY="101.0" style="-fx-font-size: 15;" text="Duża" />
+
+        <ProgressBar fx:id="pasekPostepu" layoutX="1061.0" layoutY="49.0" prefWidth="200.0" progress="0.0" AnchorPane.leftAnchor="1061.0" AnchorPane.topAnchor="49.0" />
+        <Label layoutX="1016.0" layoutY="20.0" style="-fx-font-size: 18;" text="Postęp rysowania płaszczyzn decyzji:" AnchorPane.leftAnchor="1016.0" AnchorPane.topAnchor="20.0" />
+
+        <Button layoutX="402.0" layoutY="177.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="150.0" style="-fx-border-style: dotted; -fx-border-color: #000000; -fx-background-color: #3AA7FA;" text="Proporcja" />
 
 
     </children></AnchorPane>
