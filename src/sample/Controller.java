@@ -83,7 +83,7 @@ public class Controller implements Initializable {
     private int ciagTestowy;
     private int iloscNowychR;
     private double postepValue;
-    private boolean planesDOneFlag = false;
+    private boolean planesDoneFlag = false;
 
     public static List<List<String>> dodaneRekordy = new ArrayList<>();
     private String dodaneRekordyWyswietlenie = " ";
@@ -318,7 +318,7 @@ public class Controller implements Initializable {
                         System.out.println("Wsp poziom to" +wsp_poziom);
                         System.out.println("Wsp pion" + wsp_pion);
                         //próbna zmiana punktów
-                        planesDOneFlag = false;
+                        planesDoneFlag = false;
                         for (XYChart.Series<?, ?> series : scatterChart.getData()) {
                             //for all series, take date, each data has Node (symbol) for representing point
                             for (XYChart.Data<?, ?> data : series.getData()) {
@@ -328,7 +328,7 @@ public class Controller implements Initializable {
                                 stackPane.setPrefHeight(wsp_pion);
                             }
                         }
-                        planesDOneFlag = true;
+                        planesDoneFlag = true;
                         wyswietlWykres(1, dane.length);
                     }
                 });
