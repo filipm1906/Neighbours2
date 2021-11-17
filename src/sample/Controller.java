@@ -71,6 +71,9 @@ public class Controller implements Initializable {
     @FXML
     private ProgressBar pasekPostepu;
 
+    @FXML
+    private Button proporcja;
+
     private int cecha1, cecha2;
 
     public Sasiedzi sas;
