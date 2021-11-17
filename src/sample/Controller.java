@@ -75,6 +75,7 @@ public class Controller implements Initializable {
 
     public Sasiedzi sas;
     public double[][] dane;
+    public double[][] losowe_dane;
 
     private int parametrK;
     private String parametrP;
@@ -95,6 +96,7 @@ public class Controller implements Initializable {
     private double[][] sasiady = new double[parametrK][2];
     public static String resultManual;
     private double dokladnosc = 1;
+    public IdealnaProporcja idealProp = new IdealnaProporcja();
 
     public List<List<String>> wczytajDane(ActionEvent actionEvent) {
         atrybuty.clear();
@@ -180,9 +182,14 @@ public class Controller implements Initializable {
         System.out.println("ciąg uczący to");
         System.out.println(ciagUczacy);
         //System.out.println(ciagTestowy);
-
-        TA_CiagUczacy.setText(wyswietlWiersze(1, ciagUczacy));
-        TA_CiagTestowy.setText(wyswietlWiersze(ciagUczacy + 1, dane.length));
+        idealProp = new IdealnaProporcja();
+        List<Klasy> k =  idealProp.podzialNaKlasy(pacjenci);
+        //List<List<String>> i =  idealProp.generowanieDane(ciagUczacy);
+        //if(i != null){System.out.println("jest");}
+        List<List<String>> idealList = idealProp.methodsIP(ciagUczacy, dane.length-ciagUczacy);
+        zamienNaDoubleIdealProporcja(idealList);
+        TA_CiagUczacy.setText(wyswietlWiersze(1, ciagUczacy,dane));
+        TA_CiagTestowy.setText(wyswietlWiersze(ciagUczacy + 1, dane.length,dane));
     }
 
     public void selectWyswietlWykresNKK(ActionEvent actionEvent) {
@@ -628,16 +635,16 @@ public class Controller implements Initializable {
     }
 
 
-    private String wyswietlWiersze(int wierszP, int wierszK){
+    private String wyswietlWiersze(int wierszP, int wierszK,double[][] tablica){
         String tekst = "";
         for(int i=(wierszP-1);i<wierszK;i++){
-            for(int j=0;j<dane[i].length;j++){
-                if(j==dane[i].length-1){
+            for(int j=0;j<tablica[i].length;j++){
+                if(j==tablica[i].length-1){
                     tekst+=" ";
-                    tekst+=slownikKlas.get((int)dane[i][j]);
+                    tekst+=slownikKlas.get((int)tablica[i][j]);
                 }
                 else {
-                    tekst += String.format("%3.0f", dane[i][j]);
+                    tekst += String.format("%3.0f", tablica[i][j]);
                 }
             }
             tekst+="\n";
@@ -701,6 +708,64 @@ public class Controller implements Initializable {
                 Tooltip.install(item.getNode(), tooltip);
             }
         }
+    }
+
+    public void zamienNaDoubleIdealProporcja(List<List<String>> tablica) {
+        dane = new double[tablica.size()][tablica.get(0).size()];
+        extrema = new double [tablica.get(0).size()][2];
+        Iterator<List<String>> it = tablica.iterator();
+        //pominięcie wiersza z opisami kolumn
+        //it.next();
+        for (int i = 0; it.hasNext(); i++) {
+            Iterator it2 = it.next().iterator();
+            for (int j = 0; it2.hasNext(); j++) {
+                String s = (String) it2.next();
+                if(!it2.hasNext()){
+                    dane[i][j] = sprawdzKlase(s);
+                }
+                else {
+                    dane[i][j] = Double.parseDouble(s);
+                    if(i==0) // określone jako maksimum
+                    {
+                        extrema[j][0] = extrema[j][1] = dane[i][j];
+                    }
+                    else {
+                        if(dane[i][j] > extrema[j][0]){
+                            extrema[j][0] = dane[i][j];
+                        }
+                        else if(dane[i][j] < extrema[j][1]) {
+                            extrema[j][1] = dane[i][j];
+                        }
+                    }
+                }
+            }
+        }
+        for(int i=0; i<extrema.length; i++){
+            for (int j=0; j<extrema[i].length; j++){
+                System.out.print(extrema[i][j]);
+            }
+            System.out.println();
+        }
+    }
+
+    public void losowanaDziesieciokrotnaWalidacja(){
+       if(pacjenci.size()<10){
+           System.out.println("Dane zbyt małe do 10-krotnej walidacji");
+       }
+       else
+       {
+           losowe_dane = new double[dane.length][dane[0].length];
+           ArrayList<double[]> lista_rekordow = new ArrayList<double[]>();
+           //dodanie danych do tymczasowej listy
+           for(int i = 0; i<dane.length;i++){
+               lista_rekordow.add(dane[i]);
+           }
+           Random los = new Random();
+           for(int i = 0; i<dane.length;i++) {
+               losowe_dane[i] = lista_rekordow.remove(los.nextInt(lista_rekordow.size()));
+           }
+           //System.out.println(wyswietlWiersze(1,dane.length,losowe_dane));
+       }
     }
 }
 //System.out.println("Rozmiar tablicy to: " + dane.length);
