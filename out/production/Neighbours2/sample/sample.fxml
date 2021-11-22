@@ -45,10 +45,10 @@
         <Label layoutX="948.0" layoutY="101.0" style="-fx-font-size: 15;" text="Średnia" />
         <Label layoutX="1079.0" layoutY="101.0" style="-fx-font-size: 15;" text="Duża" />
 
-        <ProgressBar fx:id="pasekPostepu" layoutX="1061.0" layoutY="49.0" prefWidth="200.0" progress="0.0" AnchorPane.leftAnchor="1061.0" AnchorPane.topAnchor="49.0" />
-        <Label layoutX="1016.0" layoutY="20.0" style="-fx-font-size: 18;" text="Postęp rysowania płaszczyzn decyzji:" AnchorPane.leftAnchor="1016.0" AnchorPane.topAnchor="20.0" />
+        <ProgressBar fx:id="pasekPostepu" layoutX="1061.0" layoutY="44.0" prefWidth="200.0" progress="0.0" AnchorPane.leftAnchor="1061.0" AnchorPane.topAnchor="44.0" />
+        <Label layoutX="1016.0" layoutY="14.0" style="-fx-font-size: 18;" text="Postęp rysowania płaszczyzn decyzji:" AnchorPane.leftAnchor="1016.0" AnchorPane.topAnchor="14.0" />
 
-        <Button layoutX="402.0" layoutY="177.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="150.0" style="-fx-border-style: dotted; -fx-border-color: #000000; -fx-background-color: #3AA7FA;" text="Proporcja" />
+        <Button fx:id="proporcja" layoutX="402.0" layoutY="177.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="150.0" style="-fx-border-style: dotted; -fx-border-color: #000000; -fx-background-color: #3AA7FA;" text="Proporcja" />
 
 
     </children></AnchorPane>

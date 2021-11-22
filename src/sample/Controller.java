@@ -493,36 +493,36 @@ public class Controller implements Initializable {
         for (int i = 0; i < indexPoczatkowy; i++) {
             for (int j = indexPoczatkowy; j < indexKoncowy; j++) {
                 if(parametrP.equals("Manhattan , p=1")){
-                    odleglosc = Metryki.odlegloscManhattan(dane[i], dane[j]);
+                    odleglosc = Metryki.odlegloscManhattan(losowe_dane[i], losowe_dane[j]);
                 } else if(parametrP.equals("Euklides , p=2")){
-                    odleglosc = Metryki.odlegloscEuklides(dane[i], dane[j]);
+                    odleglosc = Metryki.odlegloscEuklides(losowe_dane[i], losowe_dane[j]);
                 } else if(parametrP.equals("Czebyszew , p=3")){
-                    odleglosc = Metryki.odlegloscCzebyszew(dane[i], dane[j]);
+                    odleglosc = Metryki.odlegloscCzebyszew(losowe_dane[i], losowe_dane[j]);
                 }
-                sas.sprawdz(odleglosc, dane[j][dane[j].length-1]);
+                sas.sprawdz(odleglosc, losowe_dane[j][losowe_dane[j].length-1]);
             }
             wynik = sas.decyzja();
             iloscKlasyfikacji++;
-            if (wynik == dane[i][dane[i].length-1]) {
+            if (wynik == losowe_dane[i][losowe_dane[i].length-1]) {
                 iloscPoprawnych++;
             }
             sas.wyczysc();
         }
 
-        for (int i = indexKoncowy; i < dane.length; i++) {
+        for (int i = indexKoncowy; i < losowe_dane.length; i++) {
             for (int j = indexPoczatkowy; j < indexKoncowy; j++) {
                 if(parametrP.equals("Manhattan , p=1")){
-                    odleglosc = Metryki.odlegloscManhattan(dane[i], dane[j]);
+                    odleglosc = Metryki.odlegloscManhattan(losowe_dane[i], losowe_dane[j]);
                 } else if(parametrP.equals("Euklides , p=2")){
-                    odleglosc = Metryki.odlegloscEuklides(dane[i], dane[j]);
+                    odleglosc = Metryki.odlegloscEuklides(losowe_dane[i], losowe_dane[j]);
                 } else if(parametrP.equals("Czebyszew , p=3")){
-                    odleglosc = Metryki.odlegloscCzebyszew(dane[i], dane[j]);
+                    odleglosc = Metryki.odlegloscCzebyszew(losowe_dane[i], losowe_dane[j]);
                 }
-                sas.sprawdz(odleglosc, dane[j][dane[j].length-1]);
+                sas.sprawdz(odleglosc, losowe_dane[j][losowe_dane[j].length-1]);
             }
             wynik = sas.decyzja();
             iloscKlasyfikacji++;
-            if (wynik == dane[i][dane[i].length-1]) {
+            if (wynik == losowe_dane[i][losowe_dane[i].length-1]) {
                 iloscPoprawnych++;
             }
             sas.wyczysc();
@@ -543,18 +543,18 @@ public class Controller implements Initializable {
                 //rekord nie może być sam dla siebie sąsiadem
                 if(i!=j) {
                     if (parametrP.equals("Manhattan , p=1")) {
-                        odleglosc = Metryki.odlegloscManhattan(dane[i], dane[j]);
+                        odleglosc = Metryki.odlegloscManhattan(losowe_dane[i], losowe_dane[j]);
                     } else if (parametrP.equals("Euklides , p=2")) {
-                        odleglosc = Metryki.odlegloscEuklides(dane[i], dane[j]);
+                        odleglosc = Metryki.odlegloscEuklides(losowe_dane[i], losowe_dane[j]);
                     } else if (parametrP.equals("Czebyszew , p=3")) {
-                        odleglosc = Metryki.odlegloscCzebyszew(dane[i], dane[j]);
+                        odleglosc = Metryki.odlegloscCzebyszew(losowe_dane[i], losowe_dane[j]);
                     }
-                    sas.sprawdz(odleglosc, dane[j][dane[j].length - 1]);
+                    sas.sprawdz(odleglosc, losowe_dane[j][losowe_dane[j].length - 1]);
                 }
             }
             wynik = sas.decyzja();
             iloscKlasyfikacji++;
-            if (wynik == dane[i][dane[i].length-1]) {
+            if (wynik == losowe_dane[i][losowe_dane[i].length-1]) {
                 iloscPoprawnych++;
             }
             sas.wyczysc();
@@ -572,6 +572,7 @@ public class Controller implements Initializable {
     }
 
     private String dziesieciokrotnaWalidacja() {
+        losowanaDziesieciokrotnaWalidacja();
         if(dane.length<10) {
             return null;
         }
