@@ -11,3 +11,4 @@ public class Klasy {
         this.lista = lista;
     }
 }
+
