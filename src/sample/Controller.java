@@ -74,6 +74,12 @@ public class Controller implements Initializable {
     @FXML
     private Button proporcja;
 
+    @FXML
+    private TextArea TAciagUczacyW;
+
+    @FXML
+    private TextArea TAciagTestowyW;
+
     private int cecha1, cecha2;
 
     public Sasiedzi sas;
@@ -218,7 +224,11 @@ public class Controller implements Initializable {
 }
 
     public void selectWyswietlwalidacjaDziesieciokrotna(ActionEvent actionEvent) {
-        wyswietlWalidacje.setText(dziesieciokrotnaWalidacja());
+        //wyswietlWalidacje.setText(dziesieciokrotnaWalidacja());
+        String tmp[] = dziesieciokrotnaWalidacja();
+        wyswietlWalidacje.setText(tmp[0]);
+        TAciagTestowyW.setText(tmp[1]);
+        TAciagUczacyW.setText(tmp[2]);
     }
 
 
@@ -571,7 +581,7 @@ public class Controller implements Initializable {
         return tablica;
     }
 
-    private String dziesieciokrotnaWalidacja() {
+    private String[] dziesieciokrotnaWalidacja() {
         losowanaDziesieciokrotnaWalidacja();
         if(dane.length<10) {
             return null;
@@ -580,6 +590,7 @@ public class Controller implements Initializable {
         double tabWynik[] = new double[2];
         double sredniaTestowy = 0.0;
         double sredniaUczacy = 0.0;
+        String message[] = new String[3];
         String raport = "Raport dla walidacji krzyżowej: \n"; //WiP
         raport += "testowy:    uczący:\n"; //WiP
         int iloscZbiorow=1; //WiP
@@ -638,15 +649,15 @@ public class Controller implements Initializable {
         raport+="Ogólna dokładność: \n";
         raport+=String.format("%1.4f",tabWynik[0])+"      "+String.format("%1.4f",tabWynik[1]);
         tab = walidacja(0,ciagUczacy);
-        raport+="\n \n";
-        raport+="Jednokrotna walidacja \n";
-        raport+="Ciąg testowy:      Ciąg uczący:\n";
-        raport+=String.format("%1.4f",tab[0])+"             "+String.format("%1.4f",tab[1]);
+        message[0] = raport;
+        //Koniec walidacji 10-krotnej
+        message[1] = String.format("%1.4f",tab[0]);
+        message[2] = String.format("%1.4f",tab[1]);
         //System.out.println("tabWynik[0]: "+tabWynik[0]); //test
         //System.out.println("tabWynik[1]: "+tabWynik[1]); //test
         //System.out.println("Iteracje: "+iteracja); //test
         System.out.println(raport);
-        return raport;
+        return message;
     }
 
 
