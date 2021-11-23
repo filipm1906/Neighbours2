@@ -592,9 +592,13 @@ public class Controller implements Initializable {
         int poczatekZakresu = 0;
         int koniecZakresu = (int)fragment;
         for(int i=0; i<10-iloscMniejszychZbiorow; i++) {
+            //wyswietlaiie (początek zakresu, koniec zakresu.losowe dane)
+
             tab = walidacja(poczatekZakresu, koniecZakresu);
             sredniaTestowy += tab[0];
             raport+="=== Podzbiór "+iloscZbiorow+" ===\n";
+            System.out.println("Test");
+            raport+= wyswietlWiersze(poczatekZakresu +1, koniecZakresu, losowe_dane);
             //System.out.println("sredniaTestowy duże zbiory: "+sredniaTestowy); //test
             sredniaUczacy += tab[1];
             raport+=String.format("%1.4f",tab[0])+"      "+String.format("%1.4f",tab[1])+"\n";
@@ -602,6 +606,8 @@ public class Controller implements Initializable {
             iteracja++;
             poczatekZakresu+=fragment;
             koniecZakresu+=fragment;
+
+
             //System.out.println("przesunięty zakres: "+poczatekZakresu+", "+koniecZakresu); //test
             iloscZbiorow++;
         }
@@ -611,6 +617,11 @@ public class Controller implements Initializable {
             tab = walidacja(poczatekZakresu, koniecZakresu);
             sredniaTestowy += tab[0];
             raport+="=== Podzbiór "+iloscZbiorow+" ===\n";
+
+
+            //wyswietlanie (początek zakresu, koniec zakresu.losowe dane)
+
+            raport+= wyswietlWiersze(poczatekZakresu +1, koniecZakresu, losowe_dane);
             //System.out.println("sredniaTestowy małe zbiory: "+sredniaTestowy); //test
             sredniaUczacy += tab[1];
             raport+=String.format("%1.4f",tab[0])+"      "+String.format("%1.4f",tab[1])+"\n";
