@@ -221,7 +221,7 @@ public class Controller implements Initializable {
         parametrK = (int) (CB_parametrK.getSelectionModel().getSelectedItem());
         scatterChart.getData().clear();
         wyswietlPlaszczyzneDecyzji();
-}
+    }
 
     public void selectWyswietlwalidacjaDziesieciokrotna(ActionEvent actionEvent) {
         //wyswietlWalidacje.setText(dziesieciokrotnaWalidacja());
@@ -376,8 +376,8 @@ public class Controller implements Initializable {
         dodaneRekordyWyswietlenie = "";
         for(int i=0; i<dodaneRekordy.size(); i++) {
             for (int j=0; j<dodaneRekordy.get(0).size(); j++) {
-                    dodaneRekordyWyswietlenie+= dodaneRekordy.get(i).get(j);
-                    dodaneRekordyWyswietlenie+=" ";
+                dodaneRekordyWyswietlenie+= dodaneRekordy.get(i).get(j);
+                dodaneRekordyWyswietlenie+=" ";
             }
             dodaneRekordyWyswietlenie+="\n";
         }
@@ -775,23 +775,23 @@ public class Controller implements Initializable {
     }
 
     public void losowanaDziesieciokrotnaWalidacja(){
-       if(pacjenci.size()<10){
-           System.out.println("Dane zbyt małe do 10-krotnej walidacji");
-       }
-       else
-       {
-           losowe_dane = new double[dane.length][dane[0].length];
-           ArrayList<double[]> lista_rekordow = new ArrayList<double[]>();
-           //dodanie danych do tymczasowej listy
-           for(int i = 0; i<dane.length;i++){
-               lista_rekordow.add(dane[i]);
-           }
-           Random los = new Random();
-           for(int i = 0; i<dane.length;i++) {
-               losowe_dane[i] = lista_rekordow.remove(los.nextInt(lista_rekordow.size()));
-           }
-           //System.out.println(wyswietlWiersze(1,dane.length,losowe_dane));
-       }
+        if(pacjenci.size()<10){
+            System.out.println("Dane zbyt małe do 10-krotnej walidacji");
+        }
+        else
+        {
+            losowe_dane = new double[dane.length][dane[0].length];
+            ArrayList<double[]> lista_rekordow = new ArrayList<double[]>();
+            //dodanie danych do tymczasowej listy
+            for(int i = 0; i<dane.length;i++){
+                lista_rekordow.add(dane[i]);
+            }
+            Random los = new Random();
+            for(int i = 0; i<dane.length;i++) {
+                losowe_dane[i] = lista_rekordow.remove(los.nextInt(lista_rekordow.size()));
+            }
+            //System.out.println(wyswietlWiersze(1,dane.length,losowe_dane));
+        }
     }
 }
 //System.out.println("Rozmiar tablicy to: " + dane.length);
