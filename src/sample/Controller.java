@@ -618,7 +618,7 @@ public class Controller implements Initializable {
             poczatekZakresu+=fragment;
             koniecZakresu+=fragment;
 
-
+            //Komentarz dla draki
             //System.out.println("przesunięty zakres: "+poczatekZakresu+", "+koniecZakresu); //test
             iloscZbiorow++;
         }
