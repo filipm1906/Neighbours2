@@ -69,6 +69,8 @@ public class Controller implements Initializable {
     @FXML
     private Slider SliderDokladnosc;
     @FXML
+    private Button wyswietlDane;
+    @FXML
     private ProgressBar pasekPostepu;
 
     @FXML
@@ -83,6 +85,7 @@ public class Controller implements Initializable {
     private int cecha1, cecha2;
 
     public Sasiedzi sas;
+    public PopUpTabel popUpTabel;
     public double[][] dane;
     public double[][] losowe_dane;
 
@@ -169,6 +172,7 @@ public class Controller implements Initializable {
         //funkcja testująca, sprawdza wczytywanie na podstawie pliku 'breast-cancer-wisconsin'
         //Testowanie1.testWczytywaniaDanych(dane.length);
         buttonDodajRekord.setDisable(false);
+        wyswietlDane.setDisable(false);
         return pacjenci;
     }
 
@@ -844,6 +848,11 @@ public class Controller implements Initializable {
             }
             //System.out.println(wyswietlWiersze(1,dane.length,losowe_dane));
         }
+    }
+
+    public void wyswietldane(ActionEvent actionEvent) {
+        popUpTabel = new PopUpTabel();
+        popUpTabel.start(pacjenci);
     }
 }
 //System.out.println("Rozmiar tablicy to: " + dane.length);
