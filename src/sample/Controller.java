@@ -107,6 +107,7 @@ public class Controller implements Initializable {
     private double dokladnosc = 1;
     public IdealnaProporcja idealProp = new IdealnaProporcja();
 
+
     public List<List<String>> wczytajDane(ActionEvent actionEvent) {
         atrybuty.clear();
         pasekPostepu.setProgress(0.0);
@@ -131,9 +132,18 @@ public class Controller implements Initializable {
             //atrybuty.remove(atrybuty.size());
             //pacjenci.get(0).set(0, pacjenci.get(0).get(0).substring(1));
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Błąd");
+            alert.setHeaderText(null);
+            alert.setContentText("Nie można odnaleźć pliku!");
+            alert.showAndWait();
         } catch (IOException e) {
-            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Błąd");
+            alert.setHeaderText(null);
+            alert.setContentText("Nie można wczytać pliku! Sprawdź, " +
+                    "czy plik nie jest otwarty w innych aplikacjach");
+            alert.showAndWait();
         }
         zamienNaDouble(pacjenci);
         //wyznaczanie wartości minimalnej i maksymalnej slidera - wyznaczanie ciągu uczącego
@@ -402,7 +412,20 @@ public class Controller implements Initializable {
                     dane[i][j] = sprawdzKlase(s);
                 }
                 else {
-                    dane[i][j] = Double.parseDouble(s);
+                    try{
+                        dane[i][j] = Double.parseDouble(s);
+                    }
+                    catch(Exception e) {
+                        Alert alert = new Alert(Alert.AlertType.WARNING);
+                        alert.setTitle("Błąd");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Plik zawiera niepoprawne dane!\n Właściwy format pliku to:\n" +
+                                "- w pierwszym wierszu nagłówki opisujące zawartość kolumn\n" +
+                                "- w pozostałych wierszach wartości liczbowe wyrażające wartość danego parametru\n" +
+                                "- w ostatniej kolumnie tekstowa lub liczbowa klasyfikacja danego wektora danych"
+                                );
+                        alert.showAndWait();
+                    }
                     if(i==0) // określone jako maksimum
                     {
                         extrema[j][0] = extrema[j][1] = dane[i][j];
@@ -698,7 +721,17 @@ public class Controller implements Initializable {
         sas.wyczysc();
         double[] vector = new double[wektor.size()];
         for(int x=0; x<wektor.size(); x++) {
-            vector[x] = Double.parseDouble(wektor.get(x));
+            try{
+                vector[x] = Double.parseDouble(wektor.get(x));
+            }
+            catch(Exception e){
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Błąd");
+                alert.setHeaderText(null);
+                alert.setContentText("Podane dane zawierają wartości niebędące liczbami");
+                alert.showAndWait();
+                break;
+            }
         }
         XYChart.Series [] tablicaNowyRekord = new XYChart.Series[1];
         for (int k=0; k<tablicaNowyRekord.length; k++){
@@ -719,8 +752,19 @@ public class Controller implements Initializable {
         sasiedziNowyRekord[iloscSasiadow] = "Nowy rekord \nWektor nr: " + (iloscNowychR+1)+" sąsiedzi: \n"+sas.zwrocSasiadow();
         //System.out.println(resultManual);
         iloscSasiadow++;
-        double x = vector[cecha1];
-        double y = vector[cecha2];
+        double x = 0;
+        double y = 0;
+        try{
+             x = vector[cecha1];
+             y = vector[cecha2];
+        }
+        catch(Exception e){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Błąd");
+            alert.setHeaderText(null);
+            alert.setContentText("Podane dane zawierają wartości niebędące liczbami");
+            alert.showAndWait();
+        }
         XYChart.Data<?,?> punkt = new XYChart.Data(x,y);
         tablicaNowyRekord[0].getData().add(punkt);
         sas.wyczysc();
