@@ -118,7 +118,7 @@ public class Controller implements Initializable {
         fileChooser.setTitle("Open Resource File");
         atrybuty.clear();
         fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("Text Files", "*.csv"));
+                new FileChooser.ExtensionFilter("Text Files", "*.csv","*.txt"));
         File selectedFile = fileChooser.showOpenDialog(null);
         pacjenci = new ArrayList<>();
         slownikKlas = new ArrayList<>();
