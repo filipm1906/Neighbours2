@@ -3,6 +3,7 @@ package sample;
 
 import com.sun.javafx.scene.layout.region.Margins;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ObservableValue;
@@ -38,40 +39,42 @@ public class PopUpTabel{
         tableView.setEditable(false);
         int iloscwierszy = dane.size();
         //System.out.println("Ilosc: "+ilosc);
-        List<List<String>> nrlista = new ArrayList<>();
+        List<List<Object>> nrlista = new ArrayList<>();
         System.out.println(iloscwierszy);
         for(int n=0; n<iloscwierszy; n++){
-            List<String> minList = new ArrayList<>();
-            minList.add(String.format("%d",n));
+            List<Object> minList = new ArrayList<>();
+            minList.add(n);
             minList.addAll(dane.get(n));
             nrlista.add(minList);
             //System.out.println(nrlista.get(n));
         }
-        ObservableList<List<String>> nrlObs = FXCollections.observableArrayList(nrlista);
+        //ObservableList<List<String>> nrlObs = FXCollections.observableArrayList(nrlista);
+        ObservableList<List<Object>> nrlObs = FXCollections.observableArrayList(nrlista);
         int ilosc = nrlista.get(0).size();
         //kolumny
-        TableColumn<List<String>, String>[] columns = new TableColumn[ilosc];
+        TableColumn<List<Object>, Object>[] columns = new TableColumn[ilosc];
 
         columns[0] = new TableColumn("Nr");
         //headers
         for (int i=1; i<ilosc; i++) {
-            TableColumn<List<String>, String> tc = new TableColumn(nrlObs.get(0).get(i));
+            TableColumn<List<Object>, Object> tc = new TableColumn((String)nrlObs.get(0).get(i));
             columns[i]= tc;
         }
         //wyświetl dane
         for(int j=0; j<ilosc; j++){
             final int cnt = j;
-            columns[j].setCellValueFactory(data -> new SimpleStringProperty(data.getValue().get(cnt)));
-            columns[j].setSortable(false);
+            columns[j].setCellValueFactory(data -> new SimpleObjectProperty<>(data.getValue().get(cnt)));
+            columns[j].setSortable(true);
+            columns[j].setSortType(TableColumn.SortType.DESCENDING);
         }
         //columns[0].setSortType(TableColumn.SortType.ASCENDING);
-        Iterator<List<String>> it = nrlObs.iterator();
+        Iterator<List<Object>> it = nrlObs.iterator();
         //pominięcie wiersza z opisami kolumn
         if(!pierwszywiersz) {
             it.next();
             pierwszywiersz = true;
         }
-        ObservableList<List<String>> danewejsciowe = FXCollections.observableArrayList();
+        ObservableList<List<Object>> danewejsciowe = FXCollections.observableArrayList();
         for (int k= 0; it.hasNext(); k++) {
             danewejsciowe.add(it.next());
         }
