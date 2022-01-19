@@ -54,7 +54,7 @@
         <TextArea fx:id="TAciagTestowyW" layoutX="417.0" layoutY="367.0" prefHeight="38.0" prefWidth="150.0" style="-fx-border-style: dotted;" />
         <Button layoutX="386.0" layoutY="158.0" mnemonicParsing="false" onAction="#selectWyswietlwalidacjaJednokrotna" prefHeight="39.0" prefWidth="231.0" style="-fx-border-style: dotted; -fx-border-color: #000000; -fx-background-color: #3AA7FA;" text="Walidacja jednokrotna" wrapText="true" />
         <Button fx:id="wyswietlDane" disable="true" layoutX="377.0" layoutY="13.0" mnemonicParsing="false" onAction="#wyswietldane" prefHeight="38.0" prefWidth="120.0" style="-fx-border-style: dotted; -fx-border-color: #000000; -fx-background-color: #28CF19;" text="Wyświetl dane" />
-
+        <Button fx:id="odlmiedzypunkatmi" disable="true" layoutX="386.0" layoutY="99.0" mnemonicParsing="false"  onAction="#Wyswietlodlegoscmiedzypunkami" prefHeight="38.0" prefWidth="231.0" text="Odległość między dwoma punkami" />
 
 
     </children></AnchorPane>

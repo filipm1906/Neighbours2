@@ -35,6 +35,8 @@ import java.util.*;
 public class Controller implements Initializable {
 
     @FXML
+    private Button odlmiedzypunkatmi;
+    @FXML
     private ChoiceBox CB_parametrP;
     @FXML
     private ChoiceBox CB_parametrK;
@@ -112,6 +114,7 @@ public class Controller implements Initializable {
 
 
     public List<List<String>> wczytajDane(ActionEvent actionEvent) {
+        odlmiedzypunkatmi.setDisable(false);
         atrybuty.clear();
         pasekPostepu.setProgress(0.0);
         FileChooser fileChooser = new FileChooser();
@@ -853,6 +856,11 @@ public class Controller implements Initializable {
     public void wyswietldane(ActionEvent actionEvent) {
         popUpTabel = new PopUpTabel();
         popUpTabel.start(pacjenci);
+    }
+
+    public void Wyswietlodlegoscmiedzypunkami(ActionEvent actionEvent) {
+        parametrP = (String) CB_parametrP.getSelectionModel().getSelectedItem();
+        PopUpPunkty.start(dane[0].length,parametrP,atrybuty);
     }
 }
 //System.out.println("Rozmiar tablicy to: " + dane.length);
